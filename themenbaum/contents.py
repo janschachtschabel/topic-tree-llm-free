@@ -112,15 +112,48 @@ def prep_text(text: str, mode: str) -> str:
     nur die Substantive zu sehen; Transformer-Modelle arbeiten mit dem vollen Text besser."""
     if mode == "nostop":
         return " ".join(w for w in re.findall(r"[\w-]+", text) if w.lower() not in STOP and len(w) > 2)
-    if mode == "nouns":
+    if mode in ("nouns", "lemma"):
         return " ".join(w for w in re.findall(r"[\w-]+", text) if w[:1].isupper() and w.lower() not in STOP and len(w) > 2)
     return text
 
 
+def prep_texts(texts: list[str], mode: str) -> list[str]:
+    """Wie prep_text, für mehrere Texte zugleich. Modus "lemma": Substantive in Grundform (simplemma), und
+    zusammengesetzte Wörter bekommen ihr Grundwort dazu, wenn es im Bestand vorkommt
+    (z. B. "Spannungsquellen" -> "Spannungsquelle Quelle"). Getestet: bei model2vec ARI 0,35 -> 0,41."""
+    if mode != "lemma":
+        return [prep_text(t, mode) for t in texts]
+    import simplemma
+    lemma_cache: dict[str, str] = {}
+
+    def lemma(w):
+        if w not in lemma_cache:
+            lemma_cache[w] = simplemma.lemmatize(w, lang="de")
+        return lemma_cache[w]
+
+    docs = [[lemma(w) for w in prep_text(t, "nouns").split()] for t in texts]
+    vocab = {w.lower(): w for ws in docs for w in ws}
+    split_cache: dict[str, list[str]] = {}
+
+    def parts(w):  # längstes bekanntes Grundwort am Wortende (mind. 4 Zeichen, Bestimmungswort mind. 3)
+        if w not in split_cache:
+            split_cache[w] = [w]
+            for i in range(3, len(w) - 3):
+                head = vocab.get(w[i:].lower())
+                if head:
+                    split_cache[w] = [w, head]
+                    break
+        return split_cache[w]
+
+    return [" ".join(p for w in ws for p in parts(w)) for ws in docs]
+
+
 def resolve_prep(cfg: dict) -> str:
     mode = cfg.get("text_prep", "auto")
-    if mode == "auto":
-        return "nouns" if cfg.get("model", "mpnet") in M2V_MODELS else "full"
+    if mode == "auto":  # gemessen: Grundformen + Komposita helfen beim Clustern mit model2vec, nicht beim Einsortieren
+        if cfg.get("model", "mpnet") not in M2V_MODELS:
+            return "full"
+        return "nouns" if cfg.get("method") == "scaffold" else "lemma"
     return mode
 
 
@@ -272,7 +305,8 @@ async def wiki_label(F, cand: dict, covf, centroid: np.ndarray, model: str, prep
     titles = [t for t in titles if ex.get(t) and "steht für" not in ex[t][:200]]
     if not titles:
         return []
-    reps = [prep_text(f"{t}. {sentences(ex[t], 10, 30)}", prep) or t for t in titles]
+    raw = [f"{t}. {sentences(ex[t], 10, 30)}" for t in titles]
+    reps = [p or t for p, t in zip(prep_texts(raw, prep), titles)]
     score = (await embed(reps, model)) @ centroid + COVERAGE_WEIGHT * np.array([covf(base_title(t)) for t in titles])
 
     def off_topic(t):  # Klammerzusatz, der in der Gruppe nie vorkommt, z. B. „Weg-Zeit-Diagramm (Linienbaustelle)“
@@ -299,8 +333,8 @@ async def load_taxonomy(F, cfg: dict, model: str, prep: str) -> dict:
     walk(tree, None, 1)
     if not nodes:
         raise ValueError("Die Taxonomie ist leer. Bitte ein anderes Thema oder eine andere Quelle wählen.")
-    reps = [prep_text(f"{x['node']['title']}. {sentences(x['node']['description'], 15, 40)}", prep) or x["node"]["title"]
-            for x in nodes]
+    raw = [f"{x['node']['title']}. {sentences(x['node']['description'], 15, 40)}" for x in nodes]
+    reps = [p or x["node"]["title"] for p, x in zip(prep_texts(raw, prep), nodes)]
     return {"tree": tree, "nodes": nodes, "E": await embed(reps, model), "source": sc.get("source", "wikipedia")}
 
 
@@ -400,7 +434,8 @@ MODEL_INFO = {
     "minilm": "paraphrase-multilingual-MiniLM-L12-v2 (Transformer, 384 Dimensionen, lokal über fastembed/ONNX)",
     "m2v-edu": "JanSchachtschabel/m2v-gte-256-edu (statische Wortvektoren über model2vec, 256 Dimensionen, ohne Transformer)",
 }
-PREP_INFO = {"full": "Volltext", "nostop": "ohne Füllwörter", "nouns": "nur Substantive (großgeschriebene Wörter ohne Füllwörter)"}
+PREP_INFO = {"full": "Volltext", "nostop": "ohne Füllwörter", "nouns": "nur Substantive (großgeschriebene Wörter ohne Füllwörter)",
+             "lemma": "Substantive in Grundform, zusammengesetzte Wörter zusätzlich mit ihrem Grundwort (z. B. Spannungsquelle + Quelle)"}
 LABEL_INFO = {
     "keywords": "Schlagwortliste: die 3 Begriffe, die die Gruppe am stärksten von ihren Geschwistergruppen unterscheiden (c-TF-IDF wie bei BERTopic).",
     "korpus": "Begriff aus den Texten: Kandidaten sind unterscheidende Begriffe (c-TF-IDF) und häufige Substantive der Gruppe; gewählt wird der Begriff, der dem Gruppenzentrum am nächsten ist und in vielen Inhalten der Gruppe vorkommt.",
@@ -434,7 +469,7 @@ async def build_cluster(F, contents, cfg) -> tuple[dict, dict]:
     mode = cfg.get("labels", "keywords")
     need_emb = cfg.get("features") == "embedding" or mode in ("korpus", "gnd", "wikipedia", "taxonomie")
     prep = resolve_prep(cfg)
-    E = await embed([prep_text(t, prep) for t in texts], model) if need_emb else None
+    E = await embed(prep_texts(texts, prep), model) if need_emb else None
     X = E if cfg.get("features") == "embedding" else tfidf_features(texts)
     cmap = casing_map([c["title"] + " " + c.get("description", "") for c in contents])
     tax = await load_taxonomy(F, cfg, model, prep) if mode == "taxonomie" else None
@@ -502,8 +537,9 @@ async def build_scaffold(F, contents, cfg) -> tuple[dict, dict]:
         raise ValueError("Das Gerüst ist leer. Bitte ein anderes Thema oder eine andere Quelle wählen.")
     node_texts = [f"{n['title']}. {sentences(n['description'], 15, 40)}" for n, _, _ in flat]
     prep = resolve_prep(cfg)
-    E_nodes = await embed([prep_text(x, prep) or x for x in node_texts], model)
-    E_items = await embed([prep_text(doc_text(c), prep) for c in contents], model)
+    prepared = prep_texts([doc_text(c) for c in contents] + node_texts, prep)  # gemeinsamer Wortbestand für Komposita
+    E_items = await embed(prepared[:len(contents)], model)
+    E_nodes = await embed([p or x for p, x in zip(prepared[len(contents):], node_texts)], model)
     S = E_items @ E_nodes.T
     best, score = S.argmax(axis=1), S.max(axis=1)
     thr = float(cfg.get("threshold", 0.3))

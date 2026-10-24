@@ -13,7 +13,7 @@ Entstanden als Prüfung: Was kostet ein Themenbaum mit LLM, und wie weit kommt m
 | Bereich | Inhalt |
 |---|---|
 | **Thema → Baum** | Thema eingeben, Baum mit bis zu drei Ebenen erzeugen – standardmäßig aus Wikipedia, wahlweise aus Wikidata, GND oder allen dreien nebeneinander. Anderen Einstiegstreffer wählen, JSON herunterladen (Format des `topic-tree-generator`). |
-| **Inhalte → Baum** | Inhaltsmenge (Beispieldaten oder eigene JSON/CSV) zu einem Baum bündeln: Embeddings (mpnet, MiniLM oder model2vec) + hierarchisches Clustering, Benennung über Begriffe aus den Texten, GND, Wikipedia oder eine Taxonomie, oder Einsortieren in ein Gerüst. Jeder Lauf als eigene Spalte zum Vergleichen, mit Kennzahlen gegenüber Soll-Kategorien. |
+| **Inhalte → Baum** | Inhaltsmenge (Beispieldaten oder eigene JSON/CSV) zu einem Baum bündeln: Embeddings (mpnet, MiniLM oder model2vec) + hierarchisches Clustering, Benennung über Begriffe aus den Texten, GND, Wikipedia oder eine Taxonomie, oder Einsortieren in ein Gerüst. Jeder Lauf als eigene Spalte zum Vergleichen, mit Kennzahlen gegenüber Soll-Kategorien. Im Tab „Inhalte“ lässt sich der Datensatz durchsuchen und durchblättern, samt der Gruppe aus dem letzten Lauf. |
 | **Kosten** | Kernergebnisse der Kostenanalyse: interaktives Diagramm aller Use Cases für beide Modelle, das live mit dem Rechner (Inhaltsmenge, Anpassungsschleifen, Baumgröße, Kompendium, eigene Preise) rechnet und mit den Standardwerten der Übersichtsgrafik entspricht; dazu Details und Grafiken. |
 
 Info-Knöpfe (ⓘ) und die Anzeigen „So entsteht dieser Baum“ bzw. „Ablauf dieses Laufs“ zeigen, welche Verfahren im
@@ -31,7 +31,8 @@ Hintergrund laufen. Die App ist **passwortgeschützt** (Login beim Aufruf).
 - **Thema → Baum:** Wikipedia ist insgesamt am brauchbarsten, Wikidata stark bei ganzen Fächern, die GND nur dort.
   Keine Quelle ist didaktisch gegliedert.
 - **Inhalte → Baum:** Embeddings + hierarchisches Clustering trifft bei 100 Beispielinhalten 64 % Reinheit
-  (mpnet, ARI 0,39); model2vec mit Substantiven 59 % bei etwa 300-facher Geschwindigkeit. Hybride (Namen aus
+  (mpnet, ARI 0,39); model2vec mit Substantiven in Grundform und zerlegten Komposita ebenfalls 64 % (ARI 0,41) bei
+  etwa 300-facher Geschwindigkeit. Hybride (Namen aus
   Wikipedia oder einer Wikidata-Taxonomie) liefern die besten Namen und echte Beschreibungen.
 - **Kosten mit LLM:** Ein Themenbaum 12×5×5 kostet 0,07–0,16 $, ein Kompendium-Text je Sammlung 1,70–6,12 $ für
   372 Knoten (60–90 Tsd. Tokens, 50–60 % Input-Cache). Metadaten für Inhalte skalieren linear (etwa 0,06–0,14 Cent

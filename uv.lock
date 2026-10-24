@@ -1246,6 +1246,15 @@ wheels = [
 ]
 
 [[package]]
+name = "simplemma"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/09/bf/c5f923da5eb468c6d4a86c6b3250ef92470a0d31bb51cd7d2fbbea22b7c0/simplemma-2.0.0.tar.gz", hash = "sha256:03f9ba792aa51ebbe18a78fc3138c0c0087d81b284eefa534f6f2015233dcb8d", size = 19084504, upload-time = "2026-08-12T13:48:07.179Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e2/e4/078d18631ce1c012af0f25e753f473745c0b139757334175a76d6b910c82/simplemma-2.0.0-py3-none-any.whl", hash = "sha256:db33b15f5aed6485a748ce34d1f510ca760af2633289ab9a8493e2afa785c352", size = 18954708, upload-time = "2026-08-12T13:47:55.162Z" },
+]
+
+[[package]]
 name = "starlette"
 version = "1.9.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1312,6 +1321,7 @@ dependencies = [
     { name = "model2vec" },
     { name = "numpy" },
     { name = "scikit-learn" },
+    { name = "simplemma" },
     { name = "uvicorn" },
 ]
 
@@ -1323,6 +1333,7 @@ requires-dist = [
     { name = "model2vec", specifier = ">=0.4" },
     { name = "numpy", specifier = ">=1.26" },
     { name = "scikit-learn", specifier = ">=1.5" },
+    { name = "simplemma", specifier = ">=1.1" },
     { name = "uvicorn", specifier = ">=0.30" },
 ]
 

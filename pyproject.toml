@@ -13,6 +13,7 @@ dependencies = [
     "scikit-learn>=1.5",
     "fastembed>=0.4",
     "model2vec>=0.4",
+    "simplemma>=1.1",
 ]
 
 [tool.uv]

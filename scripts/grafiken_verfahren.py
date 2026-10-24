@@ -90,7 +90,7 @@ def diagram_contents():
     s.text(24, 62, "Embeddings sind Zahlenvektoren für Bedeutung, kein Textgenerator. Die Struktur entsteht aus den Inhalten oder aus einem fertigen Gerüst.", 13, INK2)
     s.box(24, 250, 160, 100, ["Titel + Beschreibung", "(z. B. 100 Inhalte)"], fill=ACCENT_SOFT, stroke=ACCENT, head="Inhalte")
     s.arrow(186, 300, 214, 300)
-    s.box(216, 250, 170, 100, ["Volltext oder nur", "Substantive (für", "model2vec)"], head="Text vorbereiten")
+    s.box(216, 240, 170, 120, ["Volltext (Transformer)", "oder Substantive in", "Grundform + Komposita", "(model2vec)"], head="Text vorbereiten")
     s.arrow(388, 300, 416, 300)
     s.box(418, 250, 180, 100, ["mpnet, MiniLM", "(Transformer, lokal)", "oder model2vec (statisch)"], head="Embeddings")
     # Zweig A
@@ -150,9 +150,10 @@ def barh_two(fn, title, sub, labels, a, b, la, lb, ca, cb, xmax, fmt):
 
 def chart_clustering():
     labels = ["TF-IDF (gemeinsame Wörter)", "MiniLM, Volltext", "mpnet, Volltext", "model2vec edu, Volltext",
-              "model2vec edu, nur Substantive", "Gerüst Wikidata „Physik“ (mpnet)", "Gerüst Wikipedia „Physik“ (MiniLM)"]
-    purity = [None, 0.57, 0.64, 0.48, 0.59, 0.48, 0.32]
-    ari = [0.03, 0.30, 0.39, 0.20, 0.35, 0.18, 0.10]
+              "model2vec edu, nur Substantive", "model2vec edu, Grundformen + Komposita",
+              "Gerüst Wikidata „Physik“ (mpnet)", "Gerüst Wikipedia „Physik“ (MiniLM)"]
+    purity = [None, 0.57, 0.64, 0.48, 0.59, 0.64, 0.48, 0.32]
+    ari = [0.03, 0.30, 0.39, 0.20, 0.35, 0.41, 0.18, 0.10]
     barh_two("ergebnisse-inhalte.png", "Inhalte → Baum: Wie gut treffen die Gruppen die Soll-Kategorien?",
              "100 Beispielinhalte, 10 Soll-Kategorien, 10 Hauptgruppen · Reinheit = Anteil in der überwiegenden Kategorie, ARI: 0 zufällig, 1 identisch",
              labels, purity, ari, "Reinheit", "ARI", "#1baf7a", "#2a78d6", 0.8, lambda v: de(v))

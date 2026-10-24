@@ -42,10 +42,11 @@ Jeder Inhalt wird aus Titel (doppelt gewichtet) und Beschreibung zu einem Vektor
 |---|---|---|---|---|
 | `paraphrase-multilingual-mpnet-base-v2` | Transformer, lokal (fastembed/ONNX) | ≈1 GB | ≈15 s (CPU) | beste Gruppen mit Volltext |
 | `paraphrase-multilingual-MiniLM-L12-v2` | Transformer, lokal | ≈0,22 GB | ≈3 s | schneller, etwas schwächer |
-| [`JanSchachtschabel/m2v-gte-256-edu`](https://huggingface.co/JanSchachtschabel/m2v-gte-256-edu) | statische Wortvektoren (model2vec) | ≈0,32 GB | ≈0,05 s | ohne Transformer; braucht **nur Substantive** als Eingabe |
+| [`JanSchachtschabel/m2v-gte-256-edu`](https://huggingface.co/JanSchachtschabel/m2v-gte-256-edu) | statische Wortvektoren (model2vec) | ≈0,32 GB | ≈0,05 s | ohne Transformer; braucht **Substantive in Grundform** als Eingabe |
 
 Statische Modelle mitteln Wortvektoren; Füllwörter verwässern diesen Mittelwert. Deshalb wählt die Einstellung
-„Text vorbereiten → automatisch“ für model2vec nur die Substantive, für Transformer den Volltext. TF-IDF ist als
+„Text vorbereiten → automatisch“ für model2vec beim Gruppenbilden die Substantive in Grundform mit zerlegten
+Komposita (beim Einsortieren in ein Gerüst nur die Substantive), für Transformer den Volltext. TF-IDF ist als
 Vergleich ebenfalls wählbar, taugt bei Texten dieser Länge aber nicht.
 
 ### A · Gruppen bilden (Embeddings + hierarchisches Clustering)
@@ -91,7 +92,8 @@ Soll-Kategorie dient nur der Bewertung.
 - **Embeddings + hierarchisches Clustering ist das stärkste Verfahren.** Klar abgegrenzte Themen (Optik, Akustik,
   Astronomie, Strahlung) werden fast sauber getroffen; querliegende Kategorien („Messen und Arbeitsweisen“) und
   verwandte Paare (Energie/Elektrizität, Wärmelehre/Klima) mischen sich.
-- **model2vec mit Substantiven** liegt knapp hinter mpnet, ist aber rund 300-mal schneller und braucht kein PyTorch.
+- **model2vec mit Substantiven in Grundform und zerlegten Komposita** erreicht dieselbe Reinheit wie mpnet (64 %,
+  ARI 0,41), ist aber rund 300-mal schneller und braucht kein PyTorch (siehe Abschnitt 3).
 - **Hybride verbessern Namen und Beschreibungen, nicht die Gruppen.** Die Wikidata-Taxonomie liefert die fachlich
   saubersten Namen (Mechanik, Kernphysik, Thermodynamik, Optik); Wikipedia-Artikel bringen zusätzlich echte
   Beschreibungstexte. Die Wikipedia-Gliederung taugt dagegen nicht als Taxonomie (Abschnitte wie „Methodik“).
@@ -103,10 +105,34 @@ Soll-Kategorie dient nur der Bewertung.
 
 - **Thema als Eingabe:** Wikipedia als Grundlage; für Fächer Wikidata. Für Schulfächer mittelfristig Lehrpläne.
 - **Inhaltsmenge:** Embeddings + hierarchisches Clustering, benannt über Wikipedia-Artikel oder eine Wikidata-
-  Taxonomie. Für große Mengen oder schwache Hardware model2vec mit Substantiven.
+  Taxonomie. Für große Mengen oder schwache Hardware model2vec mit Grundformen + Komposita.
 - **Vor einer Entscheidung** mit echten Inhalten testen; die Beispieldaten sind sauberer als reale Plattformtexte.
 
-## 3. Bewusst nicht umgesetzt
+## 3. Getestete Verbesserungen für model2vec
+
+Ausgangspunkt: model2vec `m2v-gte-256-edu`, nur Substantive, Ward-Clustering, 100 Beispielinhalte. Testskript:
+[`scripts/test_verbesserungen.py`](../scripts/test_verbesserungen.py).
+
+| Maßnahme | ARI (10 Gruppen) | Reinheit | Ergebnis |
+|---|---:|---:|---|
+| Ausgangspunkt: nur Substantive | 0,35 | 59 % | – |
+| Füllwörter automatisch erkennen (Substantive in mehr als 12–30 % der Inhalte entfernen) | 0,35–0,36 | 58–59 % | kein Gewinn; strengere Schwellen entfernen Fachbegriffe wie „Energie“ |
+| Grundformen (simplemma) | 0,36 | 62 % | leicht besser |
+| **Grundformen + Komposita** (Grundwort am Wortende zusätzlich, wenn es im Bestand vorkommt) | **0,41** | **64 %** | **übernommen** für das Gruppenbilden mit model2vec |
+| Gelenktes Clustering: 12 Wikidata-Knoten „Physik“ als Startpunkte | 0,13–0,18 | 36–47 % | schlechter; das Gerüst passt nicht zu den Inhalten (Vakuum, Biophysik statt Energie, Wetter, Messen) |
+| Gelenktes Clustering: 10 Startpunkte aus 103 Gerüstknoten nach Datenlage gewählt | 0,18–0,27 | 45–55 % | schlechter als freies Clustering |
+| Einsortieren ins Gerüst mit Grundformen + Komposita | 0,13 | 43 % | kein Gewinn (mit Substantiven 0,17); dort bleibt „nur Substantive“ |
+
+Benennung (Namensnähe zur Soll-Kategorie): Begriff aus den Texten 0,61 · Oberbegriff frei aus Wikidata 0,46
+(landet bei zu allgemeinen Klassen wie „physikalische Eigenschaft“, weil die Suche Begriffe oft auf das falsche
+Objekt abbildet) · Oberbegriff nur innerhalb des Wikidata-Gerüsts 0,57 · vorhandene Taxonomie-Benennung 0,61–0,65.
+Oberbegriffe aus Wikidata wurden deshalb nicht übernommen.
+
+Der Gewinn durch Grundformen + Komposita ist nicht bei jeder Gruppenzahl gleich: bei 8–12 Gruppen ARI +0,04 bis
++0,08, bei 6 Gruppen niedriger, bei 14 gleich. Bei 100 Inhalten liegt das nahe am Messrauschen; mit echten Daten
+nachmessen.
+
+## 4. Bewusst nicht umgesetzt
 
 | Verfahren | Grund |
 |---|---|
@@ -114,7 +140,7 @@ Soll-Kategorie dient nur der Bewertung.
 | Keyword-Graph mit Community-Erkennung | vorab nur mittel eingeschätzt; hängt stark an der Qualität der Keywords |
 | Lehrpläne als Quelle | lohnend, aber Parser je Bundesland nötig (siehe oben) |
 
-## 4. Nachnutzen
+## 5. Nachnutzen
 
 - **API** (nach Anmeldung, Cookie-basiert): `GET /api/tree?source=gnd|wikipedia|wikidata&theme=…&n1=12&n2=10&n3=5`
   und `POST /api/contents/tree` mit `{"contents": [{"title": "…", "description": "…"}], "config": {…}}`.

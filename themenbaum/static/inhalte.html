@@ -61,6 +61,23 @@ details.how>summary::-webkit-details-marker{display:none}
 details.how ol{margin:6px 0 0;padding-left:18px;display:grid;gap:3px}
 .dsinfo{font-size:12.5px;color:var(--ink2)}
 main{overflow:auto;padding:16px;min-width:0}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:-4px 0 14px}
+.tabs button{border:0;border-bottom:2px solid transparent;border-radius:0;background:none;padding:8px 14px;color:var(--ink2);font-size:14px}
+.tabs button[aria-selected="true"]{color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+.tabs .count{font-size:12px;color:var(--muted);font-weight:400}
+.ibar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:flex-end;margin-bottom:8px}
+.ibar label{min-width:140px}
+.ibar input[type=text]{min-width:240px}
+.pager{display:flex;align-items:center;gap:8px;margin-left:auto}
+.pager.bottom{justify-content:flex-end;margin-top:12px}
+.pinfo{font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums;min-width:120px;text-align:center}
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.icard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:6px;align-content:start;min-width:0}
+.icard h3{margin:0;font-size:14.5px}
+.icard .im{font-size:12px}
+.icard .idx{font-size:12.5px;color:var(--ink2);display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer}
+.icard .idx.open{-webkit-line-clamp:unset}
+.icard .where{font-size:12px;color:var(--accent)}
 #cols{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(440px,1fr);gap:16px;align-items:start;min-width:0}
 .empty{max-width:62ch;color:var(--ink2);display:grid;gap:10px;padding:8px 4px}
 .empty h1{font-size:20px;margin:0;color:var(--ink)}
@@ -152,13 +169,14 @@ details>summary::-webkit-details-marker{display:none}
   </section>
 
   <section>
-    <h2>Embeddings <details class="info"><summary aria-label="Was sind Embeddings?">ⓘ</summary><div class="infobox"><p>Ein Embedding-Modell wandelt jeden Text in einen Zahlenvektor um. Texte mit ähnlicher Bedeutung liegen nah beieinander. Es erzeugt keinen Text.</p><p><b>mpnet / MiniLM</b>: Transformer-Modelle, lokal über fastembed (ONNX). Sie arbeiten mit dem Volltext am besten.</p><p><b>model2vec</b>: statische Wortvektoren, sehr schnell und ohne Transformer. Füllwörter verwässern den Mittelwert, daher nur Substantive.</p></div></details></h2>
+    <h2>Embeddings <details class="info"><summary aria-label="Was sind Embeddings?">ⓘ</summary><div class="infobox"><p>Ein Embedding-Modell wandelt jeden Text in einen Zahlenvektor um. Texte mit ähnlicher Bedeutung liegen nah beieinander. Es erzeugt keinen Text.</p><p><b>mpnet / MiniLM</b>: Transformer-Modelle, lokal über fastembed (ONNX). Sie arbeiten mit dem Volltext am besten.</p><p><b>model2vec</b>: statische Wortvektoren, sehr schnell und ohne Transformer. Füllwörter verwässern den Mittelwert, daher nur Substantive, in Grundform und mit dem Grundwort zusammengesetzter Wörter (Spannungsquelle + Quelle).</p></div></details></h2>
     <label for="prep">Text vorbereiten
       <select id="prep">
-        <option value="auto">Automatisch (model2vec: Substantive, sonst Volltext)</option>
+        <option value="auto">Automatisch (empfohlen)</option>
         <option value="full">Volltext</option>
         <option value="nostop">ohne Füllwörter</option>
         <option value="nouns">nur Substantive</option>
+        <option value="lemma">Substantive in Grundform + Komposita</option>
       </select>
     </label>
     <p class="note">Gilt für beide Verfahren. Statische Modelle wie model2vec mitteln Wortvektoren und werden von Füllwörtern verwässert.</p>
@@ -223,12 +241,29 @@ details>summary::-webkit-details-marker{display:none}
 </aside>
 
 <main>
+  <div class="tabs" role="tablist" aria-label="Ansicht">
+    <button type="button" role="tab" id="tabRes" aria-selected="true" aria-controls="panelRes">Ergebnisse</button>
+    <button type="button" role="tab" id="tabItems" aria-selected="false" aria-controls="panelItems">Inhalte <span class="count" id="itemsCount"></span></button>
+  </div>
+  <section id="panelRes" role="tabpanel" aria-labelledby="tabRes">
   <div id="cols">
     <div class="empty" id="empty">
       <h1>Themenbaum aus einer Inhaltsmenge</h1>
       <p>Links Datensatz und Verfahren wählen, dann „Baum bilden“. Bei den Beispieldaten zeigt jede Gruppe, welche Soll-Kategorie überwiegt. Oben in der Spalte stehen Kennzahlen zur Übereinstimmung: Reinheit (Anteil der Inhalte in der überwiegenden Kategorie ihrer Gruppe), ARI und NMI (0 = zufällig, 1 = identisch mit den Soll-Kategorien).</p>
     </div>
   </div>
+  </section>
+  <section id="panelItems" role="tabpanel" aria-labelledby="tabItems" hidden>
+    <div class="ibar">
+      <label for="iSearch">Suche<input type="text" id="iSearch" placeholder="Titel oder Beschreibung"></label>
+      <label for="iGold">Soll-Kategorie<select id="iGold"><option value="">alle</option></select></label>
+      <label for="iSize">je Seite<select id="iSize"><option>12</option><option selected>24</option><option>48</option><option>96</option></select></label>
+      <div class="pager" aria-label="Seiten"><button type="button" data-p="-1" aria-label="Vorherige Seite">‹ zurück</button><span class="pinfo"></span><button type="button" data-p="1" aria-label="Nächste Seite">weiter ›</button></div>
+    </div>
+    <p class="note" id="iNote"></p>
+    <div id="iGrid" class="igrid"></div>
+    <div class="pager bottom"><button type="button" data-p="-1">‹ zurück</button><span class="pinfo"></span><button type="button" data-p="1">weiter ›</button></div>
+  </section>
 </main>
 </div>
 
@@ -244,6 +279,49 @@ function items(){return $("#dataset").value==="sample"?sample:own}
 function updateInfo(){
   const it=items(), gold=it.filter(x=>x.gold).length;
   $("#dsinfo").textContent=it.length?`${it.length} Inhalte${gold?`, ${new Set(it.map(x=>x.gold)).size} Soll-Kategorien`:", ohne Soll-Kategorien"}`:"Noch keine Inhalte erkannt.";
+  $("#itemsCount").textContent=`(${it.length})`;
+  const golds=[...new Set(it.map(x=>x.gold).filter(Boolean))].sort();
+  $("#iGold").innerHTML=`<option value="">alle</option>`+golds.map(g=>`<option>${esc(g)}</option>`).join("");
+  page=0; renderItems();
+}
+
+/* ---- Tab "Inhalte": Datensatz durchblättern ---- */
+let page=0, lastPlace={}, lastRun=0;
+function showTab(which){
+  const isItems=which==="items";
+  $("#tabRes").setAttribute("aria-selected",!isItems); $("#tabItems").setAttribute("aria-selected",isItems);
+  $("#panelRes").hidden=isItems; $("#panelItems").hidden=!isItems;
+  if(isItems)renderItems();
+}
+$("#tabRes").onclick=()=>showTab("res");
+$("#tabItems").onclick=()=>showTab("items");
+function filtered(){
+  const q=$("#iSearch").value.trim().toLowerCase(), g=$("#iGold").value;
+  return items().filter(x=>(!g||x.gold===g)&&(!q||(x.title+" "+(x.description||"")).toLowerCase().includes(q)));
+}
+function renderItems(){
+  if($("#panelItems").hidden)return;
+  const list=filtered(), size=+$("#iSize").value, pages=Math.max(1,Math.ceil(list.length/size));
+  page=Math.min(Math.max(0,page),pages-1);
+  const part=list.slice(page*size,(page+1)*size);
+  document.querySelectorAll(".pinfo").forEach(x=>x.textContent=list.length?`Seite ${page+1} von ${pages} · ${list.length} Inhalte`:"keine Treffer");
+  document.querySelectorAll(".pager button").forEach(b=>b.disabled=(b.dataset.p==="-1"&&page===0)||(b.dataset.p==="1"&&page>=pages-1));
+  $("#iNote").textContent=lastRun?`„Gruppe“ zeigt, wo der Inhalt in Lauf ${lastRun} gelandet ist.`:"Nach einem Lauf zeigt jede Karte, in welcher Gruppe der Inhalt gelandet ist.";
+  $("#iGrid").innerHTML=part.map(x=>`<article class="icard"><h3>${esc(x.title)}</h3>
+    <div class="im">${esc([x.resourceType,x.level,x.id].filter(Boolean).join(" · "))}${x.gold?` <span class="gc">${esc(x.gold)}</span>`:""}</div>
+    ${x.description?`<div class="idx" title="Klicken zum Auf- und Zuklappen">${esc(x.description)}</div>`:""}
+    ${lastPlace[x.id]?`<div class="where">Gruppe: ${esc(lastPlace[x.id])}</div>`:""}
+    <div class="im">${(x.description||"").length} Zeichen</div></article>`).join("");
+  $("#iGrid").querySelectorAll(".idx").forEach(el=>el.onclick=()=>el.classList.toggle("open"));
+}
+document.querySelectorAll(".pager button").forEach(b=>b.onclick=()=>{page+=+b.dataset.p;renderItems();$("#panelItems").scrollIntoView({block:"start"})});
+$("#iSearch").addEventListener("input",()=>{page=0;renderItems()});
+$("#iGold").onchange=()=>{page=0;renderItems()};
+$("#iSize").onchange=()=>{page=0;renderItems()};
+function rememberPlaces(d,n){
+  lastPlace={}; lastRun=n;
+  const walk=(g,path)=>{const pth=[...path,g.title];(g.items||[]).forEach(i=>{lastPlace[d.contents[i].id]=pth.join(" › ")});(g.children||[]).forEach(k=>walk(k,pth))};
+  d.tree.children.forEach(g=>walk(g,[]));
 }
 function parseOwn(text){
   text=text.trim(); if(!text)return [];
@@ -282,6 +360,7 @@ $("#go").onclick=async()=>{
   const it=items();
   if(it.length<8){$("#dsinfo").textContent="Bitte mindestens 8 Inhalte angeben.";return}
   const cfg=config(), id="run"+(++runNo);
+  showTab("res");
   $("#empty")?.remove();
   const col=document.createElement("section");col.className="col";col.id=id;
   col.innerHTML=`<div class="colhead"><div class="titlebar"><h3>Lauf ${runNo}</h3><button type="button" aria-label="Spalte schließen">✕</button></div><div class="chips"><span class="chip">${esc(summary(cfg))}</span></div></div><div class="loading">Baum wird gebildet</div>`;
@@ -293,6 +372,7 @@ $("#go").onclick=async()=>{
     const d=await r.json();
     if(!r.ok)throw new Error(d.detail||r.statusText);
     render(col,d,runNo);
+    rememberPlaces(d,col.id.replace("run",""));
   }catch(e){col.querySelector(".loading").outerHTML=`<div class="err">${esc(e.message)}</div>`}
   $("#go").disabled=false;
 };
@@ -305,7 +385,7 @@ function render(col,d,n){
     m?`<span class="chip ${purityClass(m.purity)}">Reinheit <b>${Math.round(m.purity*100)} %</b></span><span class="chip">ARI <b>${nf2.format(m.ari)}</b></span><span class="chip">NMI <b>${nf2.format(m.nmi)}</b></span>`:"",
     m&&m.name_fit!=null?`<span class="chip" title="Mittlere Ähnlichkeit (MiniLM) zwischen Namen der Hauptgruppen und ihrer überwiegenden Soll-Kategorie">Namensnähe <b>${nf2.format(m.name_fit)}</b></span>`:"",
     s.silhouette!=null?`<span class="chip">Silhouette <b>${nf2.format(s.silhouette)}</b></span>`:"",
-    s.text_prep?`<span class="chip">Text: <b>${{full:"Volltext",nostop:"ohne Füllwörter",nouns:"nur Substantive"}[s.text_prep]||s.text_prep}</b></span>`:"",
+    s.text_prep?`<span class="chip">Text: <b>${{full:"Volltext",nostop:"ohne Füllwörter",nouns:"nur Substantive",lemma:"Grundformen + Komposita"}[s.text_prep]||s.text_prep}</b></span>`:"",
     s.scaffold_nodes?`<span class="chip">Gerüst: <b>${s.used_nodes}</b> von ${s.scaffold_nodes} Knoten belegt</span>`:"",
     s.unassigned?`<span class="chip warn"><b>${s.unassigned}</b> nicht zugeordnet</span>`:"",
     `<span class="chip"><b>${s.seconds.toLocaleString("de-DE")}</b> s${s.api_calls?` · ${s.api_calls} API-Aufrufe`:""}</span>`];
