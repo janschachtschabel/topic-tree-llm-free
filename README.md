@@ -12,9 +12,9 @@ Entstanden als Prüfung: Was kostet ein Themenbaum mit LLM, und wie weit kommt m
 
 | Bereich | Inhalt |
 |---|---|
-| **Thema → Baum** | Thema eingeben, Baum mit bis zu drei Ebenen aus GND, Wikipedia und Wikidata erzeugen – einzeln oder nebeneinander. Anderen Einstiegstreffer wählen, JSON herunterladen (Format des `topic-tree-generator`). |
+| **Thema → Baum** | Thema eingeben, Baum mit bis zu drei Ebenen erzeugen – standardmäßig aus Wikipedia, wahlweise aus Wikidata, GND oder allen dreien nebeneinander. Anderen Einstiegstreffer wählen, JSON herunterladen (Format des `topic-tree-generator`). |
 | **Inhalte → Baum** | Inhaltsmenge (Beispieldaten oder eigene JSON/CSV) zu einem Baum bündeln: Embeddings (mpnet, MiniLM oder model2vec) + hierarchisches Clustering, Benennung über Begriffe aus den Texten, GND, Wikipedia oder eine Taxonomie, oder Einsortieren in ein Gerüst. Jeder Lauf als eigene Spalte zum Vergleichen, mit Kennzahlen gegenüber Soll-Kategorien. |
-| **Kosten** | Kernergebnisse der Kostenanalyse mit Hauptgrafik, Details und einem Rechner für Inhaltsmenge, Anpassungsschleifen, Baumgröße, Kompendium und eigene Preise. |
+| **Kosten** | Kernergebnisse der Kostenanalyse: interaktives Diagramm aller Use Cases für beide Modelle, das live mit dem Rechner (Inhaltsmenge, Anpassungsschleifen, Baumgröße, Kompendium, eigene Preise) rechnet und mit den Standardwerten der Übersichtsgrafik entspricht; dazu Details und Grafiken. |
 
 Info-Knöpfe (ⓘ) und die Anzeigen „So entsteht dieser Baum“ bzw. „Ablauf dieses Laufs“ zeigen, welche Verfahren im
 Hintergrund laufen. Die App ist **passwortgeschützt** (Login beim Aufruf).

@@ -148,7 +148,9 @@ Nur Ebene 1 und 2 mit Kompendium (132 statt 732 Knoten) senkt Kosten und Zeit um
 ## Nachrechnen
 
 - **Rechner in der App** (Bereich „Kosten“): Inhaltsmenge, Anpassungsschleifen, Baumgröße, Preise und Kompendium frei
-  einstellbar. Das Token-Modell ist aus den gemessenen Prompts abgeleitet.
+  einstellbar; das Diagramm aller Use Cases rechnet live mit. Es nutzt dieselben Formeln wie `scripts/kostenmodell.py`
+  (190 Tokens je Knoten bei 60 Wörtern, 245 Tokens je Objekt in den Kontextlisten) und ergibt mit den Standardwerten
+  genau die Werte der Übersichtsgrafik.
 - **Skripte:** [`scripts/kostenmodell.py`](../scripts/kostenmodell.py) zählt die Tokens aus einem Checkout des
   Generators und schreibt [`data/kosten.json`](../data/kosten.json);
   [`scripts/grafiken_kosten.py`](../scripts/grafiken_kosten.py) erzeugt daraus die Grafiken in `docs/kosten/`.

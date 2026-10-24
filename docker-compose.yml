@@ -5,6 +5,8 @@
 services:
   app:
     image: ghcr.io/janschachtschabel/topic-tree-llm-free:${IMAGE_TAG:-main}
+    # Beim erneuten Bereitstellen immer den neuesten Stand des Tags laden.
+    pull_policy: always
     restart: unless-stopped
     environment:
       APP_PASSWORD: ${APP_PASSWORD:-}

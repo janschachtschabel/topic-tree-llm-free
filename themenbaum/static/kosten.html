@@ -62,6 +62,24 @@ thead th{font-size:12px;color:var(--ink2);font-weight:600}
 td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:12.5px}
 tr.sum td{font-weight:700;border-bottom:0}
 .tbl{overflow-x:auto}
+.uc-chart{display:grid;gap:6px}
+.uc{all:unset;box-sizing:border-box;display:grid;gap:3px;padding:8px 10px;border-radius:8px;border:1px solid transparent;cursor:pointer}
+.uc:hover{background:var(--bg)}
+.uc[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.uc:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.uc-name{font-weight:600;font-size:13.5px}
+.uc-warn{font-size:12px;color:var(--warn)}
+.uc-row{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;align-items:center}
+.uc-model{font-size:12px;color:var(--ink2)}
+.uc-track{display:flex;align-items:center;gap:6px;min-width:0}
+.uc-bar{display:flex;gap:2px;height:16px;min-width:2px}
+.uc-bar i{display:block;height:100%}
+.uc-bar i:first-child{border-radius:3px 0 0 3px}
+.uc-bar i:last-child{border-radius:0 3px 3px 0}
+.uc-val{font:12.5px var(--mono);font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+h3.sel{font-size:14px;margin:4px 0 0}
+details.how{font-size:12.5px;color:var(--ink2)}
+details.how>summary{cursor:pointer;color:var(--accent)}
 details.sec{background:var(--panel);border:1px solid var(--line);border-radius:10px}
 details.sec>summary{cursor:pointer;padding:12px 16px;font-weight:600;list-style:none}
 details.sec>summary::-webkit-details-marker{display:none}
@@ -99,20 +117,12 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
 
   <div class="grid">
     <section class="card" aria-labelledby="h-main">
-      <h2 id="h-main">Kosten je Use Case · Themenbaum 12×5×5</h2>
-      <img src="/static/img/kosten-uebersicht-12x5x5.png" alt="Gestapelte Balken je Use Case und Modell: Themenbaum-Erzeugung, Inhaltsmetadaten und Kompendium-Generierung. Das Kompendium dominiert mit 3,35 $ (gpt-6-luna) bzw. 7,07 $ (gpt-5.6-luna).">
-      <div class="tbl"><table>
-        <thead><tr><th>Use Case (12×5×5)</th><th>gpt-6-luna</th><th>gpt-5.6-luna</th></tr></thead>
-        <tbody>
-          <tr><td>Themenbaum aus einem Thema</td><td class="n">3,42 $</td><td class="n">7,22 $</td></tr>
-          <tr><td>… + 1 Überarbeitung</td><td class="n">3,43 $</td><td class="n">7,25 $</td></tr>
-          <tr><td>… + 100 eigene Inhalte</td><td class="n">3,50 $</td><td class="n">7,39 $</td></tr>
-          <tr><td>Themenbaum aus 100 Inhalten, nur Metadaten</td><td class="n">3,48 $</td><td class="n">7,35 $</td></tr>
-          <tr><td>Themenbaum aus 100 Inhalten, mit Volltext (Cache)</td><td class="n">3,90 $</td><td class="n">8,20 $</td></tr>
-          <tr><td>Themenbaum aus 100 Inhalten, mit Volltext (ohne Cache)</td><td class="n">7,30 $</td><td class="n">14,98 $</td></tr>
-        </tbody>
-      </table></div>
-      <p class="note">Je Zeile ist das Kompendium (3,35 $ bzw. 7,07 $) enthalten. Ohne Kompendium kosten Baum und Metadaten Centbeträge; nur Volltexte im Kontext ohne Caching werden teuer.</p>
+      <h2 id="h-main">Kosten je Use Case · <span id="chartTitle"></span></h2>
+      <p class="note">Rechnet live mit den Einstellungen im Rechner. Mit den Standardwerten entspricht das Diagramm der Übersichtsgrafik der Kostenanalyse. Einen Use Case anklicken, um ihn rechts aufzuschlüsseln.</p>
+      <div class="legend"><span><i style="background:var(--c-tree)"></i>Themenbaum-Erzeugung</span><span><i style="background:var(--c-rev)"></i>Anpassungen</span><span><i style="background:var(--c-meta)"></i>Inhaltsmetadaten (inkl. Zuordnung)</span><span><i style="background:var(--c-komp)"></i>Kompendium</span></div>
+      <div id="chart" class="uc-chart"></div>
+      <details class="how"><summary>Werte als Tabelle</summary><div class="tbl"><table id="ucTable"></table></div></details>
+      <p class="note" id="chartNote"></p>
     </section>
 
     <section class="card" aria-labelledby="h-calc">
@@ -145,15 +155,15 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
       <fieldset>
         <legend>Anpassungsschleifen</legend>
         <div class="row">
-          <label for="loops">Anzahl je Baum<input type="number" id="loops" value="0" min="0" max="100"></label>
+          <label for="loops">Anzahl je Baum<input type="number" id="loops" value="1" min="0" max="100"></label>
           <label for="loopMode">Art<select id="loopMode"><option value="branch">nur betroffener Zweig</option><option value="branchCache">Zweig, Baum im Cache</option><option value="full">ganzer Baum neu</option></select></label>
         </div>
       </fieldset>
       <fieldset>
         <legend>Inhaltsmenge</legend>
-        <label for="items">Anzahl Inhalte: <b id="itemsOut">0</b><input type="range" id="items" min="0" max="5000" step="10" value="0"></label>
+        <label for="items">Anzahl Inhalte: <b id="itemsOut">100</b><input type="range" id="items" min="0" max="5000" step="10" value="100"></label>
         <div class="row">
-          <label for="itemsExact">genau<input type="number" id="itemsExact" min="0" max="1000000" value="0"></label>
+          <label for="itemsExact">genau<input type="number" id="itemsExact" min="0" max="1000000" value="100"></label>
           <label for="fulltext">Volltext-Tokens je Inhalt<input type="number" id="fulltext" value="5000" min="0" step="500"></label>
         </div>
         <label class="check" for="assign"><input type="checkbox" id="assign" checked> Inhalte dem Baum zuordnen (Baum im Cache)</label>
@@ -169,6 +179,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
       </fieldset>
       <label for="runs">Läufe pro Monat<input type="number" id="runs" value="1" min="0" max="100000"></label>
 
+      <h3 class="sel" id="selTitle"></h3>
       <div class="total" aria-live="polite"><span class="big" id="tTotal">–</span><span id="tMonth"></span><span id="tNodes"></span></div>
       <div class="bar" id="bar" aria-hidden="true"></div>
       <div class="legend"><span><i style="background:var(--c-tree)"></i>Themenbaum</span><span><i style="background:var(--c-rev)"></i>Anpassungen</span><span><i style="background:var(--c-meta)"></i>Inhaltsmetadaten</span><span><i style="background:var(--c-komp)"></i>Kompendium</span></div>
@@ -239,61 +250,121 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
 </div>
 
 <script>
-const PRESETS={g6:{in:0.10,out:0.50,cache:0.01,write:0.125},g56:{in:0.20,out:1.20,cache:0.02,write:0.25}};
+const PRESETS={g6:{name:"gpt-6-luna",in:0.10,out:0.50,cache:0.01,write:0.125},g56:{name:"gpt-5.6-luna",in:0.20,out:1.20,cache:0.02,write:0.25}};
 const $=s=>document.querySelector(s);
 const num=id=>Math.max(0,parseFloat($("#"+id).value)||0);
 const nf=(v,d)=>new Intl.NumberFormat("de-DE",{minimumFractionDigits:d,maximumFractionDigits:d}).format(v);
 const usd=v=>(v<1?nf(v,3):v<100?nf(v,2):nf(v,0))+" $";
 const tok=v=>v>=1e6?nf(v/1e6,2)+" Mio.":v>=1e3?nf(v/1e3,0)+" Tsd.":nf(v,0);
+const COLORS={tree:"var(--c-tree)",rev:"var(--c-rev)",meta:"var(--c-meta)",komp:"var(--c-komp)"};
+const PARTS=[["tree","Themenbaum"],["rev","Anpassungen"],["meta","Inhaltsmetadaten"],["komp","Kompendium"]];
+let selected="topic";
 
 function applyPreset(){const p=PRESETS[$("#preset").value];if(!p)return;$("#pIn").value=p.in;$("#pOut").value=p.out;$("#pCache").value=p.cache;$("#pWrite").value=p.write}
 
-/* Token-Modell, abgeleitet aus den gemessenen Prompts des topic-tree-generator (siehe docs/kosten.md). */
-function model(price){
-  const NM=Math.round(num("n1")),NS=Math.round(num("n2")),NL=Math.round(num("n3"));
-  const node=182+2.05*(num("words")-60), R=num("reason"), fix=$("#code").value==="fix", SYS=578;
-  const calls=1+NM+NM*NS, nodes=NM+NM*NS+NM*NS*NL;
-  const subIn=fix?939+11*NM:940+242*NM, lpIn=fix?973+11*NM+10*NS:975+242*NM+238*NS;
-  const treeIn=855+NM*subIn+NM*NS*lpIn;
-  const treeVis=(NM*node+150)+NM*(NS*node+10)+NM*NS*(NL*node+10);
-  const cost=(i,o,c=0,w=0)=>(i*price.in+o*price.out+c*price.cache+w*price.write)/1e6;
-  const rows=[];
-  rows.push({k:"tree",name:`Themenbaum (${calls} Aufrufe)`,i:treeIn,o:treeVis+calls*R,c:cost(treeIn,treeVis+calls*R)});
-  const loops=Math.round(num("loops")),mode=$("#loopMode").value,ctx=SYS+treeVis+150;
-  const branch=(1+NS+NS*NL)*node+R;
-  let rv={i:0,o:0,c:0};
-  if(loops>0){
-    if(mode==="full")rv={i:loops*ctx,o:loops*(treeVis+R),c:loops*cost(ctx,treeVis+R)};
-    else if(mode==="branch")rv={i:loops*ctx,o:loops*branch,c:loops*cost(ctx,branch)};
-    else rv={i:loops*150+ctx,o:loops*branch,c:cost(loops*150,loops*branch,(loops-1)*(ctx-150),ctx-150)};
+/* Token-Modell: dieselben Formeln wie scripts/kostenmodell.py (gemessen an den Prompts des topic-tree-generator).
+   Knoten im Output: 190 Tokens bei 60 Wörtern; jedes Objekt in den Kontextlisten des aktuellen Codes: 245 Tokens. */
+function params(){
+  return {NM:Math.round(num("n1")),NS:Math.round(num("n2")),NL:Math.round(num("n3")),words:num("words"),R:num("reason"),
+    fix:$("#code").value==="fix",loops:Math.round(num("loops")),loopMode:$("#loopMode").value,
+    n:Math.round(num("itemsExact")),ft:num("fulltext"),assign:$("#assign").checked,
+    komp:$("#komp").checked,kompAll:$("#kompNodes").value==="all",kompTok:num("kompTok"),kompOut:num("kompOut")};
+}
+function tree(p,fix){
+  const extra=1.925*(p.words-60), node=190+extra, rep=245+extra;
+  const calls=1+p.NM+p.NM*p.NS, nodes=p.NM+p.NM*p.NS+p.NM*p.NS*p.NL;
+  const subIn=fix?939+11*p.NM:940+rep*p.NM;
+  const lpIn=fix?973+11*p.NM+10*p.NS:975+rep*p.NM+(rep-4)*p.NS;
+  const tin=855+p.NM*subIn+p.NM*p.NS*lpIn;
+  const vis=(p.NM*node+150)+p.NM*(p.NS*node+10)+p.NM*p.NS*(p.NL*node+10);
+  return {node,calls,nodes,tin,vis,tout:vis+calls*p.R,branch:(1+p.NS+p.NS*p.NL)*node};
+}
+function cost(pr,i,o,c=0,w=0){return (i*pr.in+o*pr.out+c*pr.cache+w*pr.write)/1e6}
+
+/* Bausteine: jeweils {i, o, c} (Input-, Output-Tokens, Kosten) */
+function partTree(p,pr,fix){const t=tree(p,fix);return {i:t.tin,o:t.tout,c:cost(pr,t.tin,t.tout)}}
+function partRev(p,pr){
+  const t=tree(p,p.fix),L=p.loops,ctx=578+t.vis+150,out=t.branch+p.R;
+  if(!L)return {i:0,o:0,c:0};
+  if(p.loopMode==="full")return {i:L*ctx,o:L*(t.vis+p.R),c:L*cost(pr,ctx,t.vis+p.R)};
+  if(p.loopMode==="branch")return {i:L*ctx,o:L*out,c:L*cost(pr,ctx,out)};
+  return {i:L*150+ctx,o:L*out,c:cost(pr,L*150,L*out,(L-1)*(ctx-150),ctx-150)};
+}
+function partMeta(p,pr,assign){
+  const n=p.n,i0=n*(582+p.ft),o0=n*(250+p.R);
+  let r={i:i0,o:o0,c:cost(pr,i0,o0)};
+  if(n>0&&assign){const tl=tree(p,p.fix).nodes*14+300;r={i:r.i+n*250+tl,o:r.o+n*60,c:r.c+cost(pr,n*250,n*60,(n-1)*tl,tl)}}
+  return r;
+}
+function partTreeFromCorpus(p,pr,perItem,cached){  // Korpus aller Inhalte in jedem Aufruf; braucht umgebaute Prompts
+  const t=tree(p,true),corp=p.n*perItem+300;
+  if(!cached)return {i:t.tin+t.calls*corp,o:t.tout,c:cost(pr,t.tin+t.calls*corp,t.tout),corp};
+  return {i:t.tin+t.calls*corp,o:t.tout,c:cost(pr,t.tin,t.tout,(t.calls-1)*corp,corp),corp};
+}
+function partKomp(p,pr){
+  if(!p.komp)return {i:0,o:0,c:0,k:0};
+  const t=tree(p,p.fix),k=p.kompAll?t.nodes:p.NM+p.NM*p.NS,o=Math.min(p.kompOut,p.kompTok);
+  return {i:k*(p.kompTok-o),o:k*o,c:cost(pr,k*(p.kompTok-o),k*o),k};
+}
+const Z={i:0,o:0,c:0};
+function useCases(p,pr){
+  const tr=partTree(p,pr,p.fix),kp=partKomp(p,pr),n=nf(p.n,0);
+  const cases=[{key:"topic",name:"Themenbaum aus einem Thema",parts:{tree:tr,rev:Z,meta:Z,komp:kp}}];
+  if(p.loops)cases.push({key:"rev",name:`… + ${p.loops} ${p.loops===1?"Anpassung":"Anpassungen"} (${{branch:"nur Zweig",branchCache:"Zweig, Cache",full:"ganzer Baum"}[p.loopMode]})`,parts:{tree:tr,rev:partRev(p,pr),meta:Z,komp:kp}});
+  if(p.n>0){
+    cases.push({key:"own",name:`… + ${n} eigene Inhalte`,parts:{tree:tr,rev:Z,meta:partMeta(p,pr,p.assign),komp:kp}});
+    const meta=partMeta(p,pr,false);
+    const a=partTreeFromCorpus(p,pr,250,true),b=partTreeFromCorpus(p,pr,250+p.ft,true),c=partTreeFromCorpus(p,pr,250+p.ft,false);
+    cases.push({key:"cmeta",name:`Themenbaum aus ${n} Inhalten – nur Metadaten (Cache)`,parts:{tree:a,rev:Z,meta,komp:kp},corp:a.corp});
+    cases.push({key:"cft",name:`Themenbaum aus ${n} Inhalten – mit Volltext (Cache)`,parts:{tree:b,rev:Z,meta,komp:kp},corp:b.corp});
+    cases.push({key:"cftnc",name:`Themenbaum aus ${n} Inhalten – mit Volltext (ohne Cache)`,parts:{tree:c,rev:Z,meta,komp:kp},corp:c.corp});
   }
-  rows.push({k:"rev",name:`Anpassungsschleifen (${loops})`,...rv});
-  const n=Math.round(num("itemsExact")),ft=num("fulltext");
-  const metaIn=n*(582+ft),metaOut=n*(250+R);
-  let mi=metaIn,mo=metaOut,mc=cost(metaIn,metaOut);
-  if(n>0&&$("#assign").checked){const tl=nodes*14+300;mi+=n*250+tl;mo+=n*60;mc+=cost(n*250,n*60,(n-1)*tl,tl)}
-  rows.push({k:"meta",name:`Inhaltsmetadaten (${nf(n,0)} Inhalte${n>0&&$("#assign").checked?", inkl. Zuordnung":""})`,i:mi,o:mo,c:mc});
-  let kp={i:0,o:0,c:0},kn=0;
-  if($("#komp").checked){kn=$("#kompNodes").value==="all"?nodes:NM+NM*NS;const t=num("kompTok"),o=Math.min(num("kompOut"),t);kp={i:kn*(t-o),o:kn*o,c:cost(kn*(t-o),kn*o)}}
-  rows.push({k:"komp",name:`Kompendium (${nf(kn,0)} Knoten)`,...kp});
-  return {rows,nodes,calls,kn,total:rows.reduce((s,r)=>s+r.c,0)};
+  cases.forEach(u=>u.total=PARTS.reduce((s,[k])=>s+u.parts[k].c,0));
+  return cases;
+}
+function profiles(){
+  const list=[{key:"g6",...PRESETS.g6},{key:"g56",...PRESETS.g56}];
+  if($("#preset").value==="own")list.push({key:"own",name:"eigene Preise",in:num("pIn"),out:num("pOut"),cache:num("pCache"),write:num("pWrite")});
+  return list;
+}
+function currentProfile(){const k=$("#preset").value;return k==="own"?profiles().find(x=>x.key==="own"):{key:k,...PRESETS[k]}}
+
+function renderChart(p){
+  const profs=profiles(),all=profs.map(pr=>useCases(p,pr));
+  const ucs=all[0];
+  if(!ucs.some(u=>u.key===selected))selected="topic";
+  const max=Math.max(...all.flat().map(u=>u.total),1e-9);
+  const t=tree(p,p.fix);
+  $("#chartTitle").textContent=`Themenbaum ${p.NM}×${p.NS}×${p.NL} (${nf(t.nodes,0)} Knoten)`;
+  $("#chart").innerHTML=ucs.map((u,i)=>{
+    const warn=u.corp&&u.corp>400000?`<span class="uc-warn">Korpus ${tok(u.corp)} Tokens je Aufruf – sprengt viele Kontextfenster</span>`:"";
+    const rows=profs.map((pr,j)=>{const v=all[j][i];
+      const segs=PARTS.filter(([k])=>v.parts[k].c>0).map(([k,name])=>`<i style="flex:${v.parts[k].c} 1 0;background:${COLORS[k]}" title="${name}: ${usd(v.parts[k].c)}"></i>`).join("");
+      return `<span class="uc-row"><span class="uc-model">${pr.name}</span><span class="uc-track"><span class="uc-bar" style="width:${(v.total/max*80).toFixed(2)}%">${segs}</span><span class="uc-val">${usd(v.total)}</span></span></span>`}).join("");
+    return `<button type="button" class="uc" data-key="${u.key}" aria-pressed="${u.key===selected}"><span class="uc-name">${u.name}</span>${warn}${rows}</button>`}).join("");
+  $("#chart").querySelectorAll(".uc").forEach(b=>b.onclick=()=>{selected=b.dataset.key;render()});
+  $("#ucTable").innerHTML=`<thead><tr><th>Use Case</th><th>Modell</th>${PARTS.map(([,n])=>`<th>${n}</th>`).join("")}<th>Summe</th></tr></thead><tbody>`+
+    ucs.map((u,i)=>profs.map((pr,j)=>{const v=all[j][i];return `<tr><td>${j?"":u.name}</td><td>${pr.name}</td>${PARTS.map(([k])=>`<td class="n">${v.parts[k].c?usd(v.parts[k].c):"–"}</td>`).join("")}<td class="n"><b>${usd(v.total)}</b></td></tr>`}).join("")).join("")+"</tbody>";
+  const fixNote=p.n>0?" „Themenbaum aus Inhalten“ rechnet mit umgebauten Prompts (Korpus vorne, nur Titel im Kontext), sonst greift kein Caching.":"";
+  $("#chartNote").textContent=`Kompendium je Zeile: ${profs.map(pr=>`${usd(partKomp(p,pr).c)} (${pr.name})`).join(", ")}.${fixNote}`;
 }
 
-function render(){
-  const price={in:num("pIn"),out:num("pOut"),cache:num("pCache"),write:num("pWrite")};
-  const m=model(price),runs=num("runs");
-  $("#itemsOut").textContent=nf(Math.round(num("itemsExact")),0);
-  $("#tTotal").textContent=usd(m.total)+" je Lauf";
-  $("#tMonth").textContent=runs!==1?`${usd(m.total*runs)} bei ${nf(runs,0)} Läufen im Monat`:`${usd(m.total*1000)} für 1.000 Läufe`;
-  $("#tNodes").textContent=`${nf(m.nodes,0)} Knoten im Baum`;
-  const colors={tree:"var(--c-tree)",rev:"var(--c-rev)",meta:"var(--c-meta)",komp:"var(--c-komp)"};
-  $("#bar").innerHTML=m.total>0?m.rows.filter(r=>r.c>0).map(r=>`<div style="flex:${r.c} 1 0;background:${colors[r.k]}" title="${r.name}: ${usd(r.c)}"></div>`).join(""):"";
+function renderCalc(p){
+  const pr=currentProfile(),u=useCases(p,pr).find(x=>x.key===selected),runs=num("runs");
+  $("#itemsOut").textContent=nf(p.n,0);
+  $("#selTitle").textContent=`Aufschlüsselung: ${u.name} · ${pr.name}`;
+  $("#tTotal").textContent=usd(u.total)+" je Lauf";
+  $("#tMonth").textContent=runs!==1?`${usd(u.total*runs)} bei ${nf(runs,0)} Läufen im Monat`:`${usd(u.total*1000)} für 1.000 Läufe`;
+  $("#tNodes").textContent=`${nf(tree(p,p.fix).nodes,0)} Knoten · ${tree(p,p.fix).calls} LLM-Aufrufe für den Baum`;
+  $("#bar").innerHTML=u.total>0?PARTS.filter(([k])=>u.parts[k].c>0).map(([k,n])=>`<div style="flex:${u.parts[k].c} 1 0;background:${COLORS[k]}" title="${n}: ${usd(u.parts[k].c)}"></div>`).join(""):"";
+  const sum=f=>PARTS.reduce((s,[k])=>s+u.parts[k][f],0);
   $("#tRes").innerHTML=`<thead><tr><th>Baustein</th><th>Input</th><th>Output</th><th>Kosten</th><th>Anteil</th></tr></thead><tbody>`+
-    m.rows.map(r=>`<tr><td>${r.name}</td><td class="n">${tok(r.i)}</td><td class="n">${tok(r.o)}</td><td class="n">${usd(r.c)}</td><td class="n">${m.total?nf(r.c/m.total*100,0):0} %</td></tr>`).join("")+
-    `<tr class="sum"><td>Summe je Lauf</td><td class="n">${tok(m.rows.reduce((s,r)=>s+r.i,0))}</td><td class="n">${tok(m.rows.reduce((s,r)=>s+r.o,0))}</td><td class="n">${usd(m.total)}</td><td></td></tr></tbody>`;
-  const a=model(PRESETS.g6).total,b=model(PRESETS.g56).total;
-  $("#tCompare").textContent=`Zum Vergleich mit denselben Einstellungen: gpt-6-luna ${usd(a)}, gpt-5.6-luna ${usd(b)} je Lauf.`;
+    PARTS.map(([k,n])=>{const v=u.parts[k];return `<tr><td>${n}</td><td class="n">${tok(v.i)}</td><td class="n">${tok(v.o)}</td><td class="n">${v.c?usd(v.c):"–"}</td><td class="n">${u.total?nf(v.c/u.total*100,0):0} %</td></tr>`}).join("")+
+    `<tr class="sum"><td>Summe je Lauf</td><td class="n">${tok(sum("i"))}</td><td class="n">${tok(sum("o"))}</td><td class="n">${usd(u.total)}</td><td></td></tr></tbody>`;
+  $("#tCompare").textContent="Anderen Use Case links im Diagramm anklicken, um ihn hier aufzuschlüsseln.";
 }
+function render(){const p=params();renderChart(p);renderCalc(p)}
+
 $("#preset").onchange=()=>{applyPreset();render()};
 ["pIn","pOut","pCache","pWrite"].forEach(id=>$("#"+id).addEventListener("input",()=>{$("#preset").value="own";render()}));
 $("#items").addEventListener("input",()=>{$("#itemsExact").value=$("#items").value;render()});
