@@ -114,7 +114,14 @@ class Fetcher:
         return await self._get(url, params, False)
 
 
+def cap(title: str) -> str:
+    """Titel beginnen immer mit einem Großbuchstaben (Wikidata schreibt z. B. "geometrische Optik")."""
+    title = (title or "").strip()
+    return title[:1].upper() + title[1:]
+
+
 def node(title: str, description: str = "", keywords=(), url: str = "", kind: str = "", sid: str = "") -> dict:
+    title = cap(title)
     kws = []
     for k in keywords:
         k = (k or "").strip()

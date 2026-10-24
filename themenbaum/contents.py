@@ -23,7 +23,7 @@ from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score, s
 from . import gnd as src_gnd
 from . import wikidata as src_wikidata
 from . import wikipedia as src_wikipedia
-from .common import MODELS_DIR, Fetcher, require_wikimedia, sentences
+from .common import MODELS_DIR, Fetcher, cap, require_wikimedia, sentences
 
 SCAFFOLD_SOURCES = {"wikipedia": src_wikipedia, "wikidata": src_wikidata, "gnd": src_gnd}
 # Statische Embeddings über model2vec (sehr schnell, kein Transformer zur Laufzeit).
@@ -612,6 +612,8 @@ async def build(contents: list[dict], cfg: dict) -> dict:
 
     def strip(n):
         n.pop("_all", None)
+        if n.get("title"):
+            n["title"] = cap(n["title"])
         for ch in n.get("children", []):
             strip(ch)
 
