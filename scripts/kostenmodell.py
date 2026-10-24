@@ -63,7 +63,9 @@ for s in ("12×5×5","12×10×5"):
             Bc={m: round((cost(m,150,br+r,twrite=tin-150)+4*cost(m,150,br+r,tcached=tin-150))/5,4) for m in M})
     D["rev"].append(row)
 INSTR = t(DESCRIPTION_PROMPT_TEMPLATE)+200
-META_OUT = 250
+# Metadaten-Output je Inhalt: Titel, Keywords, JSON (~65 Tokens) + Beschreibung (1,925 Tokens je Wort, Deutsch).
+META_WORDS = 500
+META_OUT = round(65 + 1.925 * META_WORDS)
 for label,ft in {"Volltext kurz (≈2k Tokens)":2000,"Volltext mittel (≈5k)":5000,"Volltext lang (≈15k, gekappt)":15000}.items():
     tin=100*(INSTR+ft)
     D["uc2"].append(dict(label=label,ft=ft,tin=tin,basis=dict(tout=100*META_OUT,**C(tin=tin,tout=100*META_OUT)),hoch=dict(tout=100*(META_OUT+800),**C(tin=tin,tout=100*(META_OUT+800)))))

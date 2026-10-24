@@ -78,14 +78,14 @@ def plot_overview(st, fn):
     ax.set_xlim(0, maxv * 1.2); ax.set_yticks([])
     for s in ("top", "right", "left"): ax.spines[s].set_visible(False)
     ax.grid(axis="x", color=LINE, lw=0.8); ax.set_axisbelow(True)
-    ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:.0f} $"))
+    ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:.1f}".rstrip("0").rstrip(".").replace(".", ",") + " $"))
     fig.text(0.02, 1 - 0.5 / H, f"Kosten je Use Case – Themenbaum {st} ({nodes} Knoten)", fontsize=17, fontweight="bold", color=INK)
     fig.text(0.02, 1 - 0.85 / H, "US-Dollar pro Lauf, aufgeteilt nach Themenbaum-Erzeugung, Inhaltsmetadaten und Kompendium-Generierung", fontsize=11, color=INK2)
     hs = [plt.Rectangle((0, 0), 1, 1, color=c) for c in (C1, C2, C3)]
     fig.legend(hs, ["Themenbaum-Erzeugung", "Inhaltsmetadaten (inkl. Zuordnung)", "Kompendium-Generierung"], loc="lower left",
                bbox_to_anchor=(0.015, 1 - 1.45 / H), ncol=3, frameon=False, fontsize=10)
     fig.text(0.02, 0.12 / H,
-             "Annahmen: 60 Wörter je Beschreibung, kein Reasoning · 100 Inhalte à ca. 5 Tsd. Tokens Volltext · Kompendium 70 Tsd. Tokens je Knoten (Mittel aus 60–80 Tsd.)\n"
+             "Annahmen: 60 Wörter je Knotenbeschreibung, 500 Wörter je Inhaltsbeschreibung, kein Reasoning · 100 Inhalte à ca. 5 Tsd. Tokens Volltext · Kompendium 70 Tsd. Tokens je Knoten (Mittel aus 60–80 Tsd.)\n"
              "Überarbeitung = nur betroffener Zweig neu · „Aus 100 Inhalten“ mit umgebauten Prompts und Prompt-Caching (30 min)",
              ha="left", fontsize=8.5, color=MUTED)
     fig.savefig(f"{OUT}/{fn}", dpi=170); plt.close(fig)

@@ -63,8 +63,8 @@ td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:12.5px}
 tr.sum td{font-weight:700;border-bottom:0}
 .tbl{overflow-x:auto}
 .uc-chart{display:grid;gap:6px}
-.uc{all:unset;box-sizing:border-box;display:grid;gap:3px;padding:8px 10px;border-radius:8px;border:1px solid transparent;cursor:pointer}
-.uc:hover{background:var(--bg)}
+.uc{all:unset;box-sizing:border-box;display:grid;gap:3px;padding:8px 10px;border-radius:8px;border:1px solid transparent}
+
 .uc[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
 .uc:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .uc-name{font-weight:600;font-size:13.5px}
@@ -111,17 +111,17 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
   <div class="facts">
     <div class="fact"><span class="k">Themenbaum 12×5×5 (372 Knoten)</span><span class="v">0,07 – 0,16 $</span><span class="s">73 LLM-Aufrufe; 6-luna bis 5.6-luna</span></div>
     <div class="fact"><span class="k">Kompendium für 372 Knoten</span><span class="v">2,83 – 8,18 $</span><span class="s">60–80 Tsd. Tokens je Knoten, über 90 % der Kosten</span></div>
-    <div class="fact"><span class="k">Metadaten für 100 Inhalte</span><span class="v">0,07 – 0,14 $</span><span class="s">Titel, Beschreibung, Keywords; Volltext ≈ 5 Tsd. Tokens</span></div>
+    <div class="fact"><span class="k">Metadaten für 100 Inhalte</span><span class="v">0,11 – 0,24 $</span><span class="s">Titel, Beschreibung (500 Wörter), Keywords; Volltext ≈ 5 Tsd. Tokens</span></div>
     <div class="fact"><span class="k">Überarbeitungswunsch (nur Zweig)</span><span class="v">0,01 – 0,02 $</span><span class="s">ganzer Baum neu: 0,04 – 0,10 $</span></div>
   </div>
 
   <div class="grid">
     <section class="card" aria-labelledby="h-main">
       <h2 id="h-main">Kosten je Use Case · <span id="chartTitle"></span></h2>
-      <p class="note">Rechnet live mit den Einstellungen im Rechner. Mit den Standardwerten entspricht das Diagramm der Übersichtsgrafik der Kostenanalyse. Einen Use Case anklicken, um ihn rechts aufzuschlüsseln.</p>
+      <p class="note">Rechnet live mit den Einstellungen im Rechner. Mit den Standardwerten entspricht es der Übersichtsgrafik der Kostenanalyse. Die Tabelle darunter schlüsselt jeden Use Case auf.</p>
       <div class="legend"><span><i style="background:var(--c-tree)"></i>Themenbaum-Erzeugung</span><span><i style="background:var(--c-rev)"></i>Anpassungen</span><span><i style="background:var(--c-meta)"></i>Inhaltsmetadaten (inkl. Zuordnung)</span><span><i style="background:var(--c-komp)"></i>Kompendium</span></div>
       <div id="chart" class="uc-chart"></div>
-      <details class="how"><summary>Werte als Tabelle</summary><div class="tbl"><table id="ucTable"></table></div></details>
+      <details class="how" open><summary>Aufschlüsselung je Use Case</summary><div class="tbl"><table id="ucTable"></table></div></details>
       <p class="note" id="chartNote"></p>
     </section>
 
@@ -148,7 +148,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
         </div>
         <div class="row">
           <label for="code">Code-Stand<select id="code"><option value="ist">aktueller Code</option><option value="fix">mit Prompt-Fix (nur Titel im Kontext)</option></select></label>
-          <label for="words">Wörter je Beschreibung<input type="number" id="words" value="60" min="20" max="300"></label>
+          <label for="words">Wörter je Knotenbeschreibung<input type="number" id="words" value="60" min="20" max="300"></label>
           <label for="reason">Reasoning-Tokens je Aufruf<input type="number" id="reason" value="0" min="0" step="100"></label>
         </div>
       </fieldset>
@@ -165,6 +165,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
         <div class="row">
           <label for="itemsExact">genau<input type="number" id="itemsExact" min="0" max="1000000" value="100"></label>
           <label for="fulltext">Volltext-Tokens je Inhalt<input type="number" id="fulltext" value="5000" min="0" step="500"></label>
+          <label for="metaWords">Wörter je Inhaltsbeschreibung<input type="number" id="metaWords" value="500" min="0" max="3000" step="50"></label>
         </div>
         <label class="check" for="assign"><input type="checkbox" id="assign" checked> Inhalte dem Baum zuordnen (Baum im Cache)</label>
       </fieldset>
@@ -179,12 +180,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
       </fieldset>
       <label for="runs">Läufe pro Monat<input type="number" id="runs" value="1" min="0" max="100000"></label>
 
-      <h3 class="sel" id="selTitle"></h3>
-      <div class="total" aria-live="polite"><span class="big" id="tTotal">–</span><span id="tMonth"></span><span id="tNodes"></span></div>
-      <div class="bar" id="bar" aria-hidden="true"></div>
-      <div class="legend"><span><i style="background:var(--c-tree)"></i>Themenbaum</span><span><i style="background:var(--c-rev)"></i>Anpassungen</span><span><i style="background:var(--c-meta)"></i>Inhaltsmetadaten</span><span><i style="background:var(--c-komp)"></i>Kompendium</span></div>
-      <div class="tbl"><table id="tRes"></table></div>
-      <p class="note" id="tCompare"></p>
+      <p class="note" id="calcNote"></p>
     </section>
   </div>
 
@@ -199,7 +195,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
           <tr><td>Themenbaum 12×10×5, aktueller Code (133 Aufrufe)</td><td class="n">0,151 $</td><td class="n">0,330 $</td></tr>
           <tr><td>Themenbaum 12×10×5, Fall „hoch“ (100 Wörter + Reasoning)</td><td class="n">0,267 $</td><td class="n">0,600 $</td></tr>
           <tr><td>Überarbeitung 12×10×5: ganzer Baum / nur Zweig / Zweig + Cache</td><td class="n">0,084 / 0,020 / 0,011 $</td><td class="n">0,197 / 0,042 / 0,023 $</td></tr>
-          <tr><td>Metadaten 100 Inhalte: Volltext kurz / mittel / lang</td><td class="n">0,038 / 0,068 / 0,168 $</td><td class="n">0,082 / 0,142 / 0,342 $</td></tr>
+          <tr><td>Metadaten 100 Inhalte: Volltext kurz / mittel / lang</td><td class="n">0,077 / 0,107 / 0,207 $</td><td class="n">0,175 / 0,235 / 0,435 $</td></tr>
           <tr><td>Zuordnung 100 Inhalte zu 12×5×5: ohne / mit Cache</td><td class="n">0,061 / 0,012 $</td><td class="n">0,122 / 0,025 $</td></tr>
           <tr><td>Baum aus 100 Inhalten 12×5×5, Volltext mittel: ohne / mit Cache</td><td class="n">3,88 / 0,49 $</td><td class="n">7,77 / 0,99 $</td></tr>
           <tr><td>Kompendium 12×5×5 (372 Knoten)</td><td class="n">2,83 – 3,87 $</td><td class="n">5,95 – 8,18 $</td></tr>
@@ -228,7 +224,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
       <ul>
         <li>System-Prompt 578 Tokens; ein Knoten im Output 182 Tokens bei 60 Wörtern Beschreibung (+2 Tokens je weiterem Wort).</li>
         <li>Aufrufe: 1 für die Hauptthemen, 1 je Hauptthema, 1 je Unterthema. Die Modelle schöpfen die Obergrenzen voll aus.</li>
-        <li>Metadaten: Anweisung 582 Tokens + Volltext je Inhalt, Output 250 Tokens. Zuordnung: Titelliste des Baums (14 Tokens je Knoten) im Cache.</li>
+        <li>Metadaten: Anweisung 582 Tokens + Volltext je Inhalt; Output 65 Tokens (Titel, Keywords) + 1,925 Tokens je Wort Beschreibung, Standard 500 Wörter ≈ 1.030 Tokens. Zuordnung: Titelliste des Baums (14 Tokens je Knoten) im Cache.</li>
         <li>Kompendium: gemessene 60–80 Tsd. Tokens und 30–40 s je Knoten; gerechnet mit 4–6 Tsd. Output, Rest Input.</li>
         <li>Tokenizer o200k als Näherung (±10–15 %). Nicht enthalten: Crawler, Hosting, Wiederholungen nach Fehlern.</li>
       </ul>
@@ -258,7 +254,6 @@ const usd=v=>(v<1?nf(v,3):v<100?nf(v,2):nf(v,0))+" $";
 const tok=v=>v>=1e6?nf(v/1e6,2)+" Mio.":v>=1e3?nf(v/1e3,0)+" Tsd.":nf(v,0);
 const COLORS={tree:"var(--c-tree)",rev:"var(--c-rev)",meta:"var(--c-meta)",komp:"var(--c-komp)"};
 const PARTS=[["tree","Themenbaum"],["rev","Anpassungen"],["meta","Inhaltsmetadaten"],["komp","Kompendium"]];
-let selected="topic";
 
 function applyPreset(){const p=PRESETS[$("#preset").value];if(!p)return;$("#pIn").value=p.in;$("#pOut").value=p.out;$("#pCache").value=p.cache;$("#pWrite").value=p.write}
 
@@ -267,7 +262,7 @@ function applyPreset(){const p=PRESETS[$("#preset").value];if(!p)return;$("#pIn"
 function params(){
   return {NM:Math.round(num("n1")),NS:Math.round(num("n2")),NL:Math.round(num("n3")),words:num("words"),R:num("reason"),
     fix:$("#code").value==="fix",loops:Math.round(num("loops")),loopMode:$("#loopMode").value,
-    n:Math.round(num("itemsExact")),ft:num("fulltext"),assign:$("#assign").checked,
+    n:Math.round(num("itemsExact")),ft:num("fulltext"),metaWords:num("metaWords"),assign:$("#assign").checked,
     komp:$("#komp").checked,kompAll:$("#kompNodes").value==="all",kompTok:num("kompTok"),kompOut:num("kompOut")};
 }
 function tree(p,fix){
@@ -291,7 +286,7 @@ function partRev(p,pr){
   return {i:L*150+ctx,o:L*out,c:cost(pr,L*150,L*out,(L-1)*(ctx-150),ctx-150)};
 }
 function partMeta(p,pr,assign){
-  const n=p.n,i0=n*(582+p.ft),o0=n*(250+p.R);
+  const n=p.n,i0=n*(582+p.ft),o0=n*(65+1.925*p.metaWords+p.R);
   let r={i:i0,o:o0,c:cost(pr,i0,o0)};
   if(n>0&&assign){const tl=tree(p,p.fix).nodes*14+300;r={i:r.i+n*250+tl,o:r.o+n*60,c:r.c+cost(pr,n*250,n*60,(n-1)*tl,tl)}}
   return r;
@@ -332,7 +327,6 @@ function currentProfile(){const k=$("#preset").value;return k==="own"?profiles()
 function renderChart(p){
   const profs=profiles(),all=profs.map(pr=>useCases(p,pr));
   const ucs=all[0];
-  if(!ucs.some(u=>u.key===selected))selected="topic";
   const max=Math.max(...all.flat().map(u=>u.total),1e-9);
   const t=tree(p,p.fix);
   $("#chartTitle").textContent=`Themenbaum ${p.NM}×${p.NS}×${p.NL} (${nf(t.nodes,0)} Knoten)`;
@@ -341,27 +335,18 @@ function renderChart(p){
     const rows=profs.map((pr,j)=>{const v=all[j][i];
       const segs=PARTS.filter(([k])=>v.parts[k].c>0).map(([k,name])=>`<i style="flex:${v.parts[k].c} 1 0;background:${COLORS[k]}" title="${name}: ${usd(v.parts[k].c)}"></i>`).join("");
       return `<span class="uc-row"><span class="uc-model">${pr.name}</span><span class="uc-track"><span class="uc-bar" style="width:${(v.total/max*80).toFixed(2)}%">${segs}</span><span class="uc-val">${usd(v.total)}</span></span></span>`}).join("");
-    return `<button type="button" class="uc" data-key="${u.key}" aria-pressed="${u.key===selected}"><span class="uc-name">${u.name}</span>${warn}${rows}</button>`}).join("");
-  $("#chart").querySelectorAll(".uc").forEach(b=>b.onclick=()=>{selected=b.dataset.key;render()});
-  $("#ucTable").innerHTML=`<thead><tr><th>Use Case</th><th>Modell</th>${PARTS.map(([,n])=>`<th>${n}</th>`).join("")}<th>Summe</th></tr></thead><tbody>`+
-    ucs.map((u,i)=>profs.map((pr,j)=>{const v=all[j][i];return `<tr><td>${j?"":u.name}</td><td>${pr.name}</td>${PARTS.map(([k])=>`<td class="n">${v.parts[k].c?usd(v.parts[k].c):"–"}</td>`).join("")}<td class="n"><b>${usd(v.total)}</b></td></tr>`}).join("")).join("")+"</tbody>";
+    return `<div class="uc"><span class="uc-name">${u.name}</span>${warn}${rows}</div>`}).join("");
+  const runs=num("runs"),month=runs!==1;
+  $("#ucTable").innerHTML=`<thead><tr><th>Use Case</th><th>Modell</th>${PARTS.map(([,n])=>`<th>${n}</th>`).join("")}<th>Summe je Lauf</th><th>${month?`× ${nf(runs,0)} Läufe`:"1.000 Läufe"}</th></tr></thead><tbody>`+
+    ucs.map((u,i)=>profs.map((pr,j)=>{const v=all[j][i];return `<tr><td>${j?"":u.name}</td><td>${pr.name}</td>${PARTS.map(([k])=>`<td class="n" title="${tok(v.parts[k].i)} Input, ${tok(v.parts[k].o)} Output">${v.parts[k].c?usd(v.parts[k].c):"–"}</td>`).join("")}<td class="n"><b>${usd(v.total)}</b></td><td class="n">${usd(v.total*(month?runs:1000))}</td></tr>`}).join("")).join("")+"</tbody>";
   const fixNote=p.n>0?" „Themenbaum aus Inhalten“ rechnet mit umgebauten Prompts (Korpus vorne, nur Titel im Kontext), sonst greift kein Caching.":"";
   $("#chartNote").textContent=`Kompendium je Zeile: ${profs.map(pr=>`${usd(partKomp(p,pr).c)} (${pr.name})`).join(", ")}.${fixNote}`;
 }
 
 function renderCalc(p){
-  const pr=currentProfile(),u=useCases(p,pr).find(x=>x.key===selected),runs=num("runs");
+  const tr=tree(p,p.fix);
   $("#itemsOut").textContent=nf(p.n,0);
-  $("#selTitle").textContent=`Aufschlüsselung: ${u.name} · ${pr.name}`;
-  $("#tTotal").textContent=usd(u.total)+" je Lauf";
-  $("#tMonth").textContent=runs!==1?`${usd(u.total*runs)} bei ${nf(runs,0)} Läufen im Monat`:`${usd(u.total*1000)} für 1.000 Läufe`;
-  $("#tNodes").textContent=`${nf(tree(p,p.fix).nodes,0)} Knoten · ${tree(p,p.fix).calls} LLM-Aufrufe für den Baum`;
-  $("#bar").innerHTML=u.total>0?PARTS.filter(([k])=>u.parts[k].c>0).map(([k,n])=>`<div style="flex:${u.parts[k].c} 1 0;background:${COLORS[k]}" title="${n}: ${usd(u.parts[k].c)}"></div>`).join(""):"";
-  const sum=f=>PARTS.reduce((s,[k])=>s+u.parts[k][f],0);
-  $("#tRes").innerHTML=`<thead><tr><th>Baustein</th><th>Input</th><th>Output</th><th>Kosten</th><th>Anteil</th></tr></thead><tbody>`+
-    PARTS.map(([k,n])=>{const v=u.parts[k];return `<tr><td>${n}</td><td class="n">${tok(v.i)}</td><td class="n">${tok(v.o)}</td><td class="n">${v.c?usd(v.c):"–"}</td><td class="n">${u.total?nf(v.c/u.total*100,0):0} %</td></tr>`}).join("")+
-    `<tr class="sum"><td>Summe je Lauf</td><td class="n">${tok(sum("i"))}</td><td class="n">${tok(sum("o"))}</td><td class="n">${usd(u.total)}</td><td></td></tr></tbody>`;
-  $("#tCompare").textContent="Anderen Use Case links im Diagramm anklicken, um ihn hier aufzuschlüsseln.";
+  $("#calcNote").textContent=`${nf(tr.nodes,0)} Knoten, ${tr.calls} LLM-Aufrufe für den Baum. Die Ergebnisse stehen links im Diagramm und in der Aufschlüsselung je Use Case.`;
 }
 function render(){const p=params();renderChart(p);renderCalc(p)}
 

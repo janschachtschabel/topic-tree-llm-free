@@ -34,7 +34,7 @@ Hintergrund laufen. Die App ist **passwortgeschützt** (Login beim Aufruf).
   (mpnet, ARI 0,39); model2vec mit Substantiven 59 % bei etwa 300-facher Geschwindigkeit. Hybride (Namen aus
   Wikipedia oder einer Wikidata-Taxonomie) liefern die besten Namen und echte Beschreibungen.
 - **Kosten mit LLM:** Ein Themenbaum 12×5×5 kostet 0,07–0,16 $, ein Kompendium-Text je Sammlung 2,83–8,18 $ für
-  372 Knoten. Metadaten für Inhalte skalieren linear (etwa 0,1 Cent je Inhalt).
+  372 Knoten. Metadaten für Inhalte skalieren linear (etwa 0,11–0,24 Cent je Inhalt bei 500 Wörtern Beschreibung).
 
 ## Schnellstart lokal
 

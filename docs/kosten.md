@@ -12,8 +12,8 @@ Alle Beträge in US-Dollar. Gerechnet für **gpt-6-luna** und **gpt-5.6-luna**.
 - **Der Themenbaum selbst ist günstig:** 0,07–0,16 $ für 12×5×5 (372 Knoten), 0,15–0,33 $ für 12×10×5 (732 Knoten).
 - **Ein Kompendium-Text je Sammlung dominiert** mit über 90 % der Kosten: 2,83–8,18 $ für 372 Knoten. Bei mehreren
   hundert Knoten kommt trotz kleiner Einzelbeträge einiges zusammen.
-- **Inhalte skalieren linear mit der Menge:** beschreibende Metadaten (Titel, Beschreibung, Keywords) kosten etwa
-  0,07–0,14 Cent je Inhalt; Fach und Bildungsstufe laufen ohne LLM.
+- **Inhalte skalieren linear mit der Menge:** beschreibende Metadaten (Titel, Beschreibung mit 500 Wörtern, Keywords)
+  kosten etwa 0,11–0,24 Cent je Inhalt; Fach und Bildungsstufe laufen ohne LLM.
 - **Überarbeitungswünsche sind billig**, wenn nur der betroffene Zweig neu erzeugt wird (1–4 Cent).
 - **Teuer wird es nur, wenn Volltexte vieler Inhalte in jeden Aufruf wandern** und kein Prompt-Caching genutzt wird
   (bis 14 $ je Baum).
@@ -24,10 +24,10 @@ Alle Beträge in US-Dollar. Gerechnet für **gpt-6-luna** und **gpt-5.6-luna**.
 |---|---:|---:|
 | Themenbaum aus einem Thema | 3,42 $ | 7,22 $ |
 | … + 1 Überarbeitung | 3,43 $ | 7,25 $ |
-| … + 100 eigene Inhalte | 3,50 $ | 7,39 $ |
-| Themenbaum aus 100 Inhalten, nur Metadaten | 3,48 $ | 7,35 $ |
-| Themenbaum aus 100 Inhalten, mit Volltext (mit Cache) | 3,90 $ | 8,20 $ |
-| Themenbaum aus 100 Inhalten, mit Volltext (ohne Cache) | 7,30 $ | 14,98 $ |
+| … + 100 eigene Inhalte | 3,54 $ | 7,48 $ |
+| Themenbaum aus 100 Inhalten, nur Metadaten | 3,52 $ | 7,45 $ |
+| Themenbaum aus 100 Inhalten, mit Volltext (mit Cache) | 3,94 $ | 8,29 $ |
+| Themenbaum aus 100 Inhalten, mit Volltext (ohne Cache) | 7,33 $ | 15,07 $ |
 
 Dieselbe Übersicht für 12×10×5: [`kosten/00b_uebersicht_usecases_12x10x5.png`](kosten/00b_uebersicht_usecases_12x10x5.png).
 
@@ -44,7 +44,10 @@ Dieselbe Übersicht für 12×10×5: [`kosten/00b_uebersicht_usecases_12x10x5.png
   Lehrplanthemen. 12×5×5 = 73 Aufrufe, 12×10×5 = 133 Aufrufe.
 - System-Prompt 578 Tokens. Ein Knoten im Output (Titel, Kurztitel, Beschreibung, 5 Keywords) hat 182 Tokens bei
   60 Wörtern Beschreibung, 264 Tokens bei 100 Wörtern.
-- **Basis:** 60 Wörter, kein Reasoning. **Hoch:** 100 Wörter und 1.000 Reasoning-Tokens je Aufruf.
+- **Inhaltsmetadaten:** Anweisung 582 Tokens + Volltext; Output 65 Tokens (Titel, Keywords) + 1,925 Tokens je Wort
+  Beschreibung. Standard 500 Wörter ≈ 1.030 Tokens. (Eine frühere Fassung rechnete mit 250 Tokens, also nur etwa
+  95 Wörtern, und lag deshalb bei 0,07–0,14 $ je 100 Inhalte.)
+- **Basis:** 60 Wörter je Knotenbeschreibung im Baum, kein Reasoning. **Hoch:** 100 Wörter und 1.000 Reasoning-Tokens je Aufruf.
 - Die Modelle schöpfen die Obergrenzen voll aus (laut Prompt sind es Höchstwerte; real entstehen eher weniger Knoten).
 - Nicht enthalten: Crawler, Hosting, Wiederholungen nach API-Fehlern.
 
@@ -87,9 +90,9 @@ Prompt-Caching, weil die Titelliste des Baums in allen Aufrufen gleich bleibt.
 
 | Schritt (100 Inhalte) | gpt-6-luna | gpt-5.6-luna |
 |---|---:|---:|
-| Metadaten, Volltext kurz (≈2 Tsd. Tokens) | 0,038 $ | 0,082 $ |
-| Metadaten, Volltext mittel (≈5 Tsd.) | 0,068 $ | 0,142 $ |
-| Metadaten, Volltext lang (≈15 Tsd., gekappt) | 0,168 $ | 0,342 $ |
+| Metadaten, Volltext kurz (≈2 Tsd. Tokens) | 0,077 $ | 0,175 $ |
+| Metadaten, Volltext mittel (≈5 Tsd.) | 0,107 $ | 0,235 $ |
+| Metadaten, Volltext lang (≈15 Tsd., gekappt) | 0,207 $ | 0,435 $ |
 | Zuordnung zu 12×5×5, ohne / mit Cache | 0,061 / 0,012 $ | 0,122 / 0,025 $ |
 
 ## Use Case 3: Struktur aus 100 Inhalten ableiten
