@@ -18,11 +18,13 @@ from fastapi.staticfiles import StaticFiles
 from . import auth, common
 from . import contents
 from . import gnd as src_gnd
+from . import hybrid as src_hybrid
 from . import wikidata as src_wikidata
 from . import wikipedia as src_wikipedia
 
-SOURCES = {"gnd": src_gnd, "wikipedia": src_wikipedia, "wikidata": src_wikidata}
-SOURCE_NAMES = {"gnd": "GND (lobid)", "wikipedia": "Wikipedia", "wikidata": "Wikidata"}
+SOURCES = {"gnd": src_gnd, "wikipedia": src_wikipedia, "wikidata": src_wikidata, "hybrid": src_hybrid}
+SOURCE_NAMES = {"gnd": "GND (lobid)", "wikipedia": "Wikipedia", "wikidata": "Wikidata",
+                "hybrid": "Hybrid (Wikipedia + Wikidata + GND)"}
 
 STATIC = Path(__file__).parent / "static"
 VERSION = "1.0.0"
@@ -91,6 +93,18 @@ def pipeline(source: str, root: dict, enrich: bool) -> list[str]:
                 "Ebene 2 und 3: Unterabschnitte; hat ein Abschnitt keine, wird die Gliederung seines verlinkten Hauptartikels ({{Hauptartikel}}) verwendet.",
                 "Beschreibungen: Einleitung des Hauptartikels, sonst die ersten Sätze des Abschnitts. Schlagwörter: Links im Abschnitt.",
                 "Kurztitel: regelbasiert gekürzt (max. 20 Zeichen). Kein generatives LLM."]
+    if source == "hybrid":
+        steps = ["Grundlage: Wikipedia-Gliederung wie bei der Quelle Wikipedia, mit doppelt so vielen Kandidaten je Ebene.",
+                 "Allgemeine Abschnitte („Geschichte“, „Rezeption“, „Überblick“, „Weiterführendes“, Personenlisten …) und – außer bei Geschichtsthemen – Zeitabschnitte („1960er Jahre“) werden entfernt.",
+                 "Jeder Knoten bekommt sein Wikidata-Objekt: über den Hauptartikel oder einen gleichnamigen Artikel, den der Elternabschnitt verlinkt.",
+                 "Fehlende Unterthemen werden mit Wikidata-Unterbegriffen („Teil von“, „Unterklasse von“, „hat Teil“) aufgefüllt; "
+                 "nur Kandidaten, deren Titel und Wikipedia-Einleitung dem Thema ähnlich genug sind (MiniLM, Schwelle 0,38)."]
+        steps += ["Mehrheitsentscheid auf jeder Ebene: Wikipedia- und Wikidata-Kandidaten werden gemeinsam sortiert, bevorzugt nach "
+                  "Zahl der bestätigenden Quellen (Wikipedia verlinkt den Begriff im Elternabschnitt, Wikidata kennt die Beziehung zum "
+                  "Elternobjekt, GND-Eintrag vorhanden); bei Gleichstand bleibt die Wikipedia-Reihenfolge.",
+                  "Ergänzte Wikidata-Knoten bekommen die Gliederung ihres eigenen Wikipedia-Artikels als Unterthemen."]
+        return steps + ["Jeder Knoten bekommt seine GND-ID aus Wikidata (P227), sichtbar unter der Herkunft und als Schlagwort.",
+                        "Beschreibungen: Wikipedia-Einleitungen. Kein generatives LLM."]
     return ["Einstieg: Wikidata-Objekt zum Thema (Wikidata-Suche).",
             "Ebene 1 bis 3: Objekte, die „Teil von“ (P361) oder „Unterklasse von“ (P279) des Elternobjekts sind oder die es als „hat Teil“ (P527) nennt; nur mit deutschem Wikipedia-Artikel.",
             "Reihenfolge: nach Zahl der Sprachversionen (Maß für Bekanntheit); doppelte Objekte werden übersprungen.",

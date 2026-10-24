@@ -12,7 +12,7 @@ Entstanden als Prüfung: Was kostet ein Themenbaum mit LLM, und wie weit kommt m
 
 | Bereich | Inhalt |
 |---|---|
-| **Thema → Baum** | Thema eingeben, Baum mit bis zu drei Ebenen erzeugen – standardmäßig aus Wikipedia, wahlweise aus Wikidata, GND oder allen dreien nebeneinander. Anderen Einstiegstreffer wählen, JSON herunterladen (Format des `topic-tree-generator`). |
+| **Thema → Baum** | Thema eingeben, Baum mit bis zu drei Ebenen erzeugen – standardmäßig aus Wikipedia, wahlweise aus Wikidata, GND, als **Hybrid** (Wikipedia + Wikidata + GND mit Mehrheitsentscheid) oder nebeneinander („Wikipedia vs. Hybrid“, „Alle Grundquellen“). Anderen Einstiegstreffer wählen, JSON herunterladen (Format des `topic-tree-generator`). |
 | **Inhalte → Baum** | Inhaltsmenge (Beispieldaten oder eigene JSON/CSV) zu einem Baum bündeln: Embeddings (mpnet, MiniLM oder model2vec) + hierarchisches Clustering, Benennung über Begriffe aus den Texten, GND, Wikipedia oder eine Taxonomie, oder Einsortieren in ein Gerüst. Jeder Lauf als eigene Spalte zum Vergleichen, mit Kennzahlen gegenüber Soll-Kategorien. Im Tab „Inhalte“ lässt sich der Datensatz durchsuchen und durchblättern, samt der Gruppe aus dem letzten Lauf. |
 | **Kosten** | Kernergebnisse der Kostenanalyse: interaktives Diagramm aller Use Cases für beide Modelle, das live mit dem Rechner (Inhaltsmenge, Anpassungsschleifen, Baumgröße, Kompendium, eigene Preise) rechnet und mit den Standardwerten der Übersichtsgrafik entspricht; dazu Details und Grafiken. |
 
@@ -29,7 +29,9 @@ Hintergrund laufen. Die App ist **passwortgeschützt** (Login beim Aufruf).
 
 ## Ergebnisse in Kürze
 
-- **Thema → Baum:** Wikipedia ist insgesamt am brauchbarsten, Wikidata stark bei ganzen Fächern, die GND nur dort.
+- **Thema → Baum:** Wikipedia ist insgesamt am brauchbarsten, Wikidata stark bei ganzen Fächern, die GND nur dort. Der
+  Hybrid aus allen dreien füllt die oberste Ebene bei 5 von 7 Testthemen vollständig (Wikipedia: 1 von 7), entfernt
+  allgemeine Abschnitte und hängt GND-IDs an.
   Keine Quelle ist didaktisch gegliedert.
 - **Inhalte → Baum:** Embeddings + hierarchisches Clustering trifft bei 100 Beispielinhalten 64 % Reinheit
   (mpnet, ARI 0,39); model2vec mit Substantiven in Grundform und zerlegten Komposita ebenfalls 64 % (ARI 0,41) bei

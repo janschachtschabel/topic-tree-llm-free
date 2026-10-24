@@ -213,9 +213,12 @@ async def build(F, theme: str, entry: str | None, n1: int, n2: int, n3: int, enr
             url, kind = wiki_url(s["article"], s["title"]), f"Abschnitt in „{s['article']}“"
         kws = ([s["main"]] if s.get("main") else []) + links(s["text"])
         n = node(s["title"], desc, kws, url, kind, s["title"])
+        # Intern für den Hybrid: zugehöriger Artikel und alle Links im Abschnitt (nicht Teil der Ausgabe).
+        n["_main"], n["_links"] = s.get("main"), links(s["text"], 300)
         n["children"] = [make(k) for k in s.get("kids", [])]
         return n
 
     root = node(atitle, sentences(ex.get(atitle, "")) or sentences(plain(intro)), [], wiki_url(atitle), "Artikel", atitle)
+    root["_main"], root["_links"] = atitle, links(wt, 1000)
     root["children"] = [make(s) for s in l1]
     return root, alts

@@ -19,12 +19,33 @@ Ohne LLM kann man keine Struktur erfinden; man leitet sie aus einer vorhandenen 
 | **GND** (über [lobid-gnd](https://lobid.org/gnd)) | Unterbegriffe des Schlagworts (Ober-/Unterbegriffs-Relationen), ergänzt um verwandte Begriffe. Bei Fächern mit wenig Hierarchie (z. B. „Physik“) bilden die **GND-Sachgruppen** des Fachs Ebene 1; Ebene 2 sind die Begriffe, auf die in der Sachgruppe die meisten anderen als Oberbegriff verweisen. | Normdaten mit IDs, gut für Schlagwörter; Ebene 3 oft fachlich gut | Hierarchie sehr dünn: „Photosynthese“ liefert 1 Knoten; Ebene 2 bei Fächern verrauscht |
 | **Wikipedia** | Gliederung des Artikels zum Thema; hat ein Abschnitt keine Unterabschnitte, wird die Gliederung seines `{{Hauptartikel}}` übernommen. Beschreibungen aus Artikeleinleitung oder Abschnittstext. | Bei konkreten Themen meist sinnvolle Gliederung, gute Beschreibungen | Abschnitte wie „Geschichte“ oder „Rezeption“; nicht didaktisch gegliedert |
 | **Wikidata** | Objekte, die „Teil von“ (P361) oder „Unterklasse von“ (P279) des Elternobjekts sind oder die es als „hat Teil“ (P527) nennt; sortiert nach Zahl der Sprachversionen. | Bei Fächern inhaltlich stimmig, fast alle Knoten beschrieben | Bei freien Themen dünn oder schief („Klimawandel in Südkorea“) |
+| **Hybrid** (Wikipedia + Wikidata + GND) | Wikipedia-Gliederung ohne allgemeine Abschnitte und (außer bei Geschichtsthemen) ohne Zeitabschnitte; jeder Knoten wird seinem Wikidata-Objekt zugeordnet (Hauptartikel oder verlinkter gleichnamiger Artikel); passende Wikidata-Unterbegriffe kommen dazu (Relevanzfilter: Titel + Wikipedia-Einleitung gegen das Thema, MiniLM ≥ 0,38); **Mehrheitsentscheid**: bevorzugt wird, was mehrere Quellen bestätigen; ergänzte Wikidata-Knoten bekommen die Gliederung ihres Artikels; GND-ID je Knoten | Volle obere Ebene, fachliche Ordnung bei Fächern, Normdaten (GND) | Vereinzelt Unpassendes („Präsident“ unter Demokratie); langsamer (erster Lauf ≈15 s) |
 
 ![Knoten je Quelle für drei Themen](img/ergebnisse-thema.png)
 
-**Erfahrung aus den Tests:** Wikipedia war insgesamt am brauchbarsten und für weitere Tests „ausreichend gut“.
+**Erfahrung aus den Tests:** Wikipedia war insgesamt am brauchbarsten und für weitere Tests „ausreichend gut“; sie ist
+der Standard. Der **Hybrid** baut darauf auf und ist im Vergleich auf 7 Themen die beste Variante (siehe unten).
 Wikidata ist bei ganzen Fächern stark, die GND nur dort. Keine Quelle ist didaktisch gegliedert oder auf eine
 Bildungsstufe zugeschnitten; das bleibt die Lücke gegenüber dem LLM.
+
+### Hybrid: Ergebnisse
+
+Vergleich auf Physik, Photosynthese, Klimawandel, Bruchrechnung, Demokratie, Optik und Mittelalter (Ziel 12 × 5 × 5),
+Skript [`scripts/test_hybrid_thema.py`](../scripts/test_hybrid_thema.py):
+
+| | Wikipedia | Hybrid ohne Mehrheit | **Hybrid (Standard)** | Mehrheit nur Ebene 1 |
+|---|---|---|---|---|
+| Ebene 1 voll (12) | 1 von 7 | 5 von 7 | **5 von 7** | 5 von 7 |
+| allgemeine Abschnitte | 0–35 % | 0 % | **0 %** | 0 % |
+| von ≥ 2 Quellen bestätigt | 11–40 % | 13–36 % | **13–48 %** | 13–37 % |
+| Physik / Demokratie (Knoten Ebene 1/2/3) | 7/16/50 · 8/36/53 | 12/55/83 · 12/53/59 | **12/45/82 · 12/44/27** | 12/45/60 · 12/44/18 |
+
+Beispiele (Hybrid): Physik → Thermodynamik, Elektromagnetismus, Astrophysik, Teilchenphysik, Atomphysik …;
+Demokratie → direkte, repräsentative, deliberative Demokratie …; Mittelalter → Früh-, Hoch-, Spätmittelalter …;
+Optik → geometrische Optik, Wellenoptik, Quantenoptik …; Photosynthese → Calvin-Zyklus, Dunkelreaktion, C4-Stoffwechselweg
+neben den Wikipedia-Abschnitten. Ohne Mehrheitsentscheid bleiben Wikipedia-Rubriken wie „Methodik“ oder
+„Theoriengebäude“ oben; ohne Relevanzfilter kamen themenfremde Wikidata-Knoten dazu („Quantenzahl“ unter
+Bruchrechnung).
 
 **Nicht umgesetzt, aber naheliegend:** Lehrpläne als Quelle (PDF → Markdown, z. B. mit docling, und Überschriften als
 Gliederung). Das liefert didaktisch passende Strukturen für Schulfächer, braucht aber je Bundesland eigene Parser,

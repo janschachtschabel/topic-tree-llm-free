@@ -19,7 +19,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 INK, INK2, MUTED, LINE, BG = "#16201d", "#4a5753", "#7d8a86", "#dbe2df", "#fcfcfb"
 ACCENT, ACCENT_SOFT = "#1f6b5c", "#e2efeb"
-SRC = {"GND": "#6a4fc8", "Wikipedia": "#2a78d6", "Wikidata": "#b8561c"}
+SRC = {"GND": "#6a4fc8", "Wikipedia": "#2a78d6", "Wikidata": "#b8561c", "Hybrid": "#1f8a5c"}
 FONT = "Segoe UI, Helvetica, Arial, sans-serif"
 
 
@@ -55,9 +55,9 @@ class Svg:
 
 
 def diagram_topic():
-    s = Svg(1180, 560, "Thema → Themenbaum ohne LLM: drei Quellen")
+    s = Svg(1180, 700, "Thema → Themenbaum ohne LLM: drei Quellen und ein Hybrid")
     s.text(24, 62, "Jede Quelle liefert Struktur, Namen und Beschreibungen aus vorhandenem Wissen. Kein Text wird generiert.", 13, INK2)
-    s.box(24, 230, 150, 90, ["z. B. „Physik“,", "„Photosynthese“"], fill=ACCENT_SOFT, stroke=ACCENT, head="Thema")
+    s.box(24, 300, 150, 90, ["z. B. „Physik“,", "„Photosynthese“"], fill=ACCENT_SOFT, stroke=ACCENT, head="Thema")
     lanes = [
         ("GND", 100, ["Schlagwort suchen", "(lobid-gnd)"],
          ["Unterbegriffe + verwandte", "Begriffe; bei Fächern:", "GND-Sachgruppen"],
@@ -68,19 +68,22 @@ def diagram_topic():
         ("Wikidata", 390, ["Objekt zum Thema", "(Wikidata-Suche)"],
          ["„Teil von“, „Unterklasse von“,", "„hat Teil“ (SPARQL)"],
          ["sortiert nach Zahl der", "Sprachversionen"]),
+        ("Hybrid", 535, ["Wikipedia-Gliederung ohne", "allgemeine Abschnitte"],
+         ["+ passende Wikidata-Begriffe;", "Mehrheitsentscheid: was", "mehrere Quellen bestätigen"],
+         ["Gliederung des Artikels je", "Knoten; GND-ID je Knoten"]),
     ]
     for name, y, a, b, c in lanes:
         col = SRC[name]
-        s.arrow(176, 275, 230, y + 45, col)
+        s.arrow(176, 345, 230, y + 45, col)
         s.box(232, y, 210, 92, a, stroke=col, head=name, head_color=col)
         s.arrow(444, y + 46, 474, y + 46)
         s.box(476, y, 240, 92, b, head="Ebene 1")
         s.arrow(718, y + 46, 748, y + 46)
         s.box(750, y, 230, 92, c, head="Ebene 2 und 3")
-        s.arrow(982, y + 46, 1010, 275)
-    s.box(1012, 205, 150, 140, ["Titel, Kurztitel,", "Beschreibung (aus", "Wikipedia/GND),", "Schlagwörter, Link"],
+        s.arrow(982, y + 46, 1010, 345)
+    s.box(1012, 275, 150, 140, ["Titel, Kurztitel,", "Beschreibung (aus", "Wikipedia/GND),", "Schlagwörter, Link"],
           fill=ACCENT_SOFT, stroke=ACCENT, head="Themenbaum")
-    s.text(24, 530, "Beschreibungen: Wikipedia-Einleitungen (bei der GND über GND → Wikidata → Wikipedia). "
+    s.text(24, 670, "Beschreibungen: Wikipedia-Einleitungen (bei der GND über GND → Wikidata → Wikipedia). "
            "Ausgabe im JSON-Format des topic-tree-generator.", 12, MUTED)
     s.save("verfahren-thema.svg")
 
@@ -171,12 +174,12 @@ def chart_naming():
 
 def chart_topic():
     themes = ["Physik", "Photosynthese", "Klimawandel"]
-    nodes = {"GND": [225, 1, 5], "Wikipedia": [74, 43, 165], "Wikidata": [199, 6, 5]}
+    nodes = {"GND": [225, 1, 5], "Wikipedia": [74, 43, 165], "Wikidata": [199, 6, 5], "Hybrid": [190, 69, 118]}
     fig, ax = plt.subplots(figsize=(11, 4.4))
     fig.subplots_adjust(left=0.08, right=0.97, top=0.78, bottom=0.18)
-    w = 0.26
+    w = 0.2
     for j, (src, vals) in enumerate(nodes.items()):
-        xs = [i + (j - 1) * w for i in range(len(themes))]
+        xs = [i + (j - 1.5) * w for i in range(len(themes))]
         ax.bar(xs, vals, width=w - 0.02, color=SRC[src], label=src)
         for x, v in zip(xs, vals):
             ax.text(x, v + 4, str(v), ha="center", fontsize=9.5, color=INK2)
@@ -188,9 +191,9 @@ def chart_topic():
     ax.set_axisbelow(True)
     ax.set_ylabel("Knoten (max. 732 bei 12×10×5)", color=INK2)
     fig.text(0.02, 0.93, "Thema → Baum: Wie viele Knoten liefert jede Quelle?", fontsize=14, fontweight="bold", color=INK)
-    fig.text(0.02, 0.86, "Vorgabe 12 Hauptthemen × 10 Unterthemen × 5 · Wikipedia trägt bei konkreten Themen, Wikidata und GND bei Fächern",
+    fig.text(0.02, 0.86, "Vorgabe 12 × 10 × 5 · Hybrid = Wikipedia + Wikidata + GND mit Mehrheitsentscheid, ohne allgemeine Abschnitte",
              fontsize=10, color=INK2)
-    fig.legend(loc="lower left", bbox_to_anchor=(0.02, 0.0), ncol=3, frameon=False)
+    fig.legend(loc="lower left", bbox_to_anchor=(0.02, 0.0), ncol=4, frameon=False)
     fig.savefig(OUT / "ergebnisse-thema.png", dpi=160)
     plt.close(fig)
 

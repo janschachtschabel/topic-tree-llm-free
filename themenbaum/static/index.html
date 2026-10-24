@@ -9,14 +9,14 @@
 :root{
   --bg:#f4f6f5; --panel:#fdfefd; --ink:#16201d; --ink2:#4a5753; --muted:#7d8a86; --line:#dbe2df;
   --accent:#1f6b5c; --accent-soft:#e2efeb; --warn:#8a5a00; --warn-soft:#fbf1dc; --err:#a3312a; --err-soft:#fbe6e4;
-  --gnd:#6a4fc8; --wp:#2a6fc9; --wd:#b8561c;
+  --gnd:#6a4fc8; --wp:#2a6fc9; --wd:#b8561c; --hy:#1f8a5c;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:ui-monospace,"Cascadia Mono",Consolas,monospace;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root{
   --bg:#121615; --panel:#1a201e; --ink:#e9efec; --ink2:#bac6c1; --muted:#84928d; --line:#2b3431;
   --accent:#6fc2ad; --accent-soft:#1f2f2a; --warn:#e9b45a; --warn-soft:#2d2616; --err:#f08a80; --err-soft:#341c1a;
-  --gnd:#a592f0; --wp:#6aa5f0; --wd:#ec8f57; color-scheme:dark}}
+  --gnd:#a592f0; --wp:#6aa5f0; --wd:#ec8f57; --hy:#5ccf9a; color-scheme:dark}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:14.5px/1.5 var(--sans)}
 .topnav{display:flex;gap:4px;padding:10px max(16px,3vw) 0;border-bottom:1px solid var(--line);background:var(--panel)}
@@ -34,7 +34,7 @@ input[type=text]{width:min(360px,80vw)}
 input[type=number]{width:70px}
 fieldset{border:0;padding:0;margin:0;display:grid;gap:4px}
 legend{font-size:12.5px;color:var(--ink2);padding:0;margin-bottom:4px}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:7px;overflow:hidden}
 .seg label{display:block;padding:7px 12px;cursor:pointer;color:var(--ink2);font-size:13.5px;border-left:1px solid var(--line)}
 .seg label:first-child{border-left:0}
 .seg input{position:absolute;opacity:0;pointer-events:none}
@@ -126,13 +126,16 @@ details.how ol{margin:6px 0 0;padding-left:18px;display:grid;gap:3px}
       <p><b>GND</b> (Gemeinsame Normdatei, über lobid-gnd): Unterbegriffe des Schlagworts; bei Fächern mit wenig Hierarchie die GND-Sachgruppen des Fachs.</p>
       <p><b>Wikipedia</b>: Gliederung des Artikels zum Thema, tiefer über die verlinkten Hauptartikel.</p>
       <p><b>Wikidata</b>: Beziehungen „Teil von“, „Unterklasse von“ und „hat Teil“, sortiert nach Bekanntheit.</p>
+      <p><b>Hybrid</b>: Wikipedia-Gliederung ohne allgemeine Abschnitte, ergänzt um passende Wikidata-Unterbegriffe; bevorzugt wird, was mehrere Quellen bestätigen (Wikipedia, Wikidata, GND). Jeder Knoten mit GND-ID, soweit vorhanden.</p>
       <p>Alle Quellen arbeiten ohne generatives LLM. Wie ein Baum genau entstanden ist, zeigt „So entsteht dieser Baum“ in der jeweiligen Spalte.</p>
     </div></details></legend>
     <div class="seg">
       <label><input type="radio" name="source" value="wikipedia" checked><span>Wikipedia</span></label>
       <label><input type="radio" name="source" value="wikidata"><span>Wikidata</span></label>
       <label><input type="radio" name="source" value="gnd"><span>GND</span></label>
-      <label><input type="radio" name="source" value="all"><span>Alle vergleichen</span></label>
+      <label><input type="radio" name="source" value="hybrid"><span>Hybrid</span></label>
+      <label><input type="radio" name="source" value="hybridcmp"><span>Wikipedia vs. Hybrid</span></label>
+      <label><input type="radio" name="source" value="all"><span>Alle Grundquellen</span></label>
     </div>
   </fieldset>
   <label for="n1">Hauptthemen<input type="number" id="n1" value="12" min="1" max="30"></label>
@@ -146,8 +149,8 @@ details.how ol{margin:6px 0 0;padding-left:18px;display:grid;gap:3px}
 <main id="results"></main>
 
 <script>
-const NAMES={gnd:"GND",wikipedia:"Wikipedia",wikidata:"Wikidata"};
-const COLORS={gnd:"var(--gnd)",wikipedia:"var(--wp)",wikidata:"var(--wd)"};
+const NAMES={gnd:"GND",wikipedia:"Wikipedia",wikidata:"Wikidata",hybrid:"Hybrid"};
+const COLORS={gnd:"var(--gnd)",wikipedia:"var(--wp)",wikidata:"var(--wd)",hybrid:"var(--hy)"};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const nf=new Intl.NumberFormat("de-DE");
@@ -229,7 +232,7 @@ function download(d){
 $("#f").addEventListener("submit",async e=>{
   e.preventDefault();
   const src=document.querySelector('input[name="source"]:checked').value;
-  const list=src==="all"?["gnd","wikipedia","wikidata"]:[src];
+  const list=src==="all"?["gnd","wikipedia","wikidata"]:src==="hybridcmp"?["wikipedia","hybrid"]:[src];
   $("#results").innerHTML="";
   $("#go").disabled=true;
   await Promise.all(list.map(s=>run(s)));

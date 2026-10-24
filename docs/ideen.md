@@ -73,14 +73,46 @@ Unterklasse von / hat Teil“; GND-Unterbegriffe und Sachgruppen. Beobachtete Sc
 Wikipedia-Abschnitte („Geschichte“, „Methodik“, „Formulierungen“), schiefe Wikidata-Knoten („Klimawandel in
 Südkorea“), dünne GND-Hierarchie, keine didaktische Gliederung, Zielgröße 12×5×5 wird selten erreicht.
 
+### Getestet und umgesetzt: Hybrid aus Wikipedia, Wikidata und GND
+
+Umsetzung `themenbaum/hybrid.py`, in der App als Quelle „Hybrid“ und Vergleich „Wikipedia vs. Hybrid“. Test:
+[`scripts/test_hybrid_thema.py`](../scripts/test_hybrid_thema.py), 7 Themen (Physik, Photosynthese, Klimawandel,
+Bruchrechnung, Demokratie, Optik, Mittelalter), Ziel 12 × 5 × 5.
+
+Bausteine und was sie gebracht haben:
+
+| Baustein | Ergebnis |
+|---|---|
+| Wikipedia-Gliederung mit doppelt so vielen Kandidaten, allgemeine Abschnitte entfernt | allgemeine Abschnitte 0 % statt bis 35 % |
+| Zeitabschnitte entfernen („1960er Jahre“, „Anfang des 20. Jahrhunderts“), außer bei Geschichtsthemen | Klimawandel ohne Jahrzehnt-Abschnitte; Mittelalter behält seine Epochen |
+| Wikidata auffüllen ohne Prüfung | themenfremde Knoten („Methodik“ → „Fusion (Softwaretechnik)“, „Bruchrechnung“ → „Quantenzahl“) |
+| + strengere Zuordnung (Hauptartikel oder im Elternabschnitt verlinkter Artikel) | „Methodik“ bekommt keine fachfremden Unterbegriffe mehr |
+| + Relevanzfilter: Titel + Wikipedia-Einleitung gegen Thema (MiniLM ≥ 0,38) | unpassende Kandidaten 0,21–0,35, passende 0,40–0,77; nur Titel trennen nicht (Calvin-Zyklus ↔ Photosynthese 0,15); mpnet und model2vec trennen schlechter |
+| Mehrheitsentscheid (Wikipedia-Link im Elternabschnitt, Wikidata-Beziehung, GND-Eintrag) | fachliche Ordnung auf Ebene 1 (Teilgebiete, Demokratieformen, Epochen); mehr bestätigte Knoten |
+| Mehrheitsentscheid nur auf Ebene 1 | gleiche Ebene 1, weniger Knoten auf Ebene 3 (Physik 60 statt 82, Demokratie 18 statt 27) – nicht übernommen |
+| Ergänzte Wikidata-Knoten bekommen die Gliederung ihres Wikipedia-Artikels | löst das Problem dünner unterer Ebenen (Physik vorher 12/33/25, danach 12/45/82) |
+| GND-ID je Knoten aus Wikidata (P227) | 10–36 % der Knoten mit GND-ID |
+
+Endergebnis:
+
+| | Wikipedia | Hybrid ohne Mehrheit | **Hybrid (Standard)** | Mehrheit nur Ebene 1 |
+|---|---|---|---|---|
+| Ebene 1 voll (12) | 1 von 7 | 5 von 7 | **5 von 7** | 5 von 7 |
+| allgemeine Abschnitte | 0–35 % | 0 % | **0 %** | 0 % |
+| von ≥ 2 Quellen bestätigt | 11–40 % | 13–36 % | **13–48 %** | 13–37 % |
+
+Offene Schwächen: vereinzelt Unpassendes („Präsident“ unter Demokratie, „Erderhitzung“ als Synonym unter
+Klimawandel); bei engen Themen (Bruchrechnung, Klimawandel) wenig Zugewinn, weil Wikidata dort wenig kennt;
+erster Lauf ≈15 s (MiniLM wird geladen).
+
 ### Offen (Kandidaten für weitere Tests)
 
 | Priorität | Idee | Erwarteter Nutzen | Aufwand | Hinweise |
 |---|---|---|---|---|
+| 1 | **Hybrid weiter kalibrieren:** Schwelle des Relevanzfilters mit mehr Themen prüfen; Synonyme des Themas ausschließen („Erderhitzung“ unter Klimawandel, z. B. über Wikidata-Alias oder hohe Ähnlichkeit zum Thema selbst); Soll-Struktur zum Messen (WLO-Themenbaum, Lehrplan) | weniger Unpassendes | klein | Zeitabschnitte und „Mehrheit nur Ebene 1“ sind getestet, siehe oben |
 | 1 | **Aufräumregeln:** allgemeine Abschnitte („Geschichte“, „Rezeption“, „Überblick“, „Weitere Aspekte“) ausblenden oder ans Ende; Wikidata-Knoten wie „X in Land“, Personen, Ereignisse, Listen ausschließen; fast doppelte Knoten per Embedding zusammenführen | sauberere Bäume | klein | bisher bewusst ungefiltert, um die Rohqualität zu sehen |
 | 1 | **Besserer Einstieg:** Thema zerlegen (Fach und Stufe über OEH-Vokabulare erkennen, Kernbegriff suchen), Begriffsklärungsseiten auflösen | weniger falsche Einstiege bei langen Themen | klein | z. B. „Physik in Anlehnung an die Lehrpläne der Sek II“ |
-| 2 | **Wikipedia + Wikidata kombinieren:** Wikipedia gibt die Struktur, Wikidata-Unterbegriffe des jeweiligen Artikels füllen Ebene 3; GND-IDs als normierte Schlagwörter | vollere Bäume, Normdaten für edu-sharing | mittel | Artikel → Wikidata über `pageprops.wikibase_item` |
-| 2 | **Mehrheitsentscheid der Quellen:** Kandidaten aus Wikipedia, Wikidata und GND per Embedding zusammenführen; von mehreren Quellen genannte Knoten bevorzugen | robustere Auswahl | mittel | |
+| – | ~~**Wikipedia + Wikidata kombinieren**~~ und ~~**Mehrheitsentscheid**~~ | getestet, siehe oben | – | als „Hybrid“ umgesetzt |
 | 2 | **Relevanz für den Unterricht:** Knoten nach Zahl passender WLO-Inhalte gewichten (WLO-Suche) | Baum passt zum vorhandenen Material | mittel | |
 | 2 | **Didaktische Quellen:** Fach-Taxonomien von Serlo, ZUM-Unterrichten, Klexikon (Primarstufe), vorhandene WLO-Themenbäume und Fachportale | didaktische statt enzyklopädische Gliederung | mittel | Verfügbarkeit und Lizenz der Schnittstellen prüfen |
 | 3 | **Zielgröße erreichen:** verlinkte Begriffe (Hauptartikel, Wikilinks, Wikidata-Unterbegriffe) sammeln und mit dem Clustering aus „Inhalte → Baum“ zu 12 × n × m Gruppen bündeln | gewünschte Größe statt Zufallsgröße | mittel | verbindet beide Bereiche der Demo |
