@@ -1,0 +1,438 @@
+{
+ "uc1": [
+  {
+   "struct": "5×3×2 (Default)",
+   "calls": 21,
+   "nodes": 50,
+   "basis_ist": {
+    "tin": 55525,
+    "tout": 9850,
+    "gpt-5.6-luna": 0.0229,
+    "gpt-6-luna": 0.0105
+   },
+   "basis_fix": {
+    "tin": 21695,
+    "tout": 9850,
+    "gpt-5.6-luna": 0.0162,
+    "gpt-6-luna": 0.0071
+   },
+   "hoch_ist": {
+    "tin": 66690,
+    "tout": 34700,
+    "gpt-5.6-luna": 0.055,
+    "gpt-6-luna": 0.024
+   },
+   "hoch_fix": {
+    "tin": 21695,
+    "tout": 34700,
+    "gpt-5.6-luna": 0.046,
+    "gpt-6-luna": 0.0195
+   }
+  },
+  {
+   "struct": "12×5×5",
+   "calls": 73,
+   "nodes": 372,
+   "basis_ist": {
+    "tin": 354615,
+    "tout": 71550,
+    "gpt-5.6-luna": 0.1568,
+    "gpt-6-luna": 0.0712
+   },
+   "basis_fix": {
+    "tin": 83007,
+    "tout": 71550,
+    "gpt-5.6-luna": 0.1025,
+    "gpt-6-luna": 0.0441
+   },
+   "hoch_ist": {
+    "tin": 444243,
+    "tout": 173194,
+    "gpt-5.6-luna": 0.2967,
+    "gpt-6-luna": 0.131
+   },
+   "hoch_fix": {
+    "tin": 83007,
+    "tout": 173194,
+    "gpt-5.6-luna": 0.2244,
+    "gpt-6-luna": 0.0949
+   }
+  },
+  {
+   "struct": "12×10×5",
+   "calls": 133,
+   "nodes": 732,
+   "basis_ist": {
+    "tin": 806415,
+    "tout": 140550,
+    "gpt-5.6-luna": 0.3299,
+    "gpt-6-luna": 0.1509
+   },
+   "basis_fix": {
+    "tin": 158307,
+    "tout": 140550,
+    "gpt-5.6-luna": 0.2003,
+    "gpt-6-luna": 0.0861
+   },
+   "hoch_ist": {
+    "tin": 1020783,
+    "tout": 329914,
+    "gpt-5.6-luna": 0.6001,
+    "gpt-6-luna": 0.267
+   },
+   "hoch_fix": {
+    "tin": 158307,
+    "tout": 329914,
+    "gpt-5.6-luna": 0.4276,
+    "gpt-6-luna": 0.1808
+   }
+  }
+ ],
+ "rev": [
+  {
+   "struct": "12×5×5",
+   "basis": {
+    "tree_tok": 71550,
+    "branch_tok": 5890,
+    "A": {
+     "tin": 72278,
+     "tout": 71550,
+     "gpt-5.6-luna": 0.1003,
+     "gpt-6-luna": 0.043
+    },
+    "B": {
+     "tin": 72278,
+     "tout": 5890,
+     "gpt-5.6-luna": 0.0215,
+     "gpt-6-luna": 0.0102
+    },
+    "Bc": {
+     "gpt-5.6-luna": 0.0119,
+     "gpt-6-luna": 0.0053
+    }
+   },
+   "hoch": {
+    "tree_tok": 100194,
+    "branch_tok": 8277,
+    "A": {
+     "tin": 100922,
+     "tout": 104194,
+     "gpt-5.6-luna": 0.1452,
+     "gpt-6-luna": 0.0622
+    },
+    "B": {
+     "tin": 100922,
+     "tout": 12277,
+     "gpt-5.6-luna": 0.0349,
+     "gpt-6-luna": 0.0162
+    },
+    "Bc": {
+     "gpt-5.6-luna": 0.0214,
+     "gpt-6-luna": 0.0095
+    }
+   }
+  },
+  {
+   "struct": "12×10×5",
+   "basis": {
+    "tree_tok": 140550,
+    "branch_tok": 11590,
+    "A": {
+     "tin": 141278,
+     "tout": 140550,
+     "gpt-5.6-luna": 0.1969,
+     "gpt-6-luna": 0.0844
+    },
+    "B": {
+     "tin": 141278,
+     "tout": 11590,
+     "gpt-5.6-luna": 0.0422,
+     "gpt-6-luna": 0.0199
+    },
+    "Bc": {
+     "gpt-5.6-luna": 0.0233,
+     "gpt-6-luna": 0.0105
+    }
+   },
+   "hoch": {
+    "tree_tok": 196914,
+    "branch_tok": 16287,
+    "A": {
+     "tin": 197642,
+     "tout": 200914,
+     "gpt-5.6-luna": 0.2806,
+     "gpt-6-luna": 0.1202
+    },
+    "B": {
+     "tin": 197642,
+     "tout": 20287,
+     "gpt-5.6-luna": 0.0639,
+     "gpt-6-luna": 0.0299
+    },
+    "Bc": {
+     "gpt-5.6-luna": 0.0374,
+     "gpt-6-luna": 0.0167
+    }
+   }
+  }
+ ],
+ "uc2": [
+  {
+   "label": "Volltext kurz (≈2k Tokens)",
+   "ft": 2000,
+   "tin": 258200,
+   "basis": {
+    "tout": 25000,
+    "gpt-5.6-luna": 0.0816,
+    "gpt-6-luna": 0.0383
+   },
+   "hoch": {
+    "tout": 105000,
+    "gpt-5.6-luna": 0.1776,
+    "gpt-6-luna": 0.0783
+   }
+  },
+  {
+   "label": "Volltext mittel (≈5k)",
+   "ft": 5000,
+   "tin": 558200,
+   "basis": {
+    "tout": 25000,
+    "gpt-5.6-luna": 0.1416,
+    "gpt-6-luna": 0.0683
+   },
+   "hoch": {
+    "tout": 105000,
+    "gpt-5.6-luna": 0.2376,
+    "gpt-6-luna": 0.1083
+   }
+  },
+  {
+   "label": "Volltext lang (≈15k, gekappt)",
+   "ft": 15000,
+   "tin": 1558200,
+   "basis": {
+    "tout": 25000,
+    "gpt-5.6-luna": 0.3416,
+    "gpt-6-luna": 0.1683
+   },
+   "hoch": {
+    "tout": 105000,
+    "gpt-5.6-luna": 0.4376,
+    "gpt-6-luna": 0.2083
+   }
+  }
+ ],
+ "assign": [
+  {
+   "struct": "12×5×5",
+   "titlelist": 5508,
+   "ohne": {
+    "gpt-5.6-luna": 0.1224,
+    "gpt-6-luna": 0.0606
+   },
+   "mit": {
+    "gpt-5.6-luna": 0.0245,
+    "gpt-6-luna": 0.0116
+   }
+  },
+  {
+   "struct": "12×10×5",
+   "titlelist": 10548,
+   "ohne": {
+    "gpt-5.6-luna": 0.2232,
+    "gpt-6-luna": 0.111
+   },
+   "mit": {
+    "gpt-5.6-luna": 0.0357,
+    "gpt-6-luna": 0.0173
+   }
+  }
+ ],
+ "uc3": [
+  {
+   "struct": "12×5×5",
+   "label": "nur Metadaten (≈250/Inhalt)",
+   "corpus_tok": 25300,
+   "calls": 73,
+   "tin_nocache": 1929907,
+   "ohne": {
+    "gpt-5.6-luna": 0.4718,
+    "gpt-6-luna": 0.2288
+   },
+   "mit": {
+    "gpt-5.6-luna": 0.1452,
+    "gpt-6-luna": 0.0655
+   },
+   "meta": {
+    "tout": 25000,
+    "gpt-5.6-luna": 0.1416,
+    "gpt-6-luna": 0.0683
+   }
+  },
+  {
+   "struct": "12×5×5",
+   "label": "Metadaten + Volltext kurz (≈2,25k/Inhalt)",
+   "corpus_tok": 225300,
+   "calls": 73,
+   "tin_nocache": 16529907,
+   "ohne": {
+    "gpt-5.6-luna": 3.3918,
+    "gpt-6-luna": 1.6888
+   },
+   "mit": {
+    "gpt-5.6-luna": 0.4832,
+    "gpt-6-luna": 0.2345
+   },
+   "meta": {
+    "tout": 25000,
+    "gpt-5.6-luna": 0.0816,
+    "gpt-6-luna": 0.0383
+   }
+  },
+  {
+   "struct": "12×5×5",
+   "label": "Metadaten + Volltext mittel (≈5,25k/Inhalt)",
+   "corpus_tok": 525300,
+   "calls": 73,
+   "tin_nocache": 38429907,
+   "ohne": {
+    "gpt-5.6-luna": 7.7718,
+    "gpt-6-luna": 3.8788
+   },
+   "mit": {
+    "gpt-5.6-luna": 0.9902,
+    "gpt-6-luna": 0.488
+   },
+   "meta": {
+    "tout": 25000,
+    "gpt-5.6-luna": 0.1416,
+    "gpt-6-luna": 0.0683
+   }
+  },
+  {
+   "struct": "12×10×5",
+   "label": "nur Metadaten (≈250/Inhalt)",
+   "corpus_tok": 25300,
+   "calls": 133,
+   "tin_nocache": 3523207,
+   "ohne": {
+    "gpt-5.6-luna": 0.8733,
+    "gpt-6-luna": 0.4226
+   },
+   "mit": {
+    "gpt-5.6-luna": 0.2734,
+    "gpt-6-luna": 0.1227
+   },
+   "meta": {
+    "tout": 25000,
+    "gpt-5.6-luna": 0.1416,
+    "gpt-6-luna": 0.0683
+   }
+  },
+  {
+   "struct": "12×10×5",
+   "label": "Metadaten + Volltext kurz (≈2,25k/Inhalt)",
+   "corpus_tok": 225300,
+   "calls": 133,
+   "tin_nocache": 30123207,
+   "ohne": {
+    "gpt-5.6-luna": 6.1933,
+    "gpt-6-luna": 3.0826
+   },
+   "mit": {
+    "gpt-5.6-luna": 0.8514,
+    "gpt-6-luna": 0.4117
+   },
+   "meta": {
+    "tout": 25000,
+    "gpt-5.6-luna": 0.0816,
+    "gpt-6-luna": 0.0383
+   }
+  },
+  {
+   "struct": "12×10×5",
+   "label": "Metadaten + Volltext mittel (≈5,25k/Inhalt)",
+   "corpus_tok": 525300,
+   "calls": 133,
+   "tin_nocache": 70023207,
+   "ohne": {
+    "gpt-5.6-luna": 14.1733,
+    "gpt-6-luna": 7.0726
+   },
+   "mit": {
+    "gpt-5.6-luna": 1.7184,
+    "gpt-6-luna": 0.8452
+   },
+   "meta": {
+    "tout": 25000,
+    "gpt-5.6-luna": 0.1416,
+    "gpt-6-luna": 0.0683
+   }
+  }
+ ],
+ "komp": [
+  {
+   "struct": "5×3×2 (Default)",
+   "nodes": 50,
+   "low": {
+    "gpt-5.6-luna": 0.8,
+    "gpt-6-luna": 0.38
+   },
+   "high": {
+    "gpt-5.6-luna": 1.1,
+    "gpt-6-luna": 0.52
+   },
+   "tok_low": 3000000,
+   "tok_high": 4000000,
+   "h_seq": 0.5,
+   "min_par10": 3
+  },
+  {
+   "struct": "12×5×5",
+   "nodes": 372,
+   "low": {
+    "gpt-5.6-luna": 5.952,
+    "gpt-6-luna": 2.8272
+   },
+   "high": {
+    "gpt-5.6-luna": 8.184,
+    "gpt-6-luna": 3.8688
+   },
+   "tok_low": 22320000,
+   "tok_high": 29760000,
+   "h_seq": 3.6,
+   "min_par10": 22
+  },
+  {
+   "struct": "12×10×5",
+   "nodes": 732,
+   "low": {
+    "gpt-5.6-luna": 11.712,
+    "gpt-6-luna": 5.5632
+   },
+   "high": {
+    "gpt-5.6-luna": 16.104,
+    "gpt-6-luna": 7.6128
+   },
+   "tok_low": 43920000,
+   "tok_high": 58560000,
+   "h_seq": 7.1,
+   "min_par10": 43
+  }
+ ],
+ "prices": {
+  "gpt-5.6-luna": {
+   "i": 0.2,
+   "o": 1.2,
+   "c": 0.02,
+   "w30": 0.25
+  },
+  "gpt-6-luna": {
+   "i": 0.1,
+   "o": 0.5,
+   "c": 0.01,
+   "w30": 0.125
+  }
+ }
+}

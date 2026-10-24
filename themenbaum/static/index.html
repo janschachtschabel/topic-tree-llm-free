@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Themenbaum ohne LLM</title>
+<style>
+/* Layout: Eingabeleiste oben, darunter je Quelle eine Spalte (Vergleich nebeneinander, schmal untereinander). */
+:root{
+  --bg:#f4f6f5; --panel:#fdfefd; --ink:#16201d; --ink2:#4a5753; --muted:#7d8a86; --line:#dbe2df;
+  --accent:#1f6b5c; --accent-soft:#e2efeb; --warn:#8a5a00; --warn-soft:#fbf1dc; --err:#a3312a; --err-soft:#fbe6e4;
+  --gnd:#6a4fc8; --wp:#2a6fc9; --wd:#b8561c;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:ui-monospace,"Cascadia Mono",Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#121615; --panel:#1a201e; --ink:#e9efec; --ink2:#bac6c1; --muted:#84928d; --line:#2b3431;
+  --accent:#6fc2ad; --accent-soft:#1f2f2a; --warn:#e9b45a; --warn-soft:#2d2616; --err:#f08a80; --err-soft:#341c1a;
+  --gnd:#a592f0; --wp:#6aa5f0; --wd:#ec8f57; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14.5px/1.5 var(--sans)}
+.topnav{display:flex;gap:4px;padding:10px max(16px,3vw) 0;border-bottom:1px solid var(--line);background:var(--panel)}
+.topnav a{padding:8px 14px;color:var(--ink2);text-decoration:none;font-size:14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.topnav a[aria-current="page"]{color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+.topnav a:hover{color:var(--ink)}
+.topnav .grow{flex:1}
+header{padding:20px max(16px,3vw) 8px;display:grid;gap:4px}
+h1{font-size:22px;margin:0}
+header p{margin:0;color:var(--ink2);max-width:80ch}
+form{margin:12px max(16px,3vw) 0;padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:10px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end}
+label{display:grid;gap:4px;font-size:12.5px;color:var(--ink2)}
+input[type=text],input[type=number],select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:7px 10px}
+input[type=text]{width:min(360px,80vw)}
+input[type=number]{width:70px}
+fieldset{border:0;padding:0;margin:0;display:grid;gap:4px}
+legend{font-size:12.5px;color:var(--ink2);padding:0;margin-bottom:4px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.seg label{display:block;padding:7px 12px;cursor:pointer;color:var(--ink2);font-size:13.5px;border-left:1px solid var(--line)}
+.seg label:first-child{border-left:0}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg input:checked+span{color:var(--ink);font-weight:600}
+.seg label:has(input:checked){background:var(--accent-soft)}
+.seg label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:-2px}
+.check{display:flex;gap:6px;align-items:center;font-size:13.5px;color:var(--ink2);padding-bottom:7px}
+button{font:inherit;cursor:pointer;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:7px 12px}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--panel);font-weight:600;padding:8px 18px}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:disabled{opacity:.6;cursor:progress}
+.hint{margin:8px max(16px,3vw) 0;color:var(--muted);font-size:12.5px}
+details.info{display:inline-block;position:relative;vertical-align:baseline}
+details.info>summary{list-style:none;cursor:pointer;color:var(--accent);font-size:13px;padding:0 3px;border-radius:4px}
+details.info>summary::-webkit-details-marker{display:none}
+details.info>summary:focus-visible{outline:2px solid var(--accent)}
+.infobox{position:absolute;z-index:5;left:0;top:1.6em;width:min(380px,80vw);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;box-shadow:0 6px 24px rgba(0,0,0,.18);font-size:13px;color:var(--ink2);display:grid;gap:6px;text-transform:none;letter-spacing:0;font-weight:400}
+.infobox p{margin:0}
+.infobox b{color:var(--ink)}
+details.how{font-size:12.5px;color:var(--ink2)}
+details.how>summary{cursor:pointer;color:var(--accent);list-style:none}
+details.how>summary::-webkit-details-marker{display:none}
+details.how ol{margin:6px 0 0;padding-left:18px;display:grid;gap:3px}
+#results{display:grid;gap:16px;padding:16px max(16px,3vw) 40px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));align-items:start}
+.col{background:var(--panel);border:1px solid var(--line);border-radius:10px;min-width:0;display:grid;grid-template-columns:minmax(0,1fr)}
+.colhead{padding:12px 14px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr);gap:8px;min-width:0}
+.colhead h2{margin:0;font-size:16px;display:flex;gap:8px;align-items:center}
+.colhead h2 i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.entry{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--ink2)}
+.entry select{flex:1 1 180px;min-width:0;max-width:100%;padding:4px 8px;font-size:13px}
+.stats{display:flex;flex-wrap:wrap;gap:6px}
+.stat{font-size:12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:2px 8px;color:var(--ink2);font-variant-numeric:tabular-nums}
+.stat b{color:var(--ink);font-weight:600}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+.tools button{font-size:12.5px;padding:4px 10px}
+.rootdesc{font-size:13px;color:var(--ink2);margin:0}
+.tree{padding:8px 10px 14px;overflow-x:auto}
+.node{margin:0}
+.node>summary,.leaf{list-style:none;cursor:pointer;padding:5px 6px;border-radius:6px;display:grid;gap:2px}
+.leaf{cursor:default}
+.node>summary::-webkit-details-marker{display:none}
+.node>summary:hover,.leaf:hover{background:var(--bg)}
+.node>summary:focus-visible{outline:2px solid var(--accent)}
+.row{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.tw{width:12px;color:var(--muted);flex:none;font-size:11px;transition:transform .12s}
+.node[open]>summary .tw{transform:rotate(90deg)}
+.lvl{font:600 10.5px var(--mono);color:var(--muted);flex:none}
+.t{font-weight:600}
+.l1>summary .t{font-size:15px}
+.st{font:11.5px var(--mono);color:var(--muted)}
+.cnt{font-size:11.5px;color:var(--muted)}
+.src{font-size:12px;color:var(--accent);text-decoration:none;margin-left:auto}
+.src:hover{text-decoration:underline}
+.kind{font-size:11.5px;color:var(--muted);padding-left:18px}
+.desc{font-size:13px;color:var(--ink2);padding-left:18px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.desc.open{-webkit-line-clamp:unset}
+.nodesc{font-size:12.5px;color:var(--warn);padding-left:18px;font-style:italic}
+.kws{display:flex;flex-wrap:wrap;gap:4px;padding-left:18px}
+.kw{font-size:11.5px;background:var(--accent-soft);color:var(--ink);border-radius:4px;padding:0 6px}
+.kids{margin-left:13px;border-left:1px solid var(--line);padding-left:6px}
+.msg{padding:14px;font-size:13.5px}
+.msg.err{color:var(--err);background:var(--err-soft);border-radius:0 0 10px 10px}
+.msg.warnmsg{margin:0;color:var(--ink);background:var(--warn-soft);border-bottom:1px solid var(--line);font-size:13px;padding:8px 14px}
+.loading{padding:18px 14px;color:var(--muted);font-size:13.5px}
+.loading::after{content:"";display:inline-block;width:10px;height:10px;margin-left:8px;border:2px solid var(--muted);border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;vertical-align:-1px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.loading::after{animation:none}.tw{transition:none}}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Bereiche">
+  <a href="/" aria-current="page">Thema → Baum</a>
+  <a href="/inhalte">Inhalte → Baum</a>
+  <a href="/kosten">Kosten</a>
+  <span class="grow"></span>
+  <a href="/logout">Abmelden</a>
+</nav>
+<header>
+  <h1>Themenbaum ohne LLM</h1>
+  <p>Prototyp: Erzeugt einen Themenbaum mit bis zu drei Ebenen aus öffentlichen Wissensquellen. Es läuft kein generatives Sprachmodell, Struktur, Namen und Beschreibungen stammen vollständig aus GND, Wikipedia oder Wikidata.</p>
+</header>
+
+<form id="f">
+  <label for="theme">Thema
+    <input type="text" id="theme" name="theme" value="Physik" required minlength="2" autocomplete="off">
+  </label>
+  <fieldset>
+    <legend>Quelle <details class="info"><summary aria-label="Was machen die Quellen?">ⓘ</summary><div class="infobox">
+      <p><b>GND</b> (Gemeinsame Normdatei, über lobid-gnd): Unterbegriffe des Schlagworts; bei Fächern mit wenig Hierarchie die GND-Sachgruppen des Fachs.</p>
+      <p><b>Wikipedia</b>: Gliederung des Artikels zum Thema, tiefer über die verlinkten Hauptartikel.</p>
+      <p><b>Wikidata</b>: Beziehungen „Teil von“, „Unterklasse von“ und „hat Teil“, sortiert nach Bekanntheit.</p>
+      <p>Alle Quellen arbeiten ohne generatives LLM. Wie ein Baum genau entstanden ist, zeigt „So entsteht dieser Baum“ in der jeweiligen Spalte.</p>
+    </div></details></legend>
+    <div class="seg">
+      <label><input type="radio" name="source" value="all" checked><span>Alle vergleichen</span></label>
+      <label><input type="radio" name="source" value="gnd"><span>GND</span></label>
+      <label><input type="radio" name="source" value="wikipedia"><span>Wikipedia</span></label>
+      <label><input type="radio" name="source" value="wikidata"><span>Wikidata</span></label>
+    </div>
+  </fieldset>
+  <label for="n1">Hauptthemen<input type="number" id="n1" value="12" min="1" max="30"></label>
+  <label for="n2">Unterthemen<input type="number" id="n2" value="10" min="0" max="20"></label>
+  <label for="n3">Ebene 3<input type="number" id="n3" value="5" min="0" max="20"></label>
+  <label class="check" for="enrich"><input type="checkbox" id="enrich" checked> Beschreibungen aus Wikipedia ergänzen</label>
+  <button class="primary" id="go" type="submit">Baum erzeugen</button>
+</form>
+<p class="hint">Der erste Lauf eines Themas dauert länger (GND-Sachgruppen und Wikidata-Abfragen, bis etwa 30 s). Antworten werden eine Woche lokal zwischengespeichert. Über „Einstieg“ lässt sich ein anderer Treffer wählen.</p>
+
+<main id="results"></main>
+
+<script>
+const NAMES={gnd:"GND",wikipedia:"Wikipedia",wikidata:"Wikidata"};
+const COLORS={gnd:"var(--gnd)",wikipedia:"var(--wp)",wikidata:"var(--wd)"};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const nf=new Intl.NumberFormat("de-DE");
+
+function params(source,entry){
+  const p=new URLSearchParams({source,theme:$("#theme").value.trim(),n1:$("#n1").value,n2:$("#n2").value,n3:$("#n3").value,enrich:$("#enrich").checked});
+  if(entry)p.set("entry",entry);
+  return p;
+}
+
+async function run(source,entry){
+  let col=document.getElementById("col-"+source);
+  if(!col){col=document.createElement("section");col.className="col";col.id="col-"+source;$("#results").appendChild(col)}
+  col.innerHTML=`<div class="colhead"><h2><i style="background:${COLORS[source]}"></i>${NAMES[source]}</h2></div><div class="loading">Baum wird erzeugt</div>`;
+  try{
+    const r=await fetch("/api/tree?"+params(source,entry));
+    const data=await r.json();
+    if(!r.ok)throw new Error(data.detail||r.statusText);
+    render(col,data);
+  }catch(e){
+    col.innerHTML=`<div class="colhead"><h2><i style="background:${COLORS[source]}"></i>${NAMES[source]}</h2></div><div class="msg err">${esc(e.message)}</div>`;
+  }
+}
+
+function render(col,d){
+  const s=d.stats, src=d.source;
+  const alts=d.alternatives.map(a=>`<option value="${esc(a.id)}" ${a.id===d.entry.id?"selected":""}>${esc(a.label)}${a.hint?" – "+esc(a.hint.slice(0,60)):""}</option>`).join("");
+  const hasAlt=d.alternatives.some(a=>a.id===d.entry.id);
+  const lv=s.per_level.map((n,i)=>`E${i+1}: <b>${nf.format(n)}</b>/${nf.format(s.max_per_level[i])}`).join(" · ");
+  col.innerHTML=`
+    <div class="colhead">
+      <h2><i style="background:${COLORS[src]}"></i>${esc(d.source_name)}</h2>
+      <div class="entry"><label for="alt-${src}">Einstieg</label>
+        <select id="alt-${src}">${hasAlt?"":`<option selected>${esc(d.entry.label)}</option>`}${alts}</select>
+        <a class="src" href="${esc(d.entry.url)}" target="_blank" rel="noopener">${esc(d.entry.kind)} ↗</a></div>
+      ${d.metadata.description?`<p class="rootdesc">${esc(d.metadata.description)}</p>`:""}
+      <div class="stats">
+        <span class="stat"><b>${nf.format(s.nodes)}</b> Knoten</span>
+        <span class="stat">${lv}</span>
+        <span class="stat"><b>${s.nodes?Math.round(s.with_description/s.nodes*100):0} %</b> mit Beschreibung</span>
+        <span class="stat"><b>${s.seconds.toLocaleString("de-DE")}</b> s · ${s.api_calls} API-Aufrufe${s.cache_hits?` · ${s.cache_hits} aus Cache`:""}</span>
+      </div>
+      <details class="how"><summary>ⓘ So entsteht dieser Baum</summary><ol>${(d.pipeline||[]).map(p=>`<li>${esc(p)}</li>`).join("")}</ol></details>
+      <div class="tools">
+        <button type="button" data-act="open">Alle aufklappen</button>
+        <button type="button" data-act="close">Alle zuklappen</button>
+        <button type="button" data-act="json">JSON herunterladen</button>
+      </div>
+    </div>
+    ${s.per_level[0]&&s.per_level[0]<Math.ceil(s.max_per_level[0]/2)?`<p class="msg warnmsg">Diese Quelle kennt zu „${esc(d.entry.label)}“ nur ${s.per_level[0]} direkte Unterthemen. Ein anderer Einstieg oder eine andere Quelle liefert vielleicht mehr.</p>`:""}
+    <div class="tree">${d.collection.length?d.collection.map(c=>nodeHtml(c,1)).join(""):`<p class="msg">Keine Unterthemen gefunden. Ein anderer Einstieg liefert vielleicht mehr.</p>`}</div>`;
+  col.querySelector("select").addEventListener("change",e=>run(src,e.target.value));
+  col.querySelector('[data-act="open"]').onclick=()=>col.querySelectorAll("details").forEach(x=>x.open=true);
+  col.querySelector('[data-act="close"]').onclick=()=>col.querySelectorAll("details").forEach(x=>x.open=false);
+  col.querySelector('[data-act="json"]').onclick=()=>download(d);
+  col.querySelectorAll(".desc").forEach(x=>x.addEventListener("click",e=>{e.preventDefault();x.classList.toggle("open")}));
+}
+
+function nodeHtml(c,lvl){
+  const p=c.properties, desc=(p["cm:description"]||[])[0], kws=p["cclom:general_keyword"]||[], kids=c.subcollections||[];
+  const head=`<div class="row">${kids.length?'<span class="tw">▶</span>':'<span class="tw"></span>'}<span class="lvl">E${lvl}</span><span class="t">${esc(c.title)}</span>
+      ${c.shorttitle!==c.title?`<span class="st">${esc(c.shorttitle)}</span>`:""}${kids.length?`<span class="cnt">${kids.length}</span>`:""}
+      ${c._source.url?`<a class="src" href="${esc(c._source.url)}" target="_blank" rel="noopener" title="Quelle öffnen">↗</a>`:""}</div>
+    ${c._source.kind?`<div class="kind">${esc(c._source.kind)}</div>`:""}
+    ${desc?`<div class="desc" title="Klicken zum Auf- und Zuklappen">${esc(desc)}</div>`:`<div class="nodesc">keine Beschreibung</div>`}
+    ${kws.length&&!(kws.length===1&&kws[0]===c.title.toLowerCase())?`<div class="kws">${kws.map(k=>`<span class="kw">${esc(k)}</span>`).join("")}</div>`:""}`;
+  if(!kids.length)return `<div class="leaf">${head}</div>`;
+  return `<details class="node l${lvl}" ${lvl===1?"open":""}><summary>${head}</summary><div class="kids">${kids.map(k=>nodeHtml(k,lvl+1)).join("")}</div></details>`;
+}
+
+function download(d){
+  const out={metadata:d.metadata,collection:d.collection};
+  const blob=new Blob([JSON.stringify(out,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download=`themenbaum-${d.source}-${d.entry.label.replace(/[^\wäöüÄÖÜß-]+/g,"_")}.json`;a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+$("#f").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const src=document.querySelector('input[name="source"]:checked').value;
+  const list=src==="all"?["gnd","wikipedia","wikidata"]:[src];
+  $("#results").innerHTML="";
+  $("#go").disabled=true;
+  await Promise.all(list.map(s=>run(s)));
+  $("#go").disabled=false;
+});
+</script>
+</body>
+</html>

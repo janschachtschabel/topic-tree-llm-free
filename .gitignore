@@ -1,0 +1,7 @@
+.env
+.data/
+.cache/
+.models/
+.venv/
+__pycache__/
+*.pyc

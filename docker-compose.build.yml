@@ -1,0 +1,20 @@
+# Lokaler Start mit eigenem Build, ohne Traefik:
+#   docker compose -f docker-compose.build.yml up --build
+# Danach http://localhost:8000 öffnen. Passwort und Kontakt aus der .env (Vorlage: .env.example).
+
+services:
+  app:
+    build: .
+    ports:
+      - "${HOST_PORT:-8000}:8000"
+    environment:
+      APP_PASSWORD: ${APP_PASSWORD:-}
+      WIKIMEDIA_CONTACT: ${WIKIMEDIA_CONTACT:-}
+      SESSION_SECRET: ${SESSION_SECRET:-}
+      SESSION_HOURS: ${SESSION_HOURS:-168}
+      COOKIE_SECURE: "false"
+    volumes:
+      - themenbaum-data:/data
+
+volumes:
+  themenbaum-data:

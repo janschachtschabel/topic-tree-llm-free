@@ -1,0 +1,30 @@
+# Themenbaum ohne LLM – Produktiv-Stack für den Hostinger Docker Manager ("Compose from URL").
+# HTTPS übernimmt Hostingers Traefik auf dem VPS über die Labels unten.
+# Der erste Start gelingt ohne Variablen; danach in der .env mindestens DOMAIN und APP_PASSWORD setzen.
+
+services:
+  app:
+    image: ghcr.io/janschachtschabel/topic-tree-llm-free:${IMAGE_TAG:-main}
+    restart: unless-stopped
+    environment:
+      APP_PASSWORD: ${APP_PASSWORD:-}
+      WIKIMEDIA_CONTACT: ${WIKIMEDIA_CONTACT:-}
+      SESSION_SECRET: ${SESSION_SECRET:-}
+      SESSION_HOURS: ${SESSION_HOURS:-168}
+      COOKIE_SECURE: ${COOKIE_SECURE:-true}
+    volumes:
+      - themenbaum-data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=${TRAEFIK_NETWORK:-themenbaum-web}"
+      - "traefik.http.routers.themenbaum.rule=Host(`${DOMAIN:-}`)"
+      - "traefik.http.routers.themenbaum.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}"
+      - "traefik.http.routers.themenbaum.tls.certresolver=${TRAEFIK_CERTRESOLVER:-letsencrypt}"
+      - "traefik.http.services.themenbaum.loadbalancer.server.port=8000"
+
+volumes:
+  themenbaum-data:
+
+networks:
+  default:
+    name: ${TRAEFIK_NETWORK:-themenbaum-web}

@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inhalte zu Themenbaum</title>
+<style>
+/* Layout: schmale Einstellungsleiste links (einklappbar), rechts die volle Breite für Ergebnis-Spalten. */
+:root{
+  --bg:#f4f6f5; --panel:#fdfefd; --ink:#16201d; --ink2:#4a5753; --muted:#7d8a86; --line:#dbe2df;
+  --accent:#1f6b5c; --accent-soft:#e2efeb; --good:#1d7a3a; --good-soft:#e3f3e7; --warn:#8a5a00; --warn-soft:#fbf1dc;
+  --bad:#a3312a; --bad-soft:#fbe6e4;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:ui-monospace,"Cascadia Mono",Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#121615; --panel:#1a201e; --ink:#e9efec; --ink2:#bac6c1; --muted:#84928d; --line:#2b3431;
+  --accent:#6fc2ad; --accent-soft:#1f2f2a; --good:#6cd08a; --good-soft:#1b2d21; --warn:#e9b45a; --warn-soft:#2d2616;
+  --bad:#f08a80; --bad-soft:#341c1a; color-scheme:dark}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:14.5px/1.5 var(--sans);display:grid;grid-template-rows:auto 1fr}
+.topnav{display:flex;gap:4px;padding:10px 16px 0;border-bottom:1px solid var(--line);background:var(--panel);align-items:flex-end}
+.topnav a{padding:8px 14px;color:var(--ink2);text-decoration:none;font-size:14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.topnav a[aria-current="page"]{color:var(--ink);font-weight:600;border-bottom-color:var(--accent)}
+.topnav a:hover{color:var(--ink)}
+.topnav .grow{flex:1}
+.topnav button{margin-bottom:6px}
+.layout{display:grid;grid-template-columns:320px minmax(0,1fr);min-height:0}
+.layout.collapsed{grid-template-columns:0 minmax(0,1fr)}
+.layout.collapsed aside{display:none}
+aside{border-right:1px solid var(--line);background:var(--panel);overflow-y:auto;padding:14px 16px 24px;display:grid;gap:16px;align-content:start}
+aside h2{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+aside section{display:grid;gap:8px}
+label{display:grid;gap:3px;font-size:12.5px;color:var(--ink2)}
+.radio{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;color:var(--ink)}
+.radio input{margin-top:3px}
+.radio small{display:block;color:var(--muted);font-size:12px}
+input[type=text],input[type=number],select,textarea{font:inherit;font-size:13.5px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:6px 9px;width:100%}
+textarea{min-height:120px;font:12px/1.4 var(--mono);resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.check{display:flex;gap:6px;align-items:center;font-size:13.5px;color:var(--ink)}
+button{font:inherit;font-size:13.5px;cursor:pointer;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:6px 12px}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--panel);font-weight:600;padding:9px 16px;width:100%}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+button:disabled{opacity:.6;cursor:progress}
+.note{font-size:12px;color:var(--muted);margin:0}
+aside h2{display:flex;align-items:center;gap:4px}
+details.info{display:inline-block;position:relative}
+details.info>summary{list-style:none;cursor:pointer;color:var(--accent);font-size:13px;padding:0 3px;border-radius:4px;text-transform:none;letter-spacing:0}
+details.info>summary::-webkit-details-marker{display:none}
+details.info>summary:focus-visible{outline:2px solid var(--accent)}
+.infobox{position:absolute;z-index:5;left:-20px;top:1.6em;width:min(300px,78vw);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;box-shadow:0 6px 24px rgba(0,0,0,.18);font-size:12.5px;line-height:1.45;color:var(--ink2);display:grid;gap:6px;text-transform:none;letter-spacing:0;font-weight:400}
+.infobox p{margin:0}
+.infobox b{color:var(--ink)}
+details.how{font-size:12.5px;color:var(--ink2)}
+details.how>summary{cursor:pointer;color:var(--accent);list-style:none}
+details.how>summary::-webkit-details-marker{display:none}
+details.how ol{margin:6px 0 0;padding-left:18px;display:grid;gap:3px}
+.dsinfo{font-size:12.5px;color:var(--ink2)}
+main{overflow:auto;padding:16px;min-width:0}
+#cols{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(440px,1fr);gap:16px;align-items:start;min-width:0}
+.empty{max-width:62ch;color:var(--ink2);display:grid;gap:10px;padding:8px 4px}
+.empty h1{font-size:20px;margin:0;color:var(--ink)}
+.empty p{margin:0}
+.col{background:var(--panel);border:1px solid var(--line);border-radius:10px;min-width:0;display:grid;grid-template-columns:minmax(0,1fr)}
+.colhead{padding:12px 14px;border-bottom:1px solid var(--line);display:grid;gap:8px;min-width:0}
+.titlebar{display:flex;gap:8px;align-items:flex-start}
+.titlebar h3{margin:0;font-size:15px;flex:1}
+.titlebar button{padding:2px 8px;font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-size:12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:1px 7px;color:var(--ink2);font-variant-numeric:tabular-nums}
+.chip b{color:var(--ink);font-weight:600}
+.chip.good{background:var(--good-soft);border-color:transparent;color:var(--good)}
+.chip.warn{background:var(--warn-soft);border-color:transparent;color:var(--warn)}
+.chip.bad{background:var(--bad-soft);border-color:transparent;color:var(--bad)}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+.tools button{font-size:12.5px;padding:3px 9px}
+.tree{padding:6px 8px 14px;overflow-x:auto}
+details>summary{list-style:none;cursor:pointer}
+details>summary::-webkit-details-marker{display:none}
+.grp>summary{padding:6px 6px;border-radius:6px;display:grid;gap:2px}
+.grp>summary:hover{background:var(--bg)}
+.hrow{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.tw{width:12px;color:var(--muted);font-size:11px;flex:none;transition:transform .12s}
+.grp[open]>summary .tw{transform:rotate(90deg)}
+.gt{font-weight:600}
+.l1>summary .gt{font-size:15px}
+.size{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.src{font-size:12px;color:var(--accent);text-decoration:none}
+.src:hover{text-decoration:underline}
+.kind{font-size:11.5px;color:var(--muted);padding-left:18px}
+.gdesc{font-size:12.5px;color:var(--ink2);padding-left:18px}
+.kws{display:flex;flex-wrap:wrap;gap:4px;padding-left:18px}
+.kw{font-size:11.5px;background:var(--accent-soft);border-radius:4px;padding:0 6px}
+.gold{font-size:12px;padding-left:18px}
+.gold span{border-radius:4px;padding:0 6px}
+.kids{margin-left:12px;border-left:1px solid var(--line);padding-left:6px}
+.item{padding:4px 6px 4px 22px;border-radius:6px;display:grid;gap:1px;cursor:pointer}
+.item:hover{background:var(--bg)}
+.it{font-size:13.5px}
+.im{font-size:11.5px;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.gc{font-size:11px;border:1px solid var(--line);border-radius:4px;padding:0 5px;color:var(--ink2)}
+.gc.off{border-style:dashed}
+.idesc{font-size:12.5px;color:var(--ink2);display:none}
+.item.open .idesc{display:block}
+.hidegold .gold,.hidegold .gc{display:none}
+.loading{padding:18px 14px;color:var(--muted);font-size:13.5px}
+.loading::after{content:"";display:inline-block;width:10px;height:10px;margin-left:8px;border:2px solid var(--muted);border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;vertical-align:-1px}
+.err{padding:14px;color:var(--bad);background:var(--bad-soft);font-size:13.5px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.loading::after{animation:none}.tw{transition:none}}
+@media (max-width: 760px){.layout{grid-template-columns:1fr}.layout aside{border-right:0;border-bottom:1px solid var(--line)}#cols{grid-auto-flow:row;grid-auto-columns:auto}}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Bereiche">
+  <a href="/">Thema → Baum</a>
+  <a href="/inhalte" aria-current="page">Inhalte → Baum</a>
+  <a href="/kosten">Kosten</a>
+  <span class="grow"></span>
+  <button type="button" id="toggleAside" aria-expanded="true">Einstellungen ausblenden</button>
+  <a href="/logout">Abmelden</a>
+</nav>
+
+<div class="layout" id="layout">
+<aside>
+  <section>
+    <h2>Inhalte</h2>
+    <label for="dataset">Datensatz
+      <select id="dataset">
+        <option value="sample">Beispiel: 100 Physik-Inhalte (mit Soll-Kategorie)</option>
+        <option value="own">Eigene Inhalte einfügen</option>
+      </select>
+    </label>
+    <div id="ownBox" hidden>
+      <label for="ownText">JSON-Liste mit title/description (optional gold) oder je Zeile „Titel;Beschreibung“
+        <textarea id="ownText" placeholder='[{"title": "...", "description": "..."}]'></textarea>
+      </label>
+      <label for="ownFile">oder Datei laden (.json, .csv, .txt)<input type="file" id="ownFile" accept=".json,.csv,.txt,.tsv"></label>
+    </div>
+    <p class="dsinfo" id="dsinfo">Lade Beispieldaten …</p>
+    <label class="check" for="showGold"><input type="checkbox" id="showGold" checked> Soll-Kategorien anzeigen</label>
+  </section>
+
+  <section>
+    <h2>Verfahren <details class="info"><summary aria-label="Was machen die Verfahren?">ⓘ</summary><div class="infobox"><p><b>Gruppen bilden</b>: Die Inhalte werden per Embedding als Vektoren dargestellt und mit hierarchischem Clustering (agglomerativ, Ward) zu Haupt- und Untergruppen gebündelt. Die Struktur entsteht allein aus den Inhalten.</p><p><b>In Gerüst einsortieren</b>: Ein Baum aus Wikipedia, Wikidata oder GND zum Thema wird als fertige Taxonomie genommen; jeder Inhalt kommt an den ähnlichsten Knoten, leere Äste werden gekappt.</p><p>Beide Verfahren nutzen kein generatives LLM.</p></div></details></h2>
+    <label class="radio"><input type="radio" name="method" value="cluster" checked><span>Gruppen bilden<small>Ähnliche Inhalte werden zu Haupt- und Untergruppen gebündelt.</small></span></label>
+    <label class="radio"><input type="radio" name="method" value="scaffold"><span>In Gerüst einsortieren<small>Ein Baum aus Wikipedia, Wikidata oder GND zum Thema, leere Äste werden gekappt.</small></span></label>
+  </section>
+
+  <section>
+    <h2>Embeddings <details class="info"><summary aria-label="Was sind Embeddings?">ⓘ</summary><div class="infobox"><p>Ein Embedding-Modell wandelt jeden Text in einen Zahlenvektor um. Texte mit ähnlicher Bedeutung liegen nah beieinander. Es erzeugt keinen Text.</p><p><b>mpnet / MiniLM</b>: Transformer-Modelle, lokal über fastembed (ONNX). Sie arbeiten mit dem Volltext am besten.</p><p><b>model2vec</b>: statische Wortvektoren, sehr schnell und ohne Transformer. Füllwörter verwässern den Mittelwert, daher nur Substantive.</p></div></details></h2>
+    <label for="prep">Text vorbereiten
+      <select id="prep">
+        <option value="auto">Automatisch (model2vec: Substantive, sonst Volltext)</option>
+        <option value="full">Volltext</option>
+        <option value="nostop">ohne Füllwörter</option>
+        <option value="nouns">nur Substantive</option>
+      </select>
+    </label>
+    <p class="note">Gilt für beide Verfahren. Statische Modelle wie model2vec mitteln Wortvektoren und werden von Füllwörtern verwässert.</p>
+  </section>
+
+  <section id="clusterOpts">
+    <h2>Gruppen bilden <details class="info"><summary aria-label="Wie werden Gruppen gebildet und benannt?">ⓘ</summary><div class="infobox"><p><b>Hierarchisches Clustering (Ward)</b>: Ähnlichste Inhalte werden schrittweise zusammengelegt. Ebene 1 schneidet diese Hierarchie bei der gewählten Gruppenzahl; große Gruppen werden darin erneut unterteilt.</p><p><b>Benennung</b>: Schlagwortliste = unterscheidende Begriffe (c-TF-IDF). Begriff aus den Texten = Substantiv nah am Gruppenzentrum. GND-Schlagwort, Wikipedia-Artikel und Taxonomie sind <b>Hybride</b>: Gruppen aus den Inhalten, Namen aus einem Vokabular.</p><p><b>In Taxonomie einordnen</b>: Gruppen bekommen den Namen des ähnlichsten Knotens eines Baums zum Thema (Wikidata empfohlen).</p></div></details></h2>
+    <label for="features">Ähnlichkeit über
+      <select id="features">
+        <option value="embedding:mpnet">Embeddings, mpnet (empfohlen)</option>
+        <option value="embedding:minilm">Embeddings, MiniLM (schneller)</option>
+        <option value="embedding:m2v-edu">Embeddings, model2vec m2v-gte-256-edu (sehr schnell)</option>
+        <option value="tfidf:mpnet">TF-IDF (gemeinsame Wörter)</option>
+      </select>
+    </label>
+    <label for="labels">Gruppen benennen mit
+      <select id="labels">
+        <option value="korpus">Begriff aus den Texten</option>
+        <option value="gnd">GND-Schlagwort</option>
+        <option value="keywords">Schlagwortliste (3 Begriffe)</option>
+        <option value="wikipedia">Wikipedia-Artikel (Hybrid)</option>
+        <option value="taxonomie">In Taxonomie einordnen (Hybrid)</option>
+      </select>
+    </label>
+    <div class="row2" id="taxBox" hidden>
+      <label for="taxSource">Taxonomie aus
+        <select id="taxSource"><option value="wikidata">Wikidata (empfohlen)</option><option value="wikipedia">Wikipedia</option><option value="gnd">GND</option></select>
+      </label>
+      <label for="taxTheme">zum Thema<input type="text" id="taxTheme" value="Physik"></label>
+    </div>
+    <div class="row3">
+      <label for="k1">Hauptgruppen<input type="number" id="k1" min="2" max="30" placeholder="auto"></label>
+      <label for="splitMin">teilen ab<input type="number" id="splitMin" min="3" max="50" value="8"></label>
+      <label for="k2max">max. Unterg.<input type="number" id="k2max" min="0" max="8" value="4"></label>
+    </div>
+    <p class="note">Hauptgruppen leer lassen: Die Zahl wird per Silhouette-Wert gewählt (4–14). „teilen ab“: Gruppen ab dieser Größe bekommen Untergruppen.</p>
+  </section>
+
+  <section id="scaffoldOpts" hidden>
+    <h2>In Gerüst einsortieren <details class="info"><summary aria-label="Wie funktioniert das Einsortieren?">ⓘ</summary><div class="infobox"><p>Das Gerüst wird genau wie auf der Seite „Thema → Baum“ erzeugt. Jeder Knoten wird aus Titel und ersten Beschreibungssätzen eingebettet, jeder Inhalt aus Titel und Beschreibung.</p><p>Ein Inhalt kommt an den Knoten mit der höchsten Kosinus-Ähnlichkeit. Liegt sie unter der Mindest-Ähnlichkeit, bleibt er „nicht zugeordnet“.</p></div></details></h2>
+    <div class="row2">
+      <label for="scSource">Quelle
+        <select id="scSource"><option value="wikidata">Wikidata</option><option value="wikipedia">Wikipedia</option><option value="gnd">GND</option></select>
+      </label>
+      <label for="scTheme">Thema<input type="text" id="scTheme" value="Physik"></label>
+    </div>
+    <div class="row3">
+      <label for="scN1">Ebene 1<input type="number" id="scN1" value="12" min="1" max="30"></label>
+      <label for="scN2">Ebene 2<input type="number" id="scN2" value="10" min="0" max="20"></label>
+      <label for="scN3">Ebene 3<input type="number" id="scN3" value="5" min="0" max="20"></label>
+    </div>
+    <div class="row2">
+      <label for="thr">Mindest-Ähnlichkeit<input type="number" id="thr" value="0.30" min="0" max="1" step="0.05"></label>
+      <label for="scModel">Modell
+        <select id="scModel"><option value="mpnet">mpnet</option><option value="minilm">MiniLM</option><option value="m2v-edu">model2vec edu</option></select>
+      </label>
+    </div>
+  </section>
+
+  <button class="primary" id="go" type="button">Baum bilden</button>
+  <p class="note">Jeder Lauf erscheint als eigene Spalte, so lassen sich Einstellungen nebeneinander vergleichen. Der erste Lauf lädt das Sprachmodell für Embeddings (einige Sekunden). Es wird kein generatives LLM verwendet.</p>
+</aside>
+
+<main>
+  <div id="cols">
+    <div class="empty" id="empty">
+      <h1>Themenbaum aus einer Inhaltsmenge</h1>
+      <p>Links Datensatz und Verfahren wählen, dann „Baum bilden“. Bei den Beispieldaten zeigt jede Gruppe, welche Soll-Kategorie überwiegt. Oben in der Spalte stehen Kennzahlen zur Übereinstimmung: Reinheit (Anteil der Inhalte in der überwiegenden Kategorie ihrer Gruppe), ARI und NMI (0 = zufällig, 1 = identisch mit den Soll-Kategorien).</p>
+    </div>
+  </div>
+</main>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const nf2=new Intl.NumberFormat("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2});
+let sample=[], own=[], runNo=0;
+
+fetch("/api/contents/sample").then(r=>r.json()).then(d=>{sample=d;updateInfo()}).catch(()=>{$("#dsinfo").textContent="Beispieldaten konnten nicht geladen werden."});
+
+function items(){return $("#dataset").value==="sample"?sample:own}
+function updateInfo(){
+  const it=items(), gold=it.filter(x=>x.gold).length;
+  $("#dsinfo").textContent=it.length?`${it.length} Inhalte${gold?`, ${new Set(it.map(x=>x.gold)).size} Soll-Kategorien`:", ohne Soll-Kategorien"}`:"Noch keine Inhalte erkannt.";
+}
+function parseOwn(text){
+  text=text.trim(); if(!text)return [];
+  if(text.startsWith("[")){
+    try{return JSON.parse(text).filter(x=>x&&x.title).map((x,i)=>({id:x.id||`e${i+1}`,title:String(x.title),description:String(x.description||""),gold:x.gold||"",resourceType:x.resourceType||"",level:x.level||""}))}
+    catch(e){$("#dsinfo").textContent="JSON nicht lesbar: "+e.message;return []}
+  }
+  return text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).map((l,i)=>{const m=l.match(/^(.*?)[;\t](.*)$/);return {id:`e${i+1}`,title:(m?m[1]:l).trim(),description:(m?m[2]:"").trim()}}).filter(x=>x.title);
+}
+$("#dataset").onchange=()=>{$("#ownBox").hidden=$("#dataset").value!=="own";updateInfo()};
+$("#ownText").oninput=()=>{own=parseOwn($("#ownText").value);updateInfo()};
+$("#ownFile").onchange=async e=>{const f=e.target.files[0];if(!f)return;$("#ownText").value=await f.text();own=parseOwn($("#ownText").value);updateInfo()};
+document.querySelectorAll('input[name="method"]').forEach(r=>r.onchange=()=>{const m=document.querySelector('input[name="method"]:checked').value;$("#clusterOpts").hidden=m!=="cluster";$("#scaffoldOpts").hidden=m!=="scaffold"});
+$("#labels").onchange=()=>{$("#taxBox").hidden=$("#labels").value!=="taxonomie"};
+$("#showGold").onchange=()=>document.body.classList.toggle("hidegold",!$("#showGold").checked);
+$("#toggleAside").onclick=()=>{const c=$("#layout").classList.toggle("collapsed");$("#toggleAside").textContent=c?"Einstellungen einblenden":"Einstellungen ausblenden";$("#toggleAside").setAttribute("aria-expanded",!c)};
+
+function config(){
+  const method=document.querySelector('input[name="method"]:checked').value;
+  if(method==="cluster"){
+    const [features,model]=$("#features").value.split(":");
+    const k1=parseInt($("#k1").value,10);
+    return {method,features,model,text_prep:$("#prep").value,labels:$("#labels").value,taxonomy:{source:$("#taxSource").value,theme:$("#taxTheme").value.trim()||"Physik",n1:12,n2:10,n3:5},k1:isNaN(k1)?null:k1,split_min:+$("#splitMin").value||8,k2max:+$("#k2max").value||0};
+  }
+  return {method,model:$("#scModel").value,text_prep:$("#prep").value,threshold:parseFloat($("#thr").value)||0.3,
+    scaffold:{source:$("#scSource").value,theme:$("#scTheme").value.trim()||"Physik",n1:+$("#scN1").value,n2:+$("#scN2").value,n3:+$("#scN3").value}};
+}
+const LABELS={korpus:"Begriff aus Texten",gnd:"GND-Schlagwort",keywords:"Schlagwortliste",wikipedia:"Wikipedia-Artikel (Hybrid)",taxonomie:"Taxonomie (Hybrid)"};
+const SRC={wikidata:"Wikidata",wikipedia:"Wikipedia",gnd:"GND"};
+function summary(c){
+  if(c.method==="cluster")return `Gruppen · ${c.features==="embedding"?"Embeddings "+({"m2v-edu":"model2vec edu"}[c.model]||c.model):"TF-IDF"} · ${LABELS[c.labels]}${c.labels==="taxonomie"?` ${SRC[c.taxonomy.source]} „${c.taxonomy.theme}“`:""} · ${c.k1?c.k1+" Hauptgruppen":"Anzahl auto"}`;
+  return `Gerüst ${SRC[c.scaffold.source]} „${c.scaffold.theme}“ · Schwelle ${nf2.format(c.threshold)} · ${c.model}`;
+}
+
+$("#go").onclick=async()=>{
+  const it=items();
+  if(it.length<8){$("#dsinfo").textContent="Bitte mindestens 8 Inhalte angeben.";return}
+  const cfg=config(), id="run"+(++runNo);
+  $("#empty")?.remove();
+  const col=document.createElement("section");col.className="col";col.id=id;
+  col.innerHTML=`<div class="colhead"><div class="titlebar"><h3>Lauf ${runNo}</h3><button type="button" aria-label="Spalte schließen">✕</button></div><div class="chips"><span class="chip">${esc(summary(cfg))}</span></div></div><div class="loading">Baum wird gebildet</div>`;
+  col.querySelector(".titlebar button").onclick=()=>col.remove();
+  $("#cols").appendChild(col);col.scrollIntoView({behavior:"smooth",inline:"end",block:"nearest"});
+  $("#go").disabled=true;
+  try{
+    const r=await fetch("/api/contents/tree",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:it,config:cfg})});
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.detail||r.statusText);
+    render(col,d,runNo);
+  }catch(e){col.querySelector(".loading").outerHTML=`<div class="err">${esc(e.message)}</div>`}
+  $("#go").disabled=false;
+};
+
+function purityClass(p){return p>=0.8?"good":p>=0.5?"warn":"bad"}
+function render(col,d,n){
+  const s=d.stats,m=s.metrics,byId=Object.fromEntries(d.contents.map(c=>[c.id,c])),list=d.contents;
+  const chips=[
+    `<span class="chip"><b>${s.levels[0]}</b> Hauptgruppen · <b>${s.levels[1]}</b> Untergruppen</span>`,
+    m?`<span class="chip ${purityClass(m.purity)}">Reinheit <b>${Math.round(m.purity*100)} %</b></span><span class="chip">ARI <b>${nf2.format(m.ari)}</b></span><span class="chip">NMI <b>${nf2.format(m.nmi)}</b></span>`:"",
+    m&&m.name_fit!=null?`<span class="chip" title="Mittlere Ähnlichkeit (MiniLM) zwischen Namen der Hauptgruppen und ihrer überwiegenden Soll-Kategorie">Namensnähe <b>${nf2.format(m.name_fit)}</b></span>`:"",
+    s.silhouette!=null?`<span class="chip">Silhouette <b>${nf2.format(s.silhouette)}</b></span>`:"",
+    s.text_prep?`<span class="chip">Text: <b>${{full:"Volltext",nostop:"ohne Füllwörter",nouns:"nur Substantive"}[s.text_prep]||s.text_prep}</b></span>`:"",
+    s.scaffold_nodes?`<span class="chip">Gerüst: <b>${s.used_nodes}</b> von ${s.scaffold_nodes} Knoten belegt</span>`:"",
+    s.unassigned?`<span class="chip warn"><b>${s.unassigned}</b> nicht zugeordnet</span>`:"",
+    `<span class="chip"><b>${s.seconds.toLocaleString("de-DE")}</b> s${s.api_calls?` · ${s.api_calls} API-Aufrufe`:""}</span>`];
+  col.innerHTML=`<div class="colhead">
+      <div class="titlebar"><h3>Lauf ${n}${s.scaffold_entry?` · <a class="src" href="${esc(s.scaffold_url)}" target="_blank" rel="noopener">${esc(s.scaffold_entry)} ↗</a>`:""}</h3><button type="button" aria-label="Spalte schließen">✕</button></div>
+      <div class="chips"><span class="chip">${esc(summary(d.config))}</span></div>
+      <div class="chips">${chips.join("")}</div>
+      <details class="how"><summary>ⓘ Ablauf dieses Laufs</summary><ol>${(s.pipeline||[]).map(p=>`<li>${esc(p)}</li>`).join("")}</ol></details>
+      <div class="tools"><button type="button" data-a="open">Alle aufklappen</button><button type="button" data-a="close">Alle zuklappen</button><button type="button" data-a="json">JSON herunterladen</button></div>
+    </div>
+    <div class="tree">${d.tree.children.map(g=>groupHtml(g,1,list)).join("")}</div>`;
+  col.querySelector(".titlebar button").onclick=()=>col.remove();
+  col.querySelector('[data-a="open"]').onclick=()=>col.querySelectorAll("details").forEach(x=>x.open=true);
+  col.querySelector('[data-a="close"]').onclick=()=>col.querySelectorAll("details").forEach(x=>x.open=false);
+  col.querySelector('[data-a="json"]').onclick=()=>download(d,n);
+  col.querySelectorAll(".item").forEach(x=>x.addEventListener("click",()=>x.classList.toggle("open")));
+}
+function groupHtml(g,lvl,list){
+  const gold=g.gold, p=gold?gold.count/gold.total:null;
+  const goldLine=gold?`<div class="gold"><span class="chip ${purityClass(p)}">überwiegend ${esc(gold.top)} · ${gold.count} von ${gold.total}</span></div>`:"";
+  const items=(g.items||[]).map(i=>itemHtml(list[i],gold)).join("");
+  const kids=(g.children||[]).map(k=>groupHtml(k,lvl+1,list)).join("");
+  return `<details class="grp l${lvl}" ${lvl===1?"":""}>
+    <summary><div class="hrow"><span class="tw">▶</span><span class="gt">${esc(g.title)}</span><span class="size">${g.size} Inhalte</span>${g.url?`<a class="src" href="${esc(g.url)}" target="_blank" rel="noopener" title="Quelle öffnen">↗</a>`:""}</div>
+      ${g.kind?`<div class="kind">${esc(g.kind)}</div>`:""}
+      ${goldLine}
+      ${g.description?`<div class="gdesc">${esc(g.description)}</div>`:""}
+      ${g.keywords&&g.keywords.length?`<div class="kws">${g.keywords.slice(0,6).map(k=>`<span class="kw">${esc(k)}</span>`).join("")}</div>`:""}
+    </summary>
+    <div class="kids">${kids}${items}</div></details>`;
+}
+function itemHtml(c,gold){
+  const off=gold&&c.gold&&c.gold!==gold.top;
+  return `<div class="item" title="Klicken für die Beschreibung"><div class="it">${esc(c.title)}</div>
+    <div class="im">${esc([c.resourceType,c.level].filter(Boolean).join(" · "))}${c.gold?`<span class="gc ${off?"off":""}">${off?"≠ ":""}${esc(c.gold)}</span>`:""}</div>
+    <div class="idesc">${esc(c.description)}</div></div>`;
+}
+function download(d,n){
+  const conv=(g)=>({title:g.title,properties:{"cm:title":[g.title],"cm:description":g.description?[g.description]:[],"cclom:general_keyword":g.keywords||[]},
+    _source:{kind:g.kind,url:g.url||""},_contents:(g.items||[]).map(i=>d.contents[i].id),...(g.children&&g.children.length?{subcollections:g.children.map(conv)}:{})});
+  const out={metadata:{title:"Themenbaum aus Inhaltsmenge",created_at:new Date().toISOString(),author:"Themenbaum ohne LLM",config:d.config,stats:d.stats},collection:d.tree.children.map(conv)};
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:"application/json"}));
+  a.download=`themenbaum-inhalte-lauf${n}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+</script>
+</body>
+</html>

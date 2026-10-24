@@ -1,0 +1,802 @@
+[
+ {
+  "id": "t1-01",
+  "title": "Gleichförmige Bewegung im Weg-Zeit-Diagramm",
+  "description": "Dieses Arbeitsblatt führt in die Beschreibung von Bewegungen ein. Die Lernenden lesen Weg-Zeit-Diagramme von Radfahrern, Zügen und Fußgängern aus, berechnen die Durchschnittsgeschwindigkeit und rechnen zwischen Metern pro Sekunde und Kilometern pro Stunde um. Zusätzlich werden Messreihen in ein Koordinatensystem eingetragen und die Steigung der Geraden als Geschwindigkeit gedeutet. Am Ende stehen Aufgaben zu Überholvorgängen und Begegnungen zweier Körper. Das Material eignet sich als Einführung in die Kinematik, zur Übung im Anschluss an ein Schülerexperiment mit der Fahrbahn oder als Hausaufgabe. Lösungen und ein Erwartungshorizont liegen bei.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Sekundarstufe I",
+  "gold": "Mechanik"
+ },
+ {
+  "id": "t1-02",
+  "title": "Energieformen und ihre Umwandlung",
+  "description": "Dieser Erklärtext gibt einen Überblick über die wichtigsten Energieformen: Bewegungsenergie, Lageenergie, thermische, elektrische, chemische und Strahlungsenergie. An Beispielen wie Taschenlampe, Fahrrad, Toaster und Solarzelle wird gezeigt, dass Energie nicht verbraucht, sondern von einer Form in andere umgewandelt wird. Dazu werden Energieflussdiagramme gezeichnet und gelesen. Kurze Denkaufgaben fragen, welche Umwandlungen in einem Haushalt gleichzeitig ablaufen. Der Text ist sprachlich einfach gehalten, mit Randerklärungen zu Fachbegriffen versehen und lässt sich als Grundlage für die Einführung der Energiekette in den Klassen 7 und 8 einsetzen.",
+  "resourceType": "Erklärtext",
+  "level": "Sekundarstufe I",
+  "gold": "Energie und Energieversorgung"
+ },
+ {
+  "id": "t1-03",
+  "title": "Leuchtet die Glühbirne? Einfache Stromkreise bauen",
+  "description": "Mit Flachbatterie, Glühlampe, Kabeln und Fassung bauen Kinder der zweiten bis vierten Klasse ihren ersten Stromkreis. Die Experimentieranleitung stellt Forscherfragen: Wann leuchtet die Lampe? Was passiert, wenn man einen Draht löst? Welche Gegenstände leiten Strom, welche nicht? Die Kinder sortieren Materialien in Leiter und Nichtleiter und zeichnen ihre Schaltungen mit einfachen Symbolen. Ein Abschnitt zur Sicherheit erklärt, warum man nie mit Steckdosenstrom experimentiert. Zusätzlich gibt es Wortkarten und eine Forscherurkunde. Die Anleitung enthält Hinweise zur Differenzierung und zum Einsatz in Stationenarbeit.",
+  "resourceType": "Experimentieranleitung",
+  "level": "Primarstufe",
+  "gold": "Elektrizität und Magnetismus"
+ },
+ {
+  "id": "t1-04",
+  "title": "Warum rutscht der Schlitten?",
+  "description": "Ein Winterbild als Einstieg: Der Schlitten gleitet über frischen Schnee, aber auf nassem Asphalt bleibt er sofort stehen. Die Experimentieranleitung führt die Lernenden in kleinen Gruppen durch Versuche mit Zugfederwaage, Holzklotz und verschiedenen Unterlagen. Gemessen werden Haftreibung, Gleitreibung und Rollreibung, danach wird untersucht, ob die Auflagefläche oder das Gewicht eine Rolle spielt. Aus den Messwerten entsteht das Konzept der Reibungszahl. Zur Vertiefung wird gefragt, wo Reibung erwünscht ist, etwa bei Reifen oder Schuhsohlen, und wo man sie verringern möchte. Dauer etwa 90 Minuten, geeignet für Gruppenarbeit im Fachraum.",
+  "resourceType": "Experimentieranleitung",
+  "level": "Sekundarstufe I",
+  "gold": "Mechanik"
+ },
+ {
+  "id": "t1-05",
+  "title": "Wo bleibt die Energie? Erhaltung und Verluste",
+  "description": "Das Video beginnt mit einer hüpfenden Kugel, die immer niedriger springt. Verschwindet dabei Energie? Anhand mehrerer Versuche wird erklärt, dass die Gesamtenergie in einem abgeschlossenen System konstant bleibt, ein Teil jedoch als Wärme in die Umgebung gelangt und nicht mehr nutzbar ist. Begriffe wie Energieentwertung, Wirkungsgrad und perpetuum mobile werden eingeführt und mit Bildern aus Technik und Natur belegt. Die Lernenden bekommen Aufgaben zur Bilanzierung einfacher Vorgänge. Das Video dauert neun Minuten, enthält Untertitel und eignet sich für den Einstieg in die Unterrichtseinheit oder zur Wiederholung.",
+  "resourceType": "Video",
+  "level": "Sekundarstufe I",
+  "gold": "Energie und Energieversorgung"
+ },
+ {
+  "id": "t1-06",
+  "title": "Spannung und Stromstärke richtig messen",
+  "description": "Das Arbeitsblatt zeigt, wie Spannungsmesser und Strommesser in einen Stromkreis eingebunden werden. Die Lernenden zeichnen Schaltpläne, bauen die Messschaltung auf und lesen analoge sowie digitale Geräte ab. Besprochen werden Messbereiche, Parallel- und Reihenanschluss des Messgeräts sowie typische Fehler, etwa der Kurzschluss durch falsch angeschlossene Strommesser. Die Messwerte werden in einer Tabelle erfasst und mit Einheiten Volt und Ampere beschrieben. Eine Zusatzaufgabe verknüpft das Wasserkreislaufmodell mit dem elektrischen Stromkreis. Das Blatt ist für zwei Unterrichtsstunden in Klasse 7 oder 8 ausgelegt.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Sekundarstufe I",
+  "gold": "Elektrizität und Magnetismus"
+ },
+ {
+  "id": "t1-07",
+  "title": "Die drei Newtonschen Gesetze an Alltagsbeispielen",
+  "description": "In diesem Video werden Trägheitsprinzip, Grundgleichung und Wechselwirkungsprinzip anhand von Alltagssituationen erklärt: dem plötzlich bremsenden Bus, dem Einkaufswagen mit unterschiedlicher Beladung und dem Rückstoß beim Sprung aus dem Boot. Die Kraft wird als Ursache einer Beschleunigung eingeführt, die Gleichung F gleich m mal a wird mit Zahlenbeispielen angewendet. Typische Fehlvorstellungen, etwa dass Bewegung eine dauernde Kraft benötige, werden aufgegriffen und widerlegt. Das Video dauert zwölf Minuten, enthält Einblendungen für Pausen mit Verständnisfragen und passt zur Erarbeitung in der Oberstufe oder zur Wiederholung vor der Klausur.",
+  "resourceType": "Video",
+  "level": "Sekundarstufe II",
+  "gold": "Mechanik"
+ },
+ {
+  "id": "t1-08",
+  "title": "Vom Brennstoff zur Steckdose: Wärmekraftwerke",
+  "description": "Die Präsentation erklärt den Aufbau eines Dampfkraftwerks vom Brennstoff bis zum Netzanschluss. Gezeigt werden Kessel, Turbine, Kondensator und die Kopplung der Turbine an den Generator, der die Bewegung in elektrische Spannung umsetzt. Dazu kommen die Energieflüsse mit Verlusten und die Frage, warum Kraft-Wärme-Kopplung den Brennstoff besser ausnutzt. Ein Vergleich von Kohle-, Gas- und Kernkraftwerken berücksichtigt Wirkungsgrad, Emissionen und Regelbarkeit. Die Folien enthalten Schemazeichnungen und ein Sankey-Diagramm zum Selbstausfüllen. Sie richten sich an Lernende der Oberstufe, die den Weg der Energie über mehrere Stationen nachvollziehen sollen.",
+  "resourceType": "Präsentation",
+  "level": "Sekundarstufe II",
+  "gold": "Energie und Energieversorgung"
+ },
+ {
+  "id": "t1-09",
+  "title": "Das Ohmsche Gesetz verstehen",
+  "description": "Der Erklärtext entwickelt das Ohmsche Gesetz aus einer Messreihe mit Konstantandraht und einer regelbaren Spannungsquelle. Die Lernenden sehen, dass Stromstärke und Spannung proportional zueinander sind, und definieren den Widerstand als Quotienten. Der Text unterscheidet ohmsche Widerstände von Glühlampe und Diode, deren Kennlinien gekrümmt verlaufen. Es folgen Rechenbeispiele zur Umstellung der Formel, zur Abhängigkeit des Widerstands von Länge, Querschnitt und Material sowie zu Vorwiderständen bei Leuchtdioden. Abschließend sichern Verständnisfragen die zentralen Aussagen. Der Text ist barrierearm formatiert und enthält eine Formelsammlung.",
+  "resourceType": "Erklärtext",
+  "level": "Sekundarstufe I",
+  "gold": "Elektrizität und Magnetismus"
+ },
+ {
+  "id": "t1-10",
+  "title": "Hebel und Drehmoment im Experiment",
+  "description": "Der Lernpfad führt Schritt für Schritt von der Wippe auf dem Spielplatz zum Gesetz der Hebelwirkung. Die Lernenden bauen mit Hebelstab, Gewichtsstücken und Schiebereitern Gleichgewichtsanordnungen auf und notieren Kraft und Kraftarm. Dabei lernen sie ein- und zweiseitige Hebel kennen, vergleichen Brechstange, Schere und Nussknacker und erkennen die Rolle des Kraftarms. In einer Abschlussaufgabe analysieren sie das Gleichgewicht einer Balkenwaage und berechnen unbekannte Lasten. Interaktive Zwischenfragen sichern das Verständnis, Hinweise für die Lehrkraft erleichtern den Einsatz im Stationenlernen.",
+  "resourceType": "Lernpfad",
+  "level": "Sekundarstufe I",
+  "gold": "Mechanik"
+ },
+ {
+  "id": "t1-11",
+  "title": "Sonnenstrom: Photovoltaik im Selbstbau-Lernpfad",
+  "description": "Der Lernpfad begleitet Schülerinnen und Schüler von der Frage, wie viel Sonnenenergie auf ein Dach trifft, bis zur Planung einer kleinen Photovoltaikanlage für die eigene Schule. Sie messen mit einer Solarzelle die Leistung bei verschiedenen Neigungswinkeln, lernen Solarthermie und Photovoltaik zu unterscheiden und rechnen den Ertrag über ein Jahr hoch. Außerdem geht es um Herstellung, Lebensdauer und Recycling von Modulen. Interaktive Aufgaben, kurze Texte und ein Kostenrechner führen durch die einzelnen Schritte. Der Lernpfad benötigt etwa vier Unterrichtsstunden und kann ergänzend zum Wahlpflichtfach Technik verwendet werden.",
+  "resourceType": "Lernpfad",
+  "level": "Sekundarstufe I",
+  "gold": "Energie und Energieversorgung"
+ },
+ {
+  "id": "t1-12",
+  "title": "Reihen- und Parallelschaltung ausprobieren",
+  "description": "In der Simulation lassen sich Lampen und Widerstände per Mausklick zu Reihen- und Parallelschaltungen verbinden. Spannung und Stromstärke werden an jedem Bauteil angezeigt, sodass die Lernenden Regeln für Teilspannungen und Teilströme selbst entdecken. Aufgaben fordern dazu auf, Gesamtwiderstände vorherzusagen und anschließend zu überprüfen. Was geschieht, wenn eine Lampe in der Reihenschaltung ausfällt, was in der Parallelschaltung? Dazu gibt es ein Protokollblatt mit Platz für Skizzen und Erklärungen. Die Simulation lässt sich im Unterricht, als Hausaufgabe oder als Vorbereitung auf das Experimentieren im Fachraum einsetzen.",
+  "resourceType": "Interaktive Simulation",
+  "level": "Sekundarstufe I",
+  "gold": "Elektrizität und Magnetismus"
+ },
+ {
+  "id": "t1-13",
+  "title": "Stoßprozesse und Impulserhaltung simulieren",
+  "description": "Diese interaktive Simulation zeigt zwei Wagen auf einer reibungsfreien Bahn, die elastisch oder vollkommen unelastisch zusammenstoßen. Masse und Anfangsgeschwindigkeit lassen sich beliebig einstellen, während Impuls und Geschwindigkeiten vor und nach dem Stoß angezeigt werden. Die Lernenden prüfen, dass der Gesamtimpuls erhalten bleibt, und untersuchen, was beim Stoß mit der Bewegungsenergie geschieht. Ein Arbeitsauftrag leitet zur Herleitung der Formeln für den zentralen Stoß an. Das Material ist für die gymnasiale Oberstufe gedacht und lässt sich gut mit einem realen Luftkissenbahn-Versuch kombinieren oder als Vorbereitung auf das Praktikum verwenden.",
+  "resourceType": "Interaktive Simulation",
+  "level": "Sekundarstufe II",
+  "gold": "Mechanik"
+ },
+ {
+  "id": "t1-14",
+  "title": "Wir bauen ein Windrad und messen die Leistung",
+  "description": "Mit einfachen Materialien wie Pappe, Holzstäben und einem kleinen Gleichstrommotor bauen die Lernenden Modellwindräder und testen sie vor einem Haushaltsventilator. Die Experimentieranleitung führt durch die Variation von Flügelzahl, Flügelform und Anstellwinkel. Gemessen wird die entstehende Spannung, daraus lässt sich die Leistung abschätzen. Als Auswertung entsteht ein Diagramm, das zeigt, welche Konstruktion am besten abschneidet. Zusätzlich vergleichen die Lernenden ihr Modell mit realen Onshore- und Offshore-Anlagen und diskutieren den Begriff Volllaststunden. Material und Zeitbedarf sind angegeben, die Anleitung eignet sich für Projekttage.",
+  "resourceType": "Experimentieranleitung",
+  "level": "Sekundarstufe I",
+  "gold": "Energie und Energieversorgung"
+ },
+ {
+  "id": "t1-15",
+  "title": "Magnetfelder sichtbar machen",
+  "description": "Dieses Video zeigt mit Eisenfeilspänen, Kompassnadeln und einer Magnetfeldsonde, wie Magnetfelder aussehen. Nacheinander werden Stabmagnet, Hufeisenmagnet, stromdurchflossener Leiter und lange Spule untersucht. Die Feldlinienbilder werden mit den Regeln für die Richtung verglichen, darunter die Rechte-Hand-Regel. Auch das Erdmagnetfeld und die Funktionsweise eines Kompasses werden erklärt. Kurze Rückfragen im Video regen zum Mitdenken an. Die Dauer beträgt 14 Minuten, ein Begleitblatt bietet Zeichenaufgaben. Es eignet sich für den Anfangsunterricht zum Magnetismus und die Wiederholung in der Oberstufe.",
+  "resourceType": "Video",
+  "level": "Sekundarstufe I",
+  "gold": "Elektrizität und Magnetismus"
+ },
+ {
+  "id": "t1-16",
+  "title": "Freier Fall und Wurfbewegungen im Quiz",
+  "description": "Dieses Quiz prüft das Verständnis von Fallbewegungen mit 20 Aufgaben unterschiedlichen Schwierigkeitsgrades. Es geht um die Fallbeschleunigung, die Fallzeit aus verschiedenen Höhen, den Fall im Vakuum im Vergleich zur Luft sowie den waagerechten und den schrägen Wurf. Bei Rechenaufgaben müssen Wurfweite und Wurfhöhe aus Startwinkel und Anfangsgeschwindigkeit bestimmt werden. Viele Fragen beziehen sich auf bekannte Alltagssituationen wie einen Sprung vom Dreimeterbrett. Nach jeder Antwort erscheint eine kurze Erklärung. Das Quiz eignet sich für die Selbstkontrolle, die Wiederholung vor Prüfungen oder als Einstieg in eine Unterrichtsstunde.",
+  "resourceType": "Quiz",
+  "level": "Sekundarstufe II",
+  "gold": "Mechanik"
+ },
+ {
+  "id": "t1-17",
+  "title": "Energiedetektive im Klassenzimmer",
+  "description": "Dieser Unterrichtsentwurf für die Grundschule macht Kinder zu Energiedetektiven. Sie untersuchen Klassenraum, Flur und Schulhof und suchen nach Geräten, die Strom oder Wärme verbrauchen: Lampen, Heizkörper, Computer und Wasserhähne. Mit einer Detektivkarte halten sie fest, wo Energie unnötig verschwendet wird, etwa bei gekippten Fenstern im Winter. Gemeinsam werden Spartipps gesammelt und ein Klassenvertrag zum Lüften und Lichtausschalten abgefasst. Der Entwurf umfasst drei Doppelstunden mit Einstieg, Erkundungsphase und Präsentation und bietet Hinweise, wie Eltern in das Projekt einbezogen werden können.",
+  "resourceType": "Unterrichtsentwurf",
+  "level": "Primarstufe",
+  "gold": "Energie und Energieversorgung"
+ },
+ {
+  "id": "t1-18",
+  "title": "Der Elektromotor: Wie Strom Bewegung erzeugt",
+  "description": "Im Mittelpunkt steht der Bau eines einfachen Gleichstrommotors aus Batterie, Magnet, Kupferlackdraht und Büroklammern. Die Anleitung erklärt, wie die Lorentzkraft auf die stromdurchflossene Spule wirkt und warum der Kommutator die Drehrichtung aufrechterhält. Anschließend wird untersucht, wie Windungszahl, Spannung und Magnetstärke die Drehzahl beeinflussen. Die Lernenden verfolgen die Umwandlung von elektrischer Energie in Bewegungsenergie und diskutieren Verluste durch Wärme und Reibung. Zusatzmaterial vergleicht den Aufbau mit Motoren in Haushaltsgeräten und Elektroautos. Geeignet für eine Doppelstunde.",
+  "resourceType": "Experimentieranleitung",
+  "level": "Sekundarstufe I",
+  "gold": "Elektrizität und Magnetismus"
+ },
+ {
+  "id": "t1-19",
+  "title": "Schieben, Ziehen, Drücken: Kräfte entdecken",
+  "description": "Der Unterrichtsentwurf für die dritte und vierte Klasse lässt Kinder Kräfte mit dem eigenen Körper erleben. An Stationen schieben sie Kisten mit unterschiedlichem Inhalt, ziehen Wagen, dehnen Gummibänder und drücken Schwämme zusammen. Sie beschreiben dabei, was sie spüren, und ordnen die Beobachtungen den Begriffen Kraft, Richtung und Stärke zu. Ein Spiel mit dem Tauziehen führt zur Frage, wann zwei Kräfte sich ausgleichen. Der Entwurf enthält Materialliste, Zeitplan für zwei Doppelstunden, Differenzierungsangebote und kindgerechte Forscherkarten, die zum Dokumentieren der Ergebnisse dienen.",
+  "resourceType": "Unterrichtsentwurf",
+  "level": "Primarstufe",
+  "gold": "Mechanik"
+ },
+ {
+  "id": "t1-20",
+  "title": "Pumpspeicherkraftwerk: Wasser als Batterie",
+  "description": "Die Simulation bildet ein Pumpspeicherkraftwerk mit Oberbecken, Unterbecken, Pumpe und Turbine ab. Die Lernenden stellen Füllstand, Fallhöhe und Strombedarf ein und beobachten, wie überschüssiger Strom aus Wind und Sonne das Wasser nach oben pumpt und in Zeiten hoher Nachfrage über die Turbine zurückgewonnen wird. Berechnet wird die gespeicherte Lageenergie aus Masse, Höhe und Ortsfaktor, ebenso der Gesamtwirkungsgrad des Kreislaufs. Offene Fragen betreffen Standorte, Eingriffe in die Landschaft und Alternativen. Die Simulation läuft im Browser, eignet sich für die Sekundarstufe II und kann in Einzel- oder Partnerarbeit bearbeitet werden.",
+  "resourceType": "Interaktive Simulation",
+  "level": "Sekundarstufe II",
+  "gold": "Energie und Energieversorgung"
+ },
+ {
+  "id": "t1-21",
+  "title": "Wechselspannung und Transformator",
+  "description": "Die Präsentation erarbeitet die elektromagnetische Induktion an Spule und Magnet und leitet das Induktionsgesetz her. Gezeigt wird, wie sich die induzierte Spannung mit Geschwindigkeit, Windungszahl und Fläche ändert und was die Lenzsche Regel aussagt. Darauf aufbauend wird der Transformator behandelt, mit dem Spannungsverhältnis und Stromverhältnis aus den Windungszahlen folgen. Die Folien erklären, warum Strom für lange Leitungen auf hohe Spannungen transformiert wird. Aufgaben zum Rechnen und ein Versuchsvorschlag mit zerlegbarem Transformator sind angefügt. Das Material richtet sich an Kurse der Sekundarstufe II.",
+  "resourceType": "Präsentation",
+  "level": "Sekundarstufe II",
+  "gold": "Elektrizität und Magnetismus"
+ },
+ {
+  "id": "t1-22",
+  "title": "Der Flaschenzug: Weniger Kraft, längerer Weg",
+  "description": "Wie hebt man ein Klavier in den dritten Stock? Der Erklärtext entwickelt am Beispiel des Flaschenzugs, warum sich die Zugkraft verringert, der Zugweg aber im gleichen Verhältnis wächst. Besprochen werden feste und lose Rollen, Seilkräfte und die Anzahl der tragenden Seilstücke. Daraus wird die goldene Regel abgeleitet: Was man an Kraft spart, muss man an Weg zugeben. Die Arbeit am Lastgewicht bleibt dabei gleich, was den Übergang zum Arbeitsbegriff vorbereitet. Mehrere Rechenbeispiele aus dem Baugewerbe und ein kleiner Selbstbauversuch mit Garnrollen runden den Text ab, der für die Klassen 8 und 9 geschrieben wurde.",
+  "resourceType": "Erklärtext",
+  "level": "Sekundarstufe I",
+  "gold": "Mechanik"
+ },
+ {
+  "id": "t1-23",
+  "title": "Akku, Batterie, Power-Bank: Wie speichert man Strom?",
+  "description": "In dieser Podcast-Folge sprechen eine Chemikerin und ein Physiklehrer über die Speicherung von Energie in Batterien. Es geht um den Unterschied zwischen Primärzellen und Akkumulatoren, die Funktionsweise von Lithium-Ionen-Zellen, Ladezyklen und Selbstentladung. Außerdem werden Heimspeicher für Solarstrom und die Frage nach Rohstoffen wie Lithium und Kobalt diskutiert. Die Hörenden erfahren, warum es keinen idealen Speicher gibt und wie Wasserstoff als Alternative gehandelt wird. Das Skript zur Folge und Reflexionsfragen stehen als Download zur Verfügung. Die Folge dauert 25 Minuten und ist für die Oberstufe gedacht.",
+  "resourceType": "Podcast",
+  "level": "Sekundarstufe II",
+  "gold": "Energie und Energieversorgung"
+ },
+ {
+  "id": "t1-24",
+  "title": "Strom im Haushalt: Leistung und Stromkosten berechnen",
+  "description": "Das Arbeitsblatt für den Unterricht in der Berufsfachschule verbindet elektrische Leistung mit realen Kosten. Aus Typenschildern von Geräten werden Leistungsangaben abgelesen, mit Betriebsdauer multipliziert und in Kilowattstunden umgerechnet. Mit dem aktuellen Arbeitspreis entstehen Jahreskosten, die für Kühlschrank, Wäschetrockner und Standby-Geräte verglichen werden. Die Lernenden prüfen anhand eines Zählerstands den Verbrauch eines Haushalts und überlegen, welche Maßnahmen sich lohnen. Zusatzaufgaben behandeln Absicherung und Leitungsquerschnitt. Das Blatt enthält vier Aufgabenblöcke mit Lösungen und lässt sich gut für Betriebsbezüge in der Elektrotechnik nutzen.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Berufliche Bildung",
+  "gold": "Elektrizität und Magnetismus"
+ },
+ {
+  "id": "t1-25",
+  "title": "Das Fadenpendel: Schwingung und Umwandlung",
+  "description": "Im Mittelpunkt dieser Präsentation steht ein einfaches Fadenpendel. Zunächst werden Begriffe wie Amplitude, Periodendauer und Frequenz an Messungen mit der Stoppuhr erarbeitet. Dann zeigt sich, dass die Schwingungsdauer von der Fadenlänge abhängt, nicht aber von der Masse. Die Folien verfolgen anschließend den Wechsel zwischen Lageenergie am Umkehrpunkt und Bewegungsenergie im tiefsten Punkt und erklären, warum die Schwingung durch Reibung allmählich abklingt. Eingebettet sind Diagramme, Animationen und Aufgaben für Partnerarbeit. Die Präsentation passt in die Sekundarstufe II und lässt sich als Vorbereitung auf die Behandlung harmonischer Schwingungen einsetzen.",
+  "resourceType": "Präsentation",
+  "level": "Sekundarstufe II",
+  "gold": "Mechanik"
+ },
+ {
+  "id": "t1-26",
+  "title": "Wirkungsgrad von Heizsystemen vergleichen",
+  "description": "Das Arbeitsblatt für Auszubildende im Bereich Sanitär, Heizung und Klima behandelt die Berechnung von Wirkungsgraden und Jahresnutzungsgraden. Verglichen werden Gas-Brennwertkessel, Pelletheizung und Wärmepumpe anhand realer Kennwerte. Die Lernenden bestimmen aus Brennstoffverbrauch und Heizwert die eingesetzte Energie, berechnen die nutzbare Wärme und ermitteln Kosten sowie Kohlendioxid-Emissionen pro Jahr. Die Arbeitszahl der Wärmepumpe wird erklärt, ebenso der Einfluss der Vorlauftemperatur. Abschließend schreiben sie eine kurze Empfehlung für eine Kundin mit Altbau. Das Blatt umfasst zwei Seiten und enthält ausführliche Musterlösungen.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Berufliche Bildung",
+  "gold": "Energie und Energieversorgung"
+ },
+ {
+  "id": "t1-27",
+  "title": "Warum knistert der Pullover? Statische Aufladung",
+  "description": "Eine Podcast-Folge für neugierige Ohren erklärt, was passiert, wenn Haare am Luftballon haften oder man an der Türklinke einen Schlag bekommt. Es geht um Reibungselektrizität, positive und negative Ladungen, Influenz und das Entladen über Spitzen. Die Moderatorin bringt Beispiele aus dem Alltag, von Trockner und Teppichböden bis zu Blitzen am Himmel, und erklärt Schutzmaßnahmen beim Gewitter. Einfache Versuche zum Nachmachen werden beschrieben. Die Folge dauert 18 Minuten, ein Hörauftrag mit Fragen kann parallel bearbeitet werden. Sie richtet sich an Klasse 6 bis 8.",
+  "resourceType": "Podcast",
+  "level": "Sekundarstufe I",
+  "gold": "Elektrizität und Magnetismus"
+ },
+ {
+  "id": "t1-28",
+  "title": "Bremsweg und Anhalteweg im Straßenverkehr",
+  "description": "Der Podcast für angehende Kfz-Mechatroniker erklärt, wie sich Reaktionsweg, Bremsweg und Anhalteweg zusammensetzen und warum eine Verdopplung der Geschwindigkeit den Bremsweg vervierfacht. Im Gespräch mit einer Fahrlehrerin werden Faustformeln geprüft, der Einfluss von nassen Straßen, Reifenprofil und Eis diskutiert und die Wirkung von ABS erläutert. Die Kraft zwischen Reifen und Fahrbahn wird mit der Haftreibung in Verbindung gebracht, und die Bewegungsenergie des Fahrzeugs erklärt die Länge der Bremsstrecke. Zu der halbstündigen Folge gehört ein Begleitblatt mit Rechenaufgaben und Reflexionsfragen für den Berufsschulunterricht.",
+  "resourceType": "Podcast",
+  "level": "Berufliche Bildung",
+  "gold": "Mechanik"
+ },
+ {
+  "id": "t1-29",
+  "title": "Strommix und Energiewende in Deutschland",
+  "description": "Dieses Quiz fragt aktuelles Wissen zum deutschen Strommix und zum Umbau der Versorgung ab. Behandelt werden Anteile von Wind, Sonne, Biomasse, Wasser, Kohle und Erdgas, das Erneuerbare-Energien-Gesetz, Netzausbau, Speicherung und Versorgungssicherheit. Die 15 Fragen enthalten Diagramme zur Auswertung, einige Aufgaben fordern eine kurze Begründung. Nach der Auswertung erhalten die Lernenden Hinweise auf vertiefende Materialien. Das Quiz eignet sich für die Wiederholung in Politik, Geografie und Physik, als Einstieg in eine Diskussion zur Klimapolitik oder als Selbsttest vor Referaten.",
+  "resourceType": "Quiz",
+  "level": "Sekundarstufe II",
+  "gold": "Energie und Energieversorgung"
+ },
+ {
+  "id": "t1-30",
+  "title": "Vom Fahrraddynamo zum Generator",
+  "description": "Der Lernpfad beginnt mit der Frage, warum das Licht am Fahrrad bei langsamer Fahrt flackert. Die Lernenden zerlegen einen Seitenläufer-Dynamo, erkunden Magnet und Spule und messen die erzeugte Wechselspannung mit einem Oszilloskop oder einer Messwerterfassung. Danach vergleichen sie Nabendynamo, Fahrraddynamo und das Prinzip großer Generatoren im Kraftwerk. Dabei wird die Umwandlung von Bewegungsenergie in elektrische Energie diskutiert, einschließlich des Widerstands, den man beim Treten spürt. Kurze Videos, Experimentierhinweise und ein Abschlusstest strukturieren den Lernpfad, der sich über etwa drei Stunden erstreckt.",
+  "resourceType": "Lernpfad",
+  "level": "Sekundarstufe I",
+  "gold": "Elektrizität und Magnetismus"
+ },
+ {
+  "id": "t2-01",
+  "title": "Brechung von Licht an Grenzflächen",
+  "description": "Mit dieser Experimentieranleitung untersuchen Schülerinnen und Schüler, was mit einem Lichtstrahl passiert, wenn er von Luft in Wasser oder Glas übergeht. Mithilfe einer Lichtquelle mit Schlitzblende, einer halbkreisförmigen Acrylglaslinse und einer Winkelscheibe messen sie Einfallswinkel und Brechungswinkel und tragen die Wertepaare in eine Tabelle ein. Aus den Messreihen leiten sie ab, dass der Strahl zum Lot hin gebrochen wird, wenn er in das optisch dichtere Medium eintritt. Die Anleitung enthält Hinweise zur Sicherheit, Auswertungsfragen und einen Zusatzauftrag zur Totalreflexion beim Austritt aus dem Glas. Sie eignet sich für den Stationenbetrieb oder als Schülerversuch in Partnerarbeit.",
+  "resourceType": "Experimentieranleitung",
+  "level": "Sekundarstufe I",
+  "gold": "Optik und Licht"
+ },
+ {
+  "id": "t2-02",
+  "title": "Warum sieht der Strohhalm im Glas geknickt aus?",
+  "description": "Ein Strohhalm im Wasserglas scheint an der Wasseroberfläche abzuknicken, ein Löffel in der Tasse wirkt verbogen, und das Schwimmbecken erscheint flacher, als es tatsächlich ist. Der Erklärtext greift diese Alltagsbeobachtungen auf und führt Schritt für Schritt zur Erklärung: Lichtstrahlen ändern an der Grenze zwischen Wasser und Luft ihre Richtung, und unser Gehirn verlängert die ankommenden Strahlen geradlinig nach hinten. So entsteht ein scheinbarer Bildort, der nicht mit dem wirklichen Ort des Gegenstands übereinstimmt. Der Text arbeitet mit einfachen Skizzen, kurzen Denkfragen und zwei Mitmachversuchen für zu Hause. Er kann als Einstieg in die Behandlung der Lichtbrechung oder als Lesetext zur Vertiefung dienen.",
+  "resourceType": "Erklärtext",
+  "level": "Sekundarstufe I",
+  "gold": "Optik und Licht"
+ },
+ {
+  "id": "t2-03",
+  "title": "Schatten und Mondphasen mit der Taschenlampe",
+  "description": "Der Unterrichtsentwurf für die dritte und vierte Klasse zeigt, wie Kinder mit Taschenlampe, Tennisball und Globus selbst erforschen, wie Schatten entstehen und warum der Mond mal rund, mal sichelförmig erscheint. Zunächst experimentieren die Kinder mit Gegenständen im Lichtkegel, verändern Abstand und Richtung der Lichtquelle und beschreiben, wie sich Länge und Schärfe des Schattens verändern. Danach wird das Modell auf das Sonne-Erde-Mond-System übertragen. Der Entwurf enthält eine Verlaufsplanung über zwei Doppelstunden, Beobachtungsbögen, Differenzierungsvorschläge und eine Idee für ein Schattentheater zum Abschluss. Vorkenntnisse zur geradlinigen Ausbreitung des Lichts sind nicht nötig.",
+  "resourceType": "Unterrichtsentwurf",
+  "level": "Primarstufe",
+  "gold": "Optik und Licht"
+ },
+ {
+  "id": "t2-04",
+  "title": "Aufbau und Funktion des menschlichen Auges",
+  "description": "Das Arbeitsblatt vergleicht das Auge mit einer Kamera und lässt die Lernenden beide Systeme Bauteil für Bauteil einander zuordnen. Beschriftet werden Hornhaut, Pupille, Iris, Linse, Glaskörper, Netzhaut und Sehnerv. Anschließend verfolgen die Schülerinnen und Schüler den Strahlengang durch das Auge und erklären, warum auf der Netzhaut ein umgekehrtes, verkleinertes Bild entsteht. Zusatzaufgaben behandeln die Akkommodation beim Wechsel zwischen Nah- und Fernsehen sowie die Korrektur von Kurz- und Weitsichtigkeit durch Brillengläser. Das Material enthält eine Lösungsseite und lässt sich gut mit einem Versuch zum blinden Fleck kombinieren. Es ist für den Einsatz in einer Doppelstunde konzipiert.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Sekundarstufe I",
+  "gold": "Optik und Licht"
+ },
+ {
+  "id": "t2-05",
+  "title": "Sammellinsen und Abbildungsgleichung erkunden",
+  "description": "In dieser interaktiven Simulation lassen sich Gegenstandsweite, Brennweite und Gegenstandsgröße einer dünnen Sammellinse stufenlos verändern. Die Konstruktionsstrahlen, also Parallelstrahl, Mittelpunktstrahl und Brennpunktstrahl, werden live eingezeichnet, und das entstehende Bild wird mit Bildweite, Bildgröße und Abbildungsmaßstab angezeigt. Die Lernenden erkennen, wann reelle und wann virtuelle Bilder entstehen und wie sich die Linsengleichung aus den Messwerten herleiten lässt. Aufgabenkarten leiten zu gezielten Variationen an, etwa zur Lupe, zum Diaprojektor und zum Fernrohr. Ein Messprotokoll zum Ausdrucken sowie Hinweise zur Auswertung mit einer Tabellenkalkulation sind beigefügt.",
+  "resourceType": "Interaktive Simulation",
+  "level": "Sekundarstufe II",
+  "gold": "Optik und Licht"
+ },
+ {
+  "id": "t2-06",
+  "title": "Farbmischung: additiv mit RGB, subtraktiv mit CMY",
+  "description": "Das Quiz umfasst zwanzig Fragen zur additiven und subtraktiven Farbmischung und eignet sich zur Wiederholung am Ende einer Unterrichtseinheit. Die Lernenden entscheiden zum Beispiel, welche Farbe auf einem Bildschirm entsteht, wenn rotes und grünes Licht überlagert werden, und warum ein Tintenstrahldrucker mit Cyan, Magenta und Gelb arbeitet. Weitere Fragen betreffen Farbfilter, die Farbe von Gegenständen im Licht verschiedener Lampen und die Rolle der Zapfen in der Netzhaut. Zu jeder Antwort gibt es eine kurze Rückmeldung mit Erklärung. Die Fragen sind in drei Schwierigkeitsstufen sortiert, sodass sich das Quiz auch für binnendifferenzierten Unterricht eignet.",
+  "resourceType": "Quiz",
+  "level": "Sekundarstufe I",
+  "gold": "Optik und Licht"
+ },
+ {
+  "id": "t2-07",
+  "title": "Licht als elektromagnetische Welle: Polarisation und Interferenz",
+  "description": "Die Präsentation führt vom Strahlenmodell des Lichts zum Wellenmodell und zeigt, welche Phänomene nur mit der Wellenvorstellung erklärt werden können. Behandelt werden die Beugung am Spalt und am Gitter, die Interferenz am Doppelspalt, die Polarisation durch Filter und die Einordnung des sichtbaren Lichts in das elektromagnetische Spektrum. Wellenlänge und Frequenz werden über die Lichtgeschwindigkeit verknüpft, und die Folien enthalten Beispielrechnungen zur Bestimmung der Wellenlänge eines Lasers aus dem Interferenzmuster. Anmerkungen für die Lehrkraft erläutern mögliche Schülervorstellungen. Die Präsentation kann als Grundlage für einen Vortrag oder als Wiederholungsmaterial genutzt werden.",
+  "resourceType": "Präsentation",
+  "level": "Sekundarstufe II",
+  "gold": "Optik und Licht"
+ },
+ {
+  "id": "t2-08",
+  "title": "Wärmebildkamera: Infrarotstrahlung sichtbar machen",
+  "description": "Das Video erklärt, wie eine Wärmebildkamera arbeitet und warum Gegenstände auch im völlig dunklen Raum Strahlung aussenden, die für das Auge unsichtbar ist. Gezeigt werden Aufnahmen einer Hand, eines Heizkörpers und einer Fensterfront, begleitet von Erläuterungen zum infraroten Bereich des Spektrums und zur Detektion mit Mikrobolometern. Besprochen werden außerdem die Grenzen der Methode, etwa bei spiegelnden Oberflächen und Glas, die für Infrarotlicht undurchlässig sind. Das Video dauert etwa zwölf Minuten, ist in vier Kapitel gegliedert und bringt Arbeitsfragen zum Einsatz im Unterricht mit. Es lässt sich gut mit dem Thema Strahlung und Spektrum verbinden.",
+  "resourceType": "Video",
+  "level": "Sekundarstufe II",
+  "gold": "Optik und Licht"
+ },
+ {
+  "id": "t2-09",
+  "title": "Glasfaserkabel: Wie Licht Daten durch die Welt trägt",
+  "description": "Der Lernpfad richtet sich an Auszubildende in elektronischen und informationstechnischen Berufen und erklärt, wie Lichtsignale in Glasfasern über große Entfernungen übertragen werden. Ausgehend vom Prinzip der Totalreflexion an der Grenzfläche zwischen Kern und Mantel werden Grenzwinkel, numerische Apertur und Dämpfung eingeführt. Die Lernenden vergleichen Mehrmoden- und Einmodenfasern, rechnen Pegelverluste einer Übertragungsstrecke nach und lernen die Funktion von Sender und Empfänger kennen. Kurze Wissenstests und ein Praxisauftrag zur Messung mit einem optischen Leistungsmesser runden die einzelnen Stationen ab. Der Lernpfad benötigt etwa vier Unterrichtsstunden und kann auch selbstständig bearbeitet werden.",
+  "resourceType": "Lernpfad",
+  "level": "Berufliche Bildung",
+  "gold": "Optik und Licht"
+ },
+ {
+  "id": "t2-10",
+  "title": "Spiegel, Reflexionsgesetz und das Kaleidoskop",
+  "description": "Dieses Arbeitsblatt führt in das Reflexionsgesetz ein und verbindet Konstruktionsaufgaben mit praktischen Beispielen aus dem Alltag. Die Lernenden zeichnen den Strahlengang an einem ebenen Spiegel, bestimmen Einfalls- und Ausfallswinkel mit dem Geodreieck und konstruieren das virtuelle Spiegelbild eines Gegenstands. Weitere Aufgaben behandeln den Winkelspiegel, Rückstrahler am Fahrrad und das Periskop. Als Abschluss bauen die Schülerinnen und Schüler aus drei Spiegelstreifen ein einfaches Kaleidoskop und beschreiben, wie die vielfachen Bilder entstehen. Der Unterschied zwischen gerichteter und diffuser Reflexion an rauen Oberflächen wird in einer kurzen Versuchsreihe mit Papier und Alufolie verdeutlicht.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Sekundarstufe I",
+  "gold": "Optik und Licht"
+ },
+ {
+  "id": "t2-11",
+  "title": "Temperatur messen und Thermometer selbst bauen",
+  "description": "In diesem Material lernen Grundschulkinder, wie man Temperaturen misst und warum die Hand dabei kein zuverlässiges Messgerät ist. Zuerst fühlen sie mit einer Hand in kaltem und mit der anderen in warmem Wasser und tauchen dann beide in lauwarmes Wasser, um den Unterschied zwischen Empfindung und Messung zu erfahren. Danach bauen sie aus einer Plastikflasche, einem Strohhalm und gefärbtem Wasser ein einfaches Flüssigkeitsthermometer und beobachten den Anstieg der Flüssigkeitssäule. Die Kinder lesen Temperaturen in Grad Celsius ab und tragen sie in ein Diagramm ein. Die Anleitung enthält eine Materialliste, Sicherheitshinweise zum Umgang mit heißem Wasser und Anregungen für ein Forscherheft.",
+  "resourceType": "Experimentieranleitung",
+  "level": "Primarstufe",
+  "gold": "Wärmelehre"
+ },
+ {
+  "id": "t2-12",
+  "title": "Teilchenmodell: Was passiert beim Schmelzen und Verdampfen?",
+  "description": "Die Simulation zeigt, wie sich Teilchen eines Stoffes verhalten, wenn er erwärmt oder abgekühlt wird. Mit einem Regler für die Wärmezufuhr beobachten die Lernenden, wie die Teilchen im Festkörper zunächst nur um feste Plätze schwingen, im flüssigen Zustand aneinander vorbeigleiten und im Gas frei umherfliegen. Ein gekoppeltes Diagramm zeichnet den Temperaturverlauf auf und macht die Plateaus beim Schmelzen und Sieden sichtbar. Die Aufgabenkarten fordern dazu auf, Beobachtungen mit dem Modell zu erklären, etwa warum die Temperatur während des Schmelzens konstant bleibt. Die Simulation läuft im Browser, benötigt keine Installation und eignet sich für Tablets und Schulrechner.",
+  "resourceType": "Interaktive Simulation",
+  "level": "Sekundarstufe I",
+  "gold": "Wärmelehre"
+ },
+ {
+  "id": "t2-13",
+  "title": "Warum haben Brücken und Bahnschienen Dehnungsfugen?",
+  "description": "Der Text beschreibt anhand von Alltagsbeispielen, dass sich feste Körper bei Erwärmung ausdehnen und beim Abkühlen zusammenziehen. Behandelt werden Dehnungsfugen an Brücken, Lücken zwischen Bahnschienen, Bimetallstreifen in Thermostaten und das Verhalten von Quecksilber im Thermometer. Die Längenänderung wird mit dem Längenausdehnungskoeffizienten berechnet, und Beispielrechnungen zeigen, dass bei einer Stahlbrücke von hundert Metern im Jahresverlauf mehrere Zentimeter zusammenkommen können. Kurze Zwischenfragen und ein Merkkasten helfen beim Lesen. Der Text eignet sich als Hausaufgabe, als Grundlage für ein Lernplakat oder zur Vorbereitung auf eine Klassenarbeit und ist sprachlich bewusst einfach gehalten.",
+  "resourceType": "Erklärtext",
+  "level": "Sekundarstufe I",
+  "gold": "Wärmelehre"
+ },
+ {
+  "id": "t2-14",
+  "title": "Wärmeleitung, Strömung und Strahlung im Vergleich",
+  "description": "Die Anleitung enthält drei Stationenversuche, mit denen die Lernenden die Wärmeübertragung auf unterschiedlichen Wegen untersuchen. An Metallstäben aus Kupfer, Eisen und Holz, die mit Wachs und Reißzwecken präpariert sind, vergleichen sie die Wärmeleitung. Mit Kaliumpermanganat in einem erhitzten Becherglas machen sie die Strömung in Flüssigkeiten sichtbar. Mit einer Wärmelampe und geschwärzten sowie blanken Blechen prüfen sie, wie unterschiedlich Oberflächen Strahlung aufnehmen. Jeder Versuch wird durch eine Vorhersage eingeleitet, anschließend dokumentiert und in einem Auswertungsbogen mit Begriffen wie Wärmeleiter, Isolator und Konvektion zusammengefasst. Die Gesamtdauer beträgt etwa neunzig Minuten.",
+  "resourceType": "Experimentieranleitung",
+  "level": "Sekundarstufe I",
+  "gold": "Wärmelehre"
+ },
+ {
+  "id": "t2-15",
+  "title": "Wärmedämmung am Gebäude und der U-Wert",
+  "description": "Der Lernpfad vermittelt angehenden Fachkräften im Bau- und Ausbaugewerbe, wie Wärmeverluste durch Außenwände, Dach und Fenster entstehen und wie sie durch Dämmung verringert werden. Es werden Wärmeleitfähigkeit, Wärmedurchlasswiderstand und Wärmedurchgangskoeffizient eingeführt und an Beispielen berechnet. Die Lernenden vergleichen Dämmstoffe wie Mineralwolle, Holzfaser und Polystyrol, prüfen Schichtaufbauten von Wänden und erkennen Wärmebrücken an Balkonplatten und Fensterlaibungen. Praxisnahe Aufgaben zu Heizkosten und gesetzlichen Anforderungen schließen jede Lerneinheit ab. Der Pfad besteht aus fünf Modulen mit Wissenstests und einem Abschlussprojekt, bei dem ein Einfamilienhaus energetisch bewertet wird.",
+  "resourceType": "Lernpfad",
+  "level": "Berufliche Bildung",
+  "gold": "Wärmelehre"
+ },
+ {
+  "id": "t2-16",
+  "title": "Vom Ottomotor zur Dampfturbine: Wie Wärme Arbeit verrichtet",
+  "description": "Das Video erklärt anhand von Animationen den Viertaktmotor und die Dampfturbine als Beispiele für Wärmekraftmaschinen. Gezeigt wird, wie ein heißes Gas expandiert, Kolben oder Schaufeln bewegt und dabei einen Teil der zugeführten Energie in mechanische Arbeit umwandelt. Im Zentrum stehen das pV-Diagramm des Kreisprozesses, der Carnot-Wirkungsgrad und die Frage, warum selbst ideale Maschinen nie die gesamte Wärme nutzen können. Der zweite Hauptsatz wird anschaulich als Aussage über die Richtung natürlicher Vorgänge eingeführt. Begleitend gibt es Aufgaben zur Berechnung von Wirkungsgraden und eine Zusammenfassung als Merkblatt. Das Video dauert fünfzehn Minuten und ist in sechs Kapitel unterteilt.",
+  "resourceType": "Video",
+  "level": "Sekundarstufe II",
+  "gold": "Wärmelehre"
+ },
+ {
+  "id": "t2-17",
+  "title": "Spezifische Wärmekapazität: Wie viel Energie braucht ein Liter Wasser?",
+  "description": "Das Arbeitsblatt führt schrittweise in die Kalorimetrie ein. Die Lernenden bestimmen im Experiment mit einem Tauchsieder, einem Wattmeter und einem Thermometer die Energie, die nötig ist, um eine bestimmte Wassermenge um mehrere Grad zu erwärmen, und berechnen daraus die spezifische Wärmekapazität. Anschließend wenden sie die Formel auf Mischungsaufgaben an, etwa wenn heißes Metall in kaltes Wasser getaucht wird, und diskutieren Messfehler durch Wärmeverluste an die Umgebung. Zusätzliche Aufgaben vergleichen Wasser mit Öl und Sand und erklären damit das milde Klima an Küsten. Eine Musterlösung mit Fehlerbetrachtung liegt bei. Das Blatt ist für zwei Unterrichtsstunden gedacht.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Sekundarstufe II",
+  "gold": "Wärmelehre"
+ },
+ {
+  "id": "t2-18",
+  "title": "Treibhauseffekt: Wie Strahlung die Erde warm hält",
+  "description": "Die Präsentation erklärt den natürlichen und den verstärkten Treibhauseffekt als Frage der Energiebilanz der Erde. Dargestellt wird, dass die Sonne vor allem kurzwellige Strahlung einstrahlt, während die Erdoberfläche langwellige Wärmestrahlung abgibt, die von Wasserdampf, Kohlenstoffdioxid und Methan teilweise zurückgehalten wird. Ein einfaches Bilanzmodell mit Strahlungsgleichgewicht zeigt, warum die mittlere Temperatur ohne Atmosphäre etwa dreißig Grad niedriger läge. Die Folien enthalten Grafiken zur Temperaturentwicklung, Verweise auf Messreihen und Vorschläge für eine Diskussion über Klimaschutzmaßnahmen. Die Präsentation ist modular aufgebaut und lässt sich für einen Projekttag oder eine Unterrichtsreihe kürzen oder erweitern.",
+  "resourceType": "Präsentation",
+  "level": "Sekundarstufe II",
+  "gold": "Wärmelehre"
+ },
+ {
+  "id": "t2-19",
+  "title": "Wärmepumpe und Kühlschrank: Wärme gegen das Gefälle transportieren",
+  "description": "In dieser Podcastfolge sprechen eine Kälteanlagenbauerin und ein Berufsschullehrer darüber, wie Wärmepumpen und Kühlschränke funktionieren. Anhand des Kältemittelkreislaufs mit Verdampfer, Verdichter, Verflüssiger und Expansionsventil wird erklärt, wie Wärme von einem kalten Ort an einen warmen Ort befördert wird und warum dafür Antriebsenergie nötig ist. Weitere Themen sind die Leistungszahl, Jahresarbeitszahl und der Einfluss der Vorlauftemperatur auf die Effizienz einer Heizung. Die Folge dauert etwa vierzig Minuten, enthält Kapitelmarken und ein Begleitdokument mit Fachbegriffen, Rechenbeispielen und Reflexionsfragen. Sie eignet sich zum Hören im Selbststudium oder als Impuls für den Unterricht in Heizungs- und Kältetechnik.",
+  "resourceType": "Podcast",
+  "level": "Berufliche Bildung",
+  "gold": "Wärmelehre"
+ },
+ {
+  "id": "t2-20",
+  "title": "Brownsche Bewegung und die Schwingungen der Atome im Festkörper",
+  "description": "Dieses Quiz prüft, ob die Lernenden die mikroskopische Deutung von Wärme und Temperatur verstanden haben. Die Fragen reichen von der Brownschen Bewegung eines Rußteilchens in Wasser über die mittlere kinetische Energie der Teilchen eines Gases bis zur Deutung der Temperatur als Maß für die ungeordnete Bewegung. Auch das Schwingen der Atome um ihre Gitterplätze im Festkörper wird aufgegriffen und mit der Wärmeausdehnung sowie dem absoluten Nullpunkt in Verbindung gebracht. Es gibt Aufgaben zur Umrechnung zwischen Celsius und Kelvin sowie zum idealen Gas. Jede Frage wird nach der Antwort kurz erläutert. Das Quiz eignet sich als Einstieg in die kinetische Gastheorie oder zur Prüfungsvorbereitung.",
+  "resourceType": "Quiz",
+  "level": "Sekundarstufe II",
+  "gold": "Wärmelehre"
+ },
+ {
+  "id": "t2-21",
+  "title": "Pendel untersuchen: Schwingungsdauer, Fadenlänge und Masse",
+  "description": "Die Experimentieranleitung führt Schülerinnen und Schüler durch eine systematische Untersuchung des Fadenpendels. Sie variieren nacheinander die Fadenlänge, die Masse des Pendelkörpers und die Auslenkung und messen jeweils die Zeit für zehn Perioden mit einer Stoppuhr. Dabei lernen sie, immer nur eine Größe zu verändern und mehrere Messungen zu mitteln. Aus den Tabellen und Diagrammen ergibt sich, dass die Schwingungsdauer nur von der Länge, nicht aber von Masse und kleiner Amplitude abhängt. Begriffe wie Periodendauer, Frequenz, Amplitude und Auslenkung werden eingeführt und geübt. Ein Zusatzauftrag vergleicht das Fadenpendel mit dem Federpendel. Auswertungsbögen und Hinweise zur Fehlerdiskussion sind enthalten.",
+  "resourceType": "Experimentieranleitung",
+  "level": "Sekundarstufe I",
+  "gold": "Schwingungen, Wellen und Akustik"
+ },
+ {
+  "id": "t2-22",
+  "title": "Wie kommt der Schall von der Trommel zum Ohr?",
+  "description": "Das kurze Erklärvideo für die Grundschule zeigt, dass Schall durch schwingende Gegenstände entsteht und sich durch die Luft bis zu unserem Ohr ausbreitet. Kinder sehen, wie Reiskörner auf einer Trommelhaut springen, wenn man darauf schlägt, wie ein Lineal am Tischrand brummt und wie die Stimmbänder am Hals vibrieren. Eine Animation macht sichtbar, wie Luftteilchen aneinanderstoßen und die Bewegung weitergeben, ähnlich wie bei einer Reihe umfallender Dominosteine. Zum Schluss wird gefragt, warum man im Weltall keinen Ton hört. Das Begleitheft schlägt fünf einfache Versuche mit Alltagsmaterial vor, etwa das Becher-Telefon, und bietet Fragen für ein Gespräch im Sitzkreis.",
+  "resourceType": "Video",
+  "level": "Primarstufe",
+  "gold": "Schwingungen, Wellen und Akustik"
+ },
+ {
+  "id": "t2-23",
+  "title": "Tonhöhe und Frequenz: Was unterscheidet hohe und tiefe Töne?",
+  "description": "Das Arbeitsblatt untersucht den Zusammenhang zwischen Tonhöhe und Frequenz. Die Lernenden betrachten Oszilloskopbilder von Stimmgabeln, Flötentönen und der eigenen Stimme und ordnen sie nach der Anzahl der Schwingungen pro Sekunde. Sie lernen die Einheit Hertz kennen, vergleichen den Hörbereich des Menschen mit dem anderer Tiere und erklären, warum eine kürzere Saite höher klingt. Ein Versuch mit einem Lineal am Tischrand zeigt, wie sich die Tonhöhe mit der freien Länge ändert. Zusätzlich werden Oktave und Quinte als Frequenzverhältnisse eingeführt. Die Aufgaben sind nach Schwierigkeit gestuft, und im Anhang findet sich eine Frequenztabelle der Töne einer Klaviertastatur.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Sekundarstufe I",
+  "gold": "Schwingungen, Wellen und Akustik"
+ },
+ {
+  "id": "t2-24",
+  "title": "Lärm am Arbeitsplatz: Lautstärke, Dezibel und Gehörschutz",
+  "description": "Der Lernpfad vermittelt Auszubildenden, wie Lautstärke gemessen wird und welche Gefahren dauerhafter Lärm für das Gehör mit sich bringt. Die Lernenden erfahren, warum die Dezibel-Skala logarithmisch ist, dass eine Erhöhung um drei Dezibel eine Verdopplung der Schallenergie bedeutet und wie sich Pegel mehrerer Maschinen addieren. Anhand von Auslösewerten der Lärm- und Vibrations-Arbeitsschutzverordnung wird besprochen, wann Gehörschutz getragen werden muss. Eine Praxisaufgabe mit einem Schallpegelmesser dokumentiert die Belastung in der eigenen Werkstatt. Weitere Abschnitte behandeln Schalldämmung, Schallabsorption und die Wirkung von Lärm auf Konzentration und Gesundheit. Der Pfad enthält Tests und eine Checkliste für Betriebsbegehungen.",
+  "resourceType": "Lernpfad",
+  "level": "Berufliche Bildung",
+  "gold": "Schwingungen, Wellen und Akustik"
+ },
+ {
+  "id": "t2-25",
+  "title": "Resonanz: Wenn Schwingungen sich aufschaukeln",
+  "description": "Das Video erklärt das Phänomen der Resonanz an Beispielen aus dem Alltag und der Technik: Kinder auf der Schaukel, Weingläser, die durch Töne zerspringen, Brücken, die durch rhythmisches Marschieren in Schwingung geraten, und Gebäude bei Erdbeben. Aus dem Modell des erzwungenen Schwingens mit Erreger und Resonator entwickelt der Film die Resonanzkurve und zeigt, wie Dämpfung die Amplitude begrenzt. Ein Versuch mit gekoppelten Pendeln macht die Energieübertragung zwischen Systemen deutlich. Am Ende werden Maßnahmen zur Vermeidung gefährlicher Resonanzen besprochen, etwa Tilgerschwingungen in Hochhäusern. Arbeitsaufträge und ein kurzes Begleitheft für die Lehrkraft sind dabei.",
+  "resourceType": "Video",
+  "level": "Sekundarstufe II",
+  "gold": "Schwingungen, Wellen und Akustik"
+ },
+ {
+  "id": "t2-26",
+  "title": "Ultraschall: Fledermäuse, Sonar und Untersuchung im Mutterleib",
+  "description": "In dieser Podcastfolge für den Physikunterricht geht es um Schall, den wir nicht hören können. Eine Moderatorin erklärt, wie Fledermäuse mit Ultraschall jagen und sich orientieren, wie Schiffe mit Echolot die Wassertiefe messen und wie der Arzt bei einer Ultraschalluntersuchung Gewebe sichtbar macht. Das Prinzip der Laufzeitmessung wird dabei Schritt für Schritt entwickelt: Aus der Zeit zwischen Aussenden und Empfang eines Echos und der Schallgeschwindigkeit lässt sich die Entfernung berechnen. Weitere Anwendungen wie die Reinigung im Ultraschallbad kommen kurz vor. Die Folge dauert dreißig Minuten, enthält ein Transkript und Aufgaben zum Hören mit Rechenbeispielen und eignet sich für Hausaufgaben.",
+  "resourceType": "Podcast",
+  "level": "Sekundarstufe I",
+  "gold": "Schwingungen, Wellen und Akustik"
+ },
+ {
+  "id": "t2-27",
+  "title": "Transversal- und Longitudinalwellen sowie Überlagerung",
+  "description": "Die Simulation visualisiert Wellen auf einem Seil und in einer Federkette. Lernende können Amplitude, Frequenz und Ausbreitungsgeschwindigkeit verändern und erkennen den Unterschied zwischen transversalen und longitudinalen Wellen, bei denen die Teilchen quer oder längs zur Ausbreitungsrichtung schwingen. Ein zweiter Erreger erlaubt das Überlagern zweier Wellen, wodurch konstruktive und destruktive Interferenz, Reflexion am festen und losen Ende sowie stehende Wellen beobachtet werden können. Messmarken helfen, Wellenlänge und Periodendauer abzulesen und die Beziehung zwischen Geschwindigkeit, Frequenz und Wellenlänge zu bestätigen. Die Aufgabenblätter sind für selbstständiges Arbeiten in Gruppen konzipiert und können auch als Hausaufgabe eingesetzt werden.",
+  "resourceType": "Interaktive Simulation",
+  "level": "Sekundarstufe II",
+  "gold": "Schwingungen, Wellen und Akustik"
+ },
+ {
+  "id": "t2-28",
+  "title": "Wie funktionieren Gitarre, Flöte und Trommel?",
+  "description": "Der Unterrichtsentwurf verbindet Physik und Musik in einer fächerübergreifenden Sequenz über Musikinstrumente. Die Lernenden untersuchen Saiteninstrumente, Blasinstrumente und Schlaginstrumente und ermitteln, welcher Teil jeweils schwingt und wie sich die Tonhöhe verändern lässt. Im Mittelpunkt stehen die Abhängigkeit der Tonhöhe von Länge, Spannung und Dicke einer Saite, die Schwingung der Luftsäule in einer Pfeife und die Rolle des Resonanzkörpers. Eigenbauten wie Panflöte aus Strohhalmen oder Gummiband-Gitarre fördern das praktische Forschen. Der Entwurf enthält eine Verlaufsplanung über vier Stunden, Beobachtungsbögen, Hörbeispiele sowie Vorschläge für die Bewertung eines kleinen Abschlusskonzerts.",
+  "resourceType": "Unterrichtsentwurf",
+  "level": "Sekundarstufe I",
+  "gold": "Schwingungen, Wellen und Akustik"
+ },
+ {
+  "id": "t2-29",
+  "title": "Schallgeschwindigkeit in warmer und kalter Luft",
+  "description": "Das Arbeitsblatt befasst sich mit der Frage, warum sich Schall in warmer Luft schneller ausbreitet als in kalter. Ausgehend von der Näherungsformel für die Schallgeschwindigkeit in Abhängigkeit von der Lufttemperatur berechnen die Lernenden die Geschwindigkeit bei minus zehn, zwanzig und dreißig Grad und ermitteln die Laufzeit eines Echos über eine bekannte Entfernung. Eine Messaufgabe mit zwei Mikrofonen und einer Zeitmessung am Computer erlaubt die experimentelle Bestimmung. Zusätzlich wird erklärt, wie Temperaturschichten in der Atmosphäre Schallstrahlen brechen und warum man abends Geräusche aus großer Entfernung deutlicher hört. Eine Lösungsseite und Hinweise zur Genauigkeit der Messung sind angefügt.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Sekundarstufe II",
+  "gold": "Schwingungen, Wellen und Akustik"
+ },
+ {
+  "id": "t2-30",
+  "title": "Doppler-Effekt bei Schall und Licht",
+  "description": "Der Erklärtext behandelt den Doppler-Effekt zunächst am bekannten Beispiel des Martinshorns eines vorbeifahrenden Krankenwagens: Beim Annähern ist der Ton höher, beim Entfernen tiefer. Die Frequenzänderung wird für bewegte Quelle und bewegten Beobachter hergeleitet und mit Wellenfronten veranschaulicht. Ein Abschnitt zeigt, dass auch Licht eine Dopplerverschiebung erfährt, die in der Astronomie als Rot- oder Blauverschiebung der Spektrallinien genutzt wird, um Geschwindigkeiten von Sternen und Galaxien zu bestimmen. Weitere Anwendungen sind Radarkontrollen im Straßenverkehr und die Blutflussmessung mit Ultraschall. Übungsaufgaben mit Lösungen am Ende des Textes erlauben das Üben der Formeln und das Interpretieren von Frequenzspektren.",
+  "resourceType": "Erklärtext",
+  "level": "Sekundarstufe II",
+  "gold": "Schwingungen, Wellen und Akustik"
+ },
+ {
+  "id": "t3-01",
+  "title": "Halbwertszeit und Zerfallsgesetz",
+  "description": "Das Arbeitsblatt führt die Halbwertszeit als charakteristische Größe radioaktiver Nuklide ein und leitet daraus das exponentielle Zerfallsgesetz N(t) = N0 · e^(-λt) her. Die Lernenden lesen Zerfallskurven ab, bestimmen Halbwertszeiten grafisch, rechnen mit der Zerfallskonstanten und der Aktivität in Becquerel und vergleichen Nuklide wie Iod-131, Cäsium-137 und Uran-238. Eine ergänzende Aufgabe thematisiert die statistische Natur des Zerfalls: Warum lässt sich der Zerfall eines einzelnen Kerns nicht vorhersagen, wohl aber der einer großen Anzahl? Das Material eignet sich für die Einführungs- oder Übungsphase in der Oberstufe, enthält gestufte Hilfen und eine ausführliche Musterlösung und lässt sich gut mit einem Würfelexperiment als Modell verbinden.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Sekundarstufe II",
+  "gold": "Atom- und Kernphysik"
+ },
+ {
+  "id": "t3-02",
+  "title": "Mondphasen zum Anfassen: Lampe, Kugel, Schatten",
+  "description": "Mit einer Lampe, einem Styroporball und einem abgedunkelten Raum bauen Kinder das System aus Sonne, Erde und Mond im Kleinen nach. Sie halten den Ball auf Armlänge, drehen sich langsam um die eigene Achse und beobachten, wie aus der beleuchteten Kugel Neumond, zunehmender Mond, Vollmond und abnehmender Mond werden. Die Anleitung enthält Beobachtungsbögen, einen Mondkalender zum Eintragen über vier Wochen und Impulsfragen, mit denen typische Fehlvorstellungen wie der Erdschatten als Ursache der Mondphasen aufgegriffen werden. Der Versuch dauert etwa 45 Minuten, braucht kaum Material und eignet sich für den Sachunterricht in der dritten und vierten Klasse sowie für Ganztagsangebote.",
+  "resourceType": "Experimentieranleitung",
+  "level": "Primarstufe",
+  "gold": "Astronomie und Weltraum"
+ },
+ {
+  "id": "t3-03",
+  "title": "Wie alt ist Ötzi wirklich?",
+  "description": "Die Podcastfolge von rund 25 Minuten erzählt, wie Forschende das Alter der Gletschermumie aus den Ötztaler Alpen bestimmt haben. Im Gespräch zwischen einer Moderatorin und einem Physiker wird erklärt, wie Kohlenstoff-14 in der oberen Atmosphäre entsteht, über die Nahrungskette in Lebewesen gelangt und nach deren Tod mit einer Halbwertszeit von etwa 5730 Jahren zerfällt. Dabei werden Begriffe wie Isotopenverhältnis, Messunsicherheit und Kalibrierkurve verständlich eingeführt, außerdem Grenzen der Methode. Das Begleitmaterial enthält Hörfragen und eine kleine Rechenaufgabe. Die Folge eignet sich als Einstieg in die Radiokarbonmethode im Physik- und Geschichtsunterricht der Oberstufe oder als fächerverbindendes Projekt mit Archäologie und Chemie.",
+  "resourceType": "Podcast",
+  "level": "Sekundarstufe II",
+  "gold": "Atom- und Kernphysik"
+ },
+ {
+  "id": "t3-04",
+  "title": "Warum wird es im Sommer warm und im Winter kalt?",
+  "description": "Das kurze Erklärvideo räumt mit der verbreiteten Vorstellung auf, im Sommer sei die Erde näher an der Sonne. Anschaulich gezeigt werden die Neigung der Erdachse von etwa 23,5 Grad, der wechselnde Einfallswinkel der Sonnenstrahlen, die unterschiedlich langen Tage und die Stellung der Erde auf ihrer Bahn um die Sonne. Am Globus und an einer Taschenlampe wird demonstriert, warum dieselbe Lichtmenge im Winter eine größere Fläche beleuchtet und weniger erwärmt. Außerdem werden Sonnenwenden und Tagundnachtgleichen erklärt und die Verhältnisse auf der Südhalbkugel verglichen. Das Video dauert acht Minuten, ist in Kapitel gegliedert und enthält Stoppstellen mit Fragen, sodass es sich gut im Sachunterricht der Grundschule einsetzen lässt.",
+  "resourceType": "Video",
+  "level": "Primarstufe",
+  "gold": "Astronomie und Weltraum"
+ },
+ {
+  "id": "t3-05",
+  "title": "Vom Rosinenkuchen zum Schalenmodell: Atommodelle im Wandel",
+  "description": "Der Lernpfad begleitet Schülerinnen und Schüler durch die Geschichte der Vorstellungen vom Atom, von Demokrit über Daltons Kugelmodell und Thomsons Rosinenkuchen bis zu Rutherfords Streuversuch, Bohrs Schalenmodell und dem heutigen Orbitalmodell. Jede Station enthält einen kurzen Text, eine Abbildung, eine Aufgabe und ein Kontrollquiz. Die Lernenden erfahren, warum ein Modell verworfen oder erweitert wurde, und üben dabei, Experiment, Beobachtung und Deutung voneinander zu trennen. Am Ende erstellen sie eine Zeitleiste und beurteilen die Reichweite einzelner Modelle. Der Pfad ist für etwa vier Unterrichtsstunden angelegt, kann selbstständig bearbeitet werden und eignet sich für die Einführung in die Atomphysik der Mittelstufe.",
+  "resourceType": "Lernpfad",
+  "level": "Sekundarstufe I",
+  "gold": "Atom- und Kernphysik"
+ },
+ {
+  "id": "t3-06",
+  "title": "Reise durch das Sonnensystem: Acht Planeten im Überblick",
+  "description": "Dieser Lernpfad für die Grundschule führt in acht Stationen von der Sonne bis zum Neptun. Zu jedem Planeten gibt es ein Steckbrief-Formular, ein kurzes Hörstück und eine Aufgabe zum Vergleichen, etwa zu Größe, Entfernung, Temperatur und Oberfläche. Die Kinder unterscheiden Gesteinsplaneten und Gasriesen, lernen Zwergplaneten, Monde und Asteroiden kennen und bauen ein maßstabsgetreues Modell aus Papierstreifen und Schnur. Eine Merkhilfe erleichtert das Behalten der Reihenfolge. Differenzierte Zusatzaufgaben sprechen schnelle und leseschwache Kinder an. Der Pfad lässt sich in Stationenarbeit, Wochenplan oder Projektwoche einsetzen und verlinkt auf kindgerechte Bilder aus der Raumfahrt.",
+  "resourceType": "Lernpfad",
+  "level": "Primarstufe",
+  "gold": "Astronomie und Weltraum"
+ },
+ {
+  "id": "t3-07",
+  "title": "Abstand, Zeit, Abschirmung: Strahlenschutz im Unterricht",
+  "description": "Der Unterrichtsentwurf für zwei Doppelstunden vermittelt die drei Grundregeln des Strahlenschutzes: Abstand halten, Aufenthaltsdauer begrenzen und abschirmen. Nach einem Einstieg über Fallbeispiele aus Medizin, Flugverkehr und Industrie untersuchen die Lernenden in Gruppen mit einem Strahler im Schulbestand, wie die Zählrate mit der Entfernung abnimmt und wie Papier, Aluminium und Blei verschiedene Strahlungsarten abschwächen. Anschließend diskutieren sie Grenzwerte, die Einheit Sievert und die Frage, warum Vorsorge auch bei kleinen Dosen sinnvoll ist. Der Entwurf enthält Zeitplan, Sicherheitshinweise, Tafelbild, Arbeitsmaterial und Hinweise zur Bewertung. Er richtet sich an Lehrkräfte der Mittelstufe mit Physik- oder Naturwissenschaftsunterricht.",
+  "resourceType": "Unterrichtsentwurf",
+  "level": "Sekundarstufe I",
+  "gold": "Atom- und Kernphysik"
+ },
+ {
+  "id": "t3-08",
+  "title": "Wie die Sonne leuchtet: Fusion im Sternkern",
+  "description": "Der Erklärtext zeigt, woher die Sonne ihre Energie bezieht. Beschrieben wird die Proton-Proton-Reaktion, bei der in mehreren Schritten vier Wasserstoffkerne zu einem Heliumkern verschmelzen, wobei ein kleiner Teil der Masse nach E = mc² in Strahlung umgewandelt wird. Der Text erklärt, warum im Sonneninneren Temperaturen von rund 15 Millionen Kelvin nötig sind, wie der Strahlungstransport viele tausend Jahre bis zur Oberfläche dauert und weshalb ein Stern im Gleichgewicht zwischen Gravitationsdruck und Gasdruck bleibt. Zum Schluss wird ein Ausblick auf schwerere Elemente und die Entwicklung massereicher Sterne gegeben. Der Text mit Abbildungen und Verständnisfragen richtet sich an die Oberstufe und ergänzt Astrophysik- und Kernphysikkurse.",
+  "resourceType": "Erklärtext",
+  "level": "Sekundarstufe II",
+  "gold": "Astronomie und Weltraum"
+ },
+ {
+  "id": "t3-09",
+  "title": "Röntgenbilder in der Praxis: Nutzen, Dosis, Risiko",
+  "description": "Die Präsentation richtet sich an Auszubildende in medizinischen Berufen und erläutert, wie Röntgenstrahlung entsteht, wie sie Gewebe durchdringt und wie daraus ein Bild wird. Behandelt werden Röntgenröhre, Bremsstrahlung, Streustrahlung, Strahlenempfindlichkeit einzelner Organe sowie die Begriffe Energiedosis, Äquivalentdosis und effektive Dosis. Anhand typischer Untersuchungen wie Thorax-Aufnahme, Zahnröntgen und Computertomografie werden Dosiswerte verglichen und mit der natürlichen Strahlenexposition von rund zwei bis drei Millisievert pro Jahr in Beziehung gesetzt. Außerdem werden Schutzmaßnahmen, Dosimeter am Arbeitsplatz und die rechtfertigende Indikation besprochen. Die Folien enthalten Speichernotizen, Fallbeispiele und Diskussionsfragen für den berufsbezogenen Unterricht.",
+  "resourceType": "Präsentation",
+  "level": "Berufliche Bildung",
+  "gold": "Atom- und Kernphysik"
+ },
+ {
+  "id": "t3-10",
+  "title": "Hertzsprung-Russell-Diagramm: Sterne sortieren und verstehen",
+  "description": "In dieser interaktiven Simulation tragen die Lernenden Sterne nach Leuchtkraft und Oberflächentemperatur in ein Hertzsprung-Russell-Diagramm ein und erkennen Hauptreihe, Rote Riesen, Überriesen und Weiße Zwerge. Über einen Regler für die Masse lässt sich die Entwicklung eines Sterns verfolgen, vom Protostern über das Wasserstoffbrennen bis zum Endstadium als Weißer Zwerg, Neutronenstern oder Schwarzes Loch. Zusätzlich können Spektralklassen, Farbindex und scheinbare Helligkeit untersucht werden. Arbeitsaufträge führen schrittweise zur Beantwortung der Frage, wo sich unsere Sonne befindet und wie lange sie noch leuchten wird. Die Simulation läuft im Browser ohne Installation und eignet sich für Kurse der Oberstufe sowie für Astronomie-Arbeitsgemeinschaften.",
+  "resourceType": "Interaktive Simulation",
+  "level": "Sekundarstufe II",
+  "gold": "Astronomie und Weltraum"
+ },
+ {
+  "id": "t3-11",
+  "title": "Kernspaltung Schritt für Schritt: Die Kettenreaktion simulieren",
+  "description": "Die Simulation zeigt, wie ein Neutron einen Urankern trifft, ihn spaltet und weitere Neutronen freisetzt. Lernende verändern die Anzahl der Spaltstoffkerne, fügen Moderator- und Absorberstäbe hinzu und beobachten, ob die Kettenreaktion abbricht, stationär verläuft oder explosionsartig anwächst. Dabei werden Begriffe wie Wirkungsquerschnitt, kritische Masse, Multiplikationsfaktor und Massendefekt anschaulich eingeführt. Ein Messwerkzeug zeigt die freiwerdende Energie pro Spaltung von etwa 200 Megaelektronvolt. Die Aufgabenkarten leiten dazu an, Hypothesen aufzustellen, Parameter systematisch zu variieren und Ergebnisse zu protokollieren. Das Angebot ist für die Qualifikationsphase der gymnasialen Oberstufe konzipiert und läuft ohne Installation im Browser.",
+  "resourceType": "Interaktive Simulation",
+  "level": "Sekundarstufe II",
+  "gold": "Atom- und Kernphysik"
+ },
+ {
+  "id": "t3-12",
+  "title": "Auf der Suche nach der zweiten Erde: Exoplaneten",
+  "description": "Die Podcastfolge nimmt die Hörerinnen und Hörer mit in die Welt der Planeten fremder Sterne. Im Interview mit einer Astrophysikerin geht es um die Transitmethode, bei der ein Planet das Licht seines Sterns minimal abdunkelt, und um die Radialgeschwindigkeitsmethode, die das Wackeln eines Sterns misst. Erklärt werden auch habitable Zone, Heiße Jupiter, Supererden und die Frage, wie sich Atmosphären aus Spektren ableiten lassen. Die Weltraumteleskope Kepler und TESS werden ebenso vorgestellt wie die Ziele künftiger Missionen. Das Skript, Hörfragen und ein Glossar liegen bei. Die Folge dauert etwa 30 Minuten und eignet sich als Impuls für Projektarbeiten oder Facharbeiten in der Oberstufe.",
+  "resourceType": "Podcast",
+  "level": "Sekundarstufe II",
+  "gold": "Astronomie und Weltraum"
+ },
+ {
+  "id": "t3-13",
+  "title": "Vom Brennstab zum Strom: So funktioniert ein Kernkraftwerk",
+  "description": "Das Erklärvideo folgt der Energie von der Kernspaltung im Reaktorkern bis zur Steckdose. Gezeigt werden Brennelemente, Steuerstäbe, Moderator und Kühlmittel eines Druckwasserreaktors sowie der Wasser-Dampf-Kreislauf mit Turbine, Generator und Kondensator. Anschließend werden Wirkungsgrad, Regelleistung und Grundlast im Stromnetz eingeordnet und mit Kohle-, Gas- und Windkraftwerken verglichen. Das Video geht auch auf Zwischenlagerung, Endlagersuche und den deutschen Atomausstieg ein, damit Fragen der Energieversorgung sachlich diskutiert werden können. Es dauert 14 Minuten, ist in Kapitel gegliedert und enthält Arbeitsaufträge. Es richtet sich an Auszubildende in Energie- und Elektroberufen und an technisch interessierte Lernende.",
+  "resourceType": "Video",
+  "level": "Berufliche Bildung",
+  "gold": "Atom- und Kernphysik"
+ },
+ {
+  "id": "t3-14",
+  "title": "Raketengleichung und Umlaufbahnen: Wie kommt ein Satellit ins All?",
+  "description": "Das Arbeitsblatt für die technische Ausbildung behandelt die physikalischen Grundlagen des Raketenstarts. Ausgehend vom Impulserhaltungssatz wird die Ziolkowski-Gleichung eingeführt, mit der sich Endgeschwindigkeit, Ausströmgeschwindigkeit und Massenverhältnis verbinden lassen. Die Auszubildenden berechnen, warum Raketen in Stufen gebaut werden, wie groß die Geschwindigkeit für eine niedrige Erdumlaufbahn sein muss und welche Rolle die Erdrotation beim Start am Äquator spielt. Weitere Aufgaben betreffen geostationäre Satelliten, Hohmann-Transfer und Treibstoffbedarf. Das Material enthält ein Datenblatt typischer Trägerraketen, gestufte Rechenhilfen und Lösungen und ist für Berufe der Luft- und Raumfahrttechnik sowie der Mechatronik gedacht.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Berufliche Bildung",
+  "gold": "Astronomie und Weltraum"
+ },
+ {
+  "id": "t3-15",
+  "title": "Isotope und Nuklidkarte lesen: Ein Quiz",
+  "description": "Das Quiz umfasst 20 Fragen zu Aufbau und Bezeichnung von Atomkernen. Behandelt werden Protonen- und Neutronenzahl, Massenzahl, Ordnungszahl, die Schreibweise von Nukliden und der Unterschied zwischen stabilen und instabilen Isotopen. Mehrere Aufgaben verlangen das Lesen einer Nuklidkarte: Welche Zerfallsart tritt bei einem bestimmten Kern auf, welches Tochternuklid entsteht, wo liegt das Tal der Stabilität? Auch Anwendungen wie Wasserstoff, Deuterium und Tritium oder Kohlenstoff-12 und Kohlenstoff-14 werden abgefragt. Jede Antwort wird mit einer kurzen Erläuterung rückgemeldet. Das Quiz eignet sich zur Wiederholung vor Klausuren, als Eingangstest oder als Selbstlernkontrolle in der Oberstufe.",
+  "resourceType": "Quiz",
+  "level": "Sekundarstufe II",
+  "gold": "Atom- und Kernphysik"
+ },
+ {
+  "id": "t3-16",
+  "title": "Schwerelos auf der ISS: Warum schweben Astronauten?",
+  "description": "Dieses Quiz räumt mit dem Irrtum auf, im All gebe es keine Schwerkraft. In 15 Fragen mit Bildern und kurzen Erklärungen geht es um den freien Fall der Raumstation um die Erde, um die Bahngeschwindigkeit von rund 28 000 Kilometern pro Stunde und um die Gravitationskraft in 400 Kilometern Höhe, die noch etwa neun Zehntel des Wertes an der Erdoberfläche beträgt. Die Lernenden erfahren außerdem, wie sich Schwerelosigkeit auf Muskeln, Knochen und Flüssigkeiten im Körper auswirkt, warum Wasser dort zu Kugeln wird und wie das Trainieren im All abläuft. Zu jeder Frage gibt es einen Hinweis für Lehrkräfte. Das Quiz ist für die Mittelstufe geeignet und lässt sich als Einstieg oder Abschluss einer Gravitationsreihe nutzen.",
+  "resourceType": "Quiz",
+  "level": "Sekundarstufe I",
+  "gold": "Astronomie und Weltraum"
+ },
+ {
+  "id": "t3-17",
+  "title": "Natürliche Strahlung messen mit dem Geiger-Müller-Zähler",
+  "description": "In diesem Praktikumsversuch messen Lernende die Nullrate ihres Klassenzimmers und vergleichen sie mit Proben aus dem Alltag, etwa Granit, Paranüssen, Kaliumsalz, Uranglasur und Thoriumglühstrumpf. Die Anleitung erklärt Aufbau und Funktionsweise des Zählrohrs, den Unterschied zwischen Zählrate und Dosisleistung und die statistische Schwankung von Messwerten. Die Teilnehmenden notieren mehrere Messreihen, bilden Mittelwerte, schätzen die Unsicherheit ab und ordnen ihre Ergebnisse in die natürliche Strahlenexposition ein, die aus Boden, Kosmos, Radon und Nahrung stammt. Arbeitsschutzhinweise und eine Auswertungstabelle liegen bei. Der Versuch dauert etwa 90 Minuten und ist für Physikkurse der Mittelstufe gedacht.",
+  "resourceType": "Experimentieranleitung",
+  "level": "Sekundarstufe I",
+  "gold": "Atom- und Kernphysik"
+ },
+ {
+  "id": "t3-18",
+  "title": "Unsere Milchstraße und die Welt der Galaxien",
+  "description": "Die Präsentation gibt einen Überblick über Aufbau und Vielfalt von Galaxien. Ausgehend von der Milchstraße mit Spiralarmen, zentralem Bulge, Halo und dem supermassereichen Schwarzen Loch Sagittarius A* werden Spiral-, Balken-, elliptische und irreguläre Galaxien vorgestellt. Erläutert werden Entfernungen in Lichtjahren, die Andromedagalaxie als nächster großer Nachbar, Galaxienhaufen und die Rotverschiebung als Hinweis auf die Expansion des Universums. Die Folien mit Aufnahmen des Hubble- und des James-Webb-Teleskops enthalten Notizen für den Vortrag, Denkanstöße und eine Lernzielkontrolle. Die Präsentation ist für die Mittelstufe gedacht und kann in Projektwochen, im Wahlpflichtbereich oder als Impuls für eigene Schülervorträge genutzt werden.",
+  "resourceType": "Präsentation",
+  "level": "Sekundarstufe I",
+  "gold": "Astronomie und Weltraum"
+ },
+ {
+  "id": "t3-19",
+  "title": "Alpha, Beta, Gamma: Drei Strahlungsarten im Vergleich",
+  "description": "Der Erklärtext stellt die drei klassischen Arten radioaktiver Strahlung gegenüber. Alphastrahlung besteht aus Heliumkernen, ist stark ionisierend und schon durch ein Blatt Papier abzuschirmen. Betastrahlung besteht aus Elektronen oder Positronen und wird von dünnen Metallplatten gestoppt, während die energiereiche Gammastrahlung als elektromagnetische Welle nur durch dicke Blei- oder Betonschichten geschwächt wird. Ergänzend werden Umwandlungsgleichungen, Verschiebungssätze und Ablenkung im Magnetfeld besprochen. Eine Tabelle fasst Reichweite, Ionisationsvermögen und Schutzmaßnahmen zusammen. Der Text mit Abbildungen und Verständnisfragen eignet sich als Grundlage für die Erarbeitung der Radioaktivität in der Mittelstufe und für selbstständiges Lernen.",
+  "resourceType": "Erklärtext",
+  "level": "Sekundarstufe I",
+  "gold": "Atom- und Kernphysik"
+ },
+ {
+  "id": "t3-20",
+  "title": "Vom Fernrohr Galileis zum James-Webb-Teleskop",
+  "description": "Der Unterrichtsentwurf für eine Doppelstunde führt durch die Geschichte des Teleskops. Nach einem Einstieg mit einem selbstgebauten Linsenfernrohr vergleichen die Lernenden Refraktor und Spiegelteleskop, klären Begriffe wie Brennweite, Öffnung und Auflösungsvermögen und erkunden, warum Observatorien in Wüsten oder im Weltraum stehen. Am Beispiel von Hubble und James Webb wird deutlich, welchen Gewinn Beobachtungen im Infrarotbereich bringen. Ein Gruppenpuzzle bereitet die Ergebnisse auf, die zum Abschluss in einem kurzen Galeriegang vorgestellt werden. Der Entwurf enthält Zeitplanung, Materiallisten, Tafelbild, Differenzierungsvorschläge und ein Bewertungsraster und richtet sich an Lehrkräfte der Mittelstufe.",
+  "resourceType": "Unterrichtsentwurf",
+  "level": "Sekundarstufe I",
+  "gold": "Astronomie und Weltraum"
+ },
+ {
+  "id": "t4-01",
+  "title": "Wie lang, wie schwer, wie schnell? Messen im Sachunterricht",
+  "description": "Dieses Arbeitsblatt für die Klassen 3 und 4 führt in das Messen mit Lineal, Waage und Stoppuhr ein. Die Kinder schätzen zunächst die Länge ihres Radiergummis, das Gewicht einer Federtasche und die Zeit für zehn Hampelmänner und überprüfen ihre Schätzungen anschließend durch Messen. Dabei lernen sie die Einheiten Zentimeter, Meter, Gramm, Kilogramm, Sekunde und Minute kennen und üben, Messergebnisse mit Zahl und Einheit aufzuschreiben. Eine Seite mit Umrechnungsaufgaben und ein Forscherauftrag für zu Hause vertiefen das Gelernte. Das Blatt eignet sich für Stationenarbeit und für Freiarbeitsphasen. Hinweise zur Differenzierung sind enthalten.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Primarstufe",
+  "gold": "Messen und Arbeitsweisen"
+ },
+ {
+  "id": "t4-02",
+  "title": "Wie entsteht eigentlich ein Gewitter?",
+  "description": "Das animierte Erklärvideo zeigt in rund acht Minuten, wie aus warmer, feuchter Luft an einem Sommernachmittag eine Gewitterwolke wird. Ausgehend von der Thermik und der Kondensation des Wasserdampfs wird erklärt, warum sich eine Cumulonimbus-Wolke bis in große Höhen auftürmt, wie durch Reibung und Eiskristalle elektrische Ladungen getrennt werden und was bei einem Blitz und dem anschließenden Donner geschieht. Zusätzlich werden Kaltfronten und eine labile Schichtung der Luft angesprochen. Das Video eignet sich als Einstieg in eine Unterrichtseinheit zur Atmosphäre in den Klassen 7 bis 9, lässt sich an markierten Stellen anhalten und wird durch ein Begleitblatt mit Fragen zum richtigen Verhalten bei Gewitter ergänzt.",
+  "resourceType": "Video",
+  "level": "Sekundarstufe I",
+  "gold": "Wetter und Klima"
+ },
+ {
+  "id": "t4-03",
+  "title": "Den Treibhauseffekt modellieren",
+  "description": "Mit dieser Anleitung bauen Schülerinnen und Schüler ein einfaches Modell der Erdatmosphäre aus zwei durchsichtigen Gefäßen, Thermometern und einer Lampe. Das eine Gefäß wird mit normaler Luft gefüllt, das andere mit einem kohlenstoffdioxidreichen Gas, das aus Brausetabletten entsteht. Beim Bestrahlen mit Licht wird die Temperatur in beiden Gefäßen im Minutentakt gemessen. Die Lernenden vergleichen die Verläufe und erklären die Unterschiede mit der Absorption und Wiederabgabe von Wärmestrahlung. Dabei wird auch reflektiert, wo das Modell an seine Grenzen stößt, etwa weil Konvektion und Gefäßwände eine Rolle spielen. Die Durchführung dauert etwa 45 Minuten, eine Sicherheitsunterweisung und ein Auswertungsbogen sind enthalten.",
+  "resourceType": "Experimentieranleitung",
+  "level": "Sekundarstufe I",
+  "gold": "Wetter und Klima"
+ },
+ {
+  "id": "t4-04",
+  "title": "Messunsicherheit: Warum jede Messung ungenau bleibt",
+  "description": "Der Erklärtext behandelt die Grundlagen der Messunsicherheit für die Oberstufe. Er unterscheidet systematische und zufällige Messabweichungen, erläutert Begriffe wie Ablesefehler, Nullpunktfehler und Streuung und zeigt, wie aus einer Messreihe Mittelwert und Standardabweichung berechnet werden. Anhand eines Pendelversuchs und der Messung einer Federkonstante wird vorgeführt, wie sich Unsicherheiten nach dem Gaußschen Fortpflanzungsgesetz auf abgeleitete Größen übertragen. Mehrere Rechenbeispiele mit Lösungsweg, ein Glossar sowie Hinweise zur Darstellung von Fehlerbalken in Diagrammen ergänzen den Text. Er eignet sich zur Vorbereitung auf Praktika und zur Auswertung eigener Versuche im Grund- und Leistungskurs.",
+  "resourceType": "Erklärtext",
+  "level": "Sekundarstufe II",
+  "gold": "Messen und Arbeitsweisen"
+ },
+ {
+  "id": "t4-05",
+  "title": "Weg-Zeit-Diagramme lesen und deuten",
+  "description": "In dieser interaktiven Simulation steuern Lernende eine virtuelle Person, die sich vor einer Wand bewegt, und beobachten, wie dabei live ein Weg-Zeit-Diagramm entsteht. In einem zweiten Modus ist ein Diagramm vorgegeben, und die Aufgabe besteht darin, die passende Bewegung nachzustellen. So lernen sie, Steigung, Knicke und waagerechte Abschnitte zu interpretieren, Geschwindigkeiten abzulesen und Achsen korrekt zu beschriften. Eine Aufgabenkarte führt in sechs Schritten vom Ablesen einzelner Werte bis zum Vergleich zweier Bewegungen. Die Simulation läuft im Browser ohne Installation und ist für die Klassen 7 bis 9 gedacht. Eine Selbstkontrolle mit Rückmeldung ist integriert.",
+  "resourceType": "Interaktive Simulation",
+  "level": "Sekundarstufe I",
+  "gold": "Messen und Arbeitsweisen"
+ },
+ {
+  "id": "t4-06",
+  "title": "Luftdruck: Warum drückt die Luft auf uns?",
+  "description": "Das Arbeitsblatt führt in den Begriff des Luftdrucks ein und knüpft an Alltagsbeobachtungen an, zum Beispiel an das Knacken im Ohr bei der Fahrt ins Tal oder an eine Trinkflasche, die im Flugzeug aufgebläht wird. Die Lernenden lesen ein Barometer ab, ordnen Hoch- und Tiefdruckgebiete einer vereinfachten Wetterkarte zu und erklären, warum der Luftdruck mit der Höhe abnimmt. Aufgaben zur Einheit Hektopascal, ein kurzer Lesetext zum Versuch von Torricelli sowie eine Differenzierung mit Hilfekarten sorgen dafür, dass unterschiedliche Leistungsniveaus erreicht werden. Das Material umfasst zwei Seiten, enthält eine Lösung und passt in die Jahrgangsstufen 6 bis 8.",
+  "resourceType": "Arbeitsblatt",
+  "level": "Sekundarstufe I",
+  "gold": "Wetter und Klima"
+ },
+ {
+  "id": "t4-07",
+  "title": "Klimazonen der Erde im Überblick",
+  "description": "Die Präsentation mit 24 Folien gibt einen Überblick über die Klimazonen der Erde von den Tropen über die Subtropen und die gemäßigten Breiten bis zu den Polarregionen. Für jede Zone werden typische Temperatur- und Niederschlagsverläufe in Klimadiagrammen gezeigt und mit der jeweiligen Vegetation verknüpft, beispielsweise dem tropischen Regenwald, der Savanne, dem Mittelmeerraum oder der Tundra. Außerdem wird erklärt, wie die Neigung der Erdachse, die Einstrahlung der Sonne und die globalen Windsysteme die Zonierung hervorrufen. Notizen für Lehrkräfte, Impulsfragen und eine Weltkarte zum Ausdrucken erleichtern den Einsatz im Geografie- oder Naturwissenschaftsunterricht der Sekundarstufe I.",
+  "resourceType": "Präsentation",
+  "level": "Sekundarstufe I",
+  "gold": "Wetter und Klima"
+ },
+ {
+  "id": "t4-08",
+  "title": "Ein Experiment sauber planen und durchführen",
+  "description": "Der Unterrichtsentwurf für eine Doppelstunde zeigt, wie Schülerinnen und Schüler eine Fragestellung in einen kontrollierten Versuch überführen. Am Beispiel der Frage, wovon die Schwingungsdauer eines Fadenpendels abhängt, lernen sie, abhängige, unabhängige und konstant zu haltende Variablen zu unterscheiden, eine Versuchsskizze anzufertigen und eine Materialliste zu erstellen. Eine Planungsvorlage führt Schritt für Schritt durch die Phasen Vermutung, Aufbau, Durchführung und Auswertung. Der Entwurf enthält Impulse für die Gruppenarbeit, eine Checkliste zur gegenseitigen Rückmeldung und Hinweise zur Differenzierung. Er ist auf die Klassenstufen 7 und 8 zugeschnitten und lässt sich leicht auf andere Fragestellungen übertragen.",
+  "resourceType": "Unterrichtsentwurf",
+  "level": "Sekundarstufe I",
+  "gold": "Messen und Arbeitsweisen"
+ },
+ {
+  "id": "t4-09",
+  "title": "Eine Wetterstation für den Schulhof aufbauen",
+  "description": "Der Unterrichtsentwurf beschreibt eine Projektwoche, in der eine Klasse eine kleine Wetterstation auf dem Schulgelände plant, aufstellt und betreut. Thermometer, Niederschlagsmesser, Windfahne und Hygrometer werden gemeinsam ausgewählt, an geeigneten Standorten platziert und täglich abgelesen. Die Messwerte werden in einer Tabelle gesammelt und mit den Vorhersagen eines Wetterdienstes verglichen. Der Entwurf enthält eine Verlaufsplanung für sechs Doppelstunden, Hinweise zur Standortwahl nach den Regeln der Meteorologie, Beobachtungsbögen und Ideen für fächerübergreifende Anknüpfungen an Mathematik und Informatik. Er richtet sich an Lehrkräfte der Klassen 6 bis 8.",
+  "resourceType": "Unterrichtsentwurf",
+  "level": "Sekundarstufe I",
+  "gold": "Wetter und Klima"
+ },
+ {
+  "id": "t4-10",
+  "title": "Messschieber ablesen und Messprotokolle führen",
+  "description": "Das Lehrvideo zeigt für die gewerblich-technische Ausbildung, wie ein Messschieber richtig angesetzt, abgelesen und gepflegt wird. Anschließend wird erklärt, wie die Ergebnisse in einem Messprotokoll festgehalten werden: mit Angabe von Prüfmittel, Nennmaß, Toleranz, Istmaß und Datum. Typische Fehler wie schiefes Ansetzen, zu hoher Messdruck oder das Ablesen mit Parallaxe werden an Beispielen aus der Werkstatt gezeigt. Eingebaute Pausen laden zum eigenen Ablesen am Nonius ein, ein Protokollvordruck steht zum Download bereit. Das Video dauert etwa zwölf Minuten und eignet sich für das erste Ausbildungsjahr, etwa in der Metallverarbeitung und im Maschinenbau.",
+  "resourceType": "Video",
+  "level": "Berufliche Bildung",
+  "gold": "Messen und Arbeitsweisen"
+ },
+ {
+  "id": "t4-11",
+  "title": "Hypothesen formulieren und überprüfen",
+  "description": "Die Präsentation führt in das hypothesengeleitete Arbeiten in den Naturwissenschaften ein. Sie erklärt, was eine überprüfbare Hypothese von einer bloßen Vermutung unterscheidet, wie aus ihr eine Vorhersage abgeleitet wird und warum Hypothesen nicht bewiesen, sondern nur bestätigt oder widerlegt werden können. Als Fallbeispiele dienen das Fallgesetz, die Ausbreitung von Schall in Luft und die Abhängigkeit des elektrischen Widerstands von der Temperatur. Übungsfolien lassen die Lernenden eigene Wenn-dann-Aussagen formulieren und Gegenbeispiele suchen. Die 18 Folien samt Moderationshinweisen eignen sich für den Einstieg in Praktikumsphasen und für die Facharbeit in der Oberstufe.",
+  "resourceType": "Präsentation",
+  "level": "Sekundarstufe II",
+  "gold": "Messen und Arbeitsweisen"
+ },
+ {
+  "id": "t4-12",
+  "title": "Hitze, Starkregen, Sturm: Extremwetter in Deutschland",
+  "description": "In dieser Podcastfolge von etwa 25 Minuten sprechen eine Meteorologin und ein Geograf über Extremwetterereignisse in Deutschland. Es geht um Hitzewellen, Starkregen, Hagel und Winterstürme, um die Frage, wie sich Extremereignisse statistisch erfassen lassen und welche Rolle die Erwärmung der Atmosphäre für ihre Häufigkeit spielt. Besprochen werden außerdem die Warnsysteme des Deutschen Wetterdienstes und die Flutkatastrophe im Ahrtal als Fallbeispiel. Ein Transkript, Hörfragen und Diskussionsimpulse für den Politik-, Geografie- und Physikunterricht in der Oberstufe sind beigefügt. Die Folge kann auch als Hausaufgabe zur Vorbereitung einer Debatte über Anpassung an veränderte Bedingungen dienen.",
+  "resourceType": "Podcast",
+  "level": "Sekundarstufe II",
+  "gold": "Wetter und Klima"
+ },
+ {
+  "id": "t4-13",
+  "title": "Die Keeling-Kurve auswerten: CO2 in der Atmosphäre",
+  "description": "Der Lernpfad besteht aus fünf Stationen rund um die CO2-Messreihe vom Mauna Loa auf Hawaii. Zunächst erfahren die Lernenden, wie Kohlenstoffdioxid mit Infrarotspektrometern gemessen wird. Anschließend laden sie die frei verfügbaren Monatswerte in eine Tabellenkalkulation, erstellen ein Diagramm und beschreiben den jahreszeitlichen Zickzack sowie den langfristigen Anstieg. Mit einer linearen und einer exponentiellen Ausgleichskurve wird der Trend geschätzt und kritisch bewertet. Eine abschließende Station vergleicht die Daten mit Eisbohrkernen. Der Pfad verbindet Datenanalyse mit Fragen zum menschengemachten Klimawandel und eignet sich für Physik, Geografie und Mathematik in der Oberstufe.",
+  "resourceType": "Lernpfad",
+  "level": "Sekundarstufe II",
+  "gold": "Wetter und Klima"
+ },
+ {
+  "id": "t4-14",
+  "title": "Was kann ein Modell? Denkwerkzeuge der Physik",
+  "description": "Diese Podcastfolge von rund 20 Minuten widmet sich der Rolle von Modellen in der Physik. Ein Physikdidaktiker und eine Lehrerin diskutieren, warum Modelle bewusst vereinfachen, wie das Teilchenmodell, das Bohrsche Atommodell und das Modell des idealen Gases entstanden sind und woran man erkennt, wann ein Modell an seine Grenzen kommt. Auch Klimamodelle werden als Beispiel dafür genannt, wie Simulationen aus Gleichungen Vorhersagen erzeugen, die mit Messdaten verglichen werden. Die Folge hilft dabei, Modellkompetenz im Unterricht zu fördern. Ein Begleitdokument enthält Reflexionsfragen und einen Vorschlag für eine Gruppenarbeit, in der Lernende ein Modell hinsichtlich Reichweite und Schwächen bewerten.",
+  "resourceType": "Podcast",
+  "level": "Sekundarstufe II",
+  "gold": "Messen und Arbeitsweisen"
+ },
+ {
+  "id": "t4-15",
+  "title": "Wetter-Quiz: Sonne, Wind, Regen und Wolken",
+  "description": "Das Quiz mit 15 Fragen richtet sich an Kinder der Klassen 2 bis 4 und greift typische Alltagsbeobachtungen zum Wetter auf. Es geht um die Frage, woran man Regenwolken erkennt, was ein Thermometer anzeigt, woher der Wind kommt und wie Schnee entsteht. Die Aufgaben sind als Bild- und Textfragen mit Antwortauswahl gestaltet, der Wortschatz bleibt einfach, und jede Antwort wird mit einer kurzen Erklärung rückgemeldet. Zwischen den Fragen können die Kinder die Wetterlage am Schulhof beschreiben und ein Wetterbild malen. Das Quiz eignet sich als Einstieg oder Abschluss einer Sachunterrichtseinheit und lässt sich im Klassenverband am Whiteboard oder einzeln am Tablet durchführen.",
+  "resourceType": "Quiz",
+  "level": "Primarstufe",
+  "gold": "Wetter und Klima"
+ },
+ {
+  "id": "t4-16",
+  "title": "Sicher experimentieren im Physikraum",
+  "description": "Mit diesem Quiz überprüfen Lernende ihr Wissen über das sichere Arbeiten im Fachraum. Die 20 Fragen drehen sich um Verhaltensregeln, Fluchtwege und den Standort von Feuerlöscher, Erste-Hilfe-Kasten und Not-Aus-Schalter, um den Umgang mit Netzgeräten und Laserpointern, das Tragen von Schutzbrillen sowie die Bedeutung von Gefahrenpiktogrammen. Szenarien mit Bildern, etwa ein defektes Kabel oder ein umgekippter Brenner, verlangen das richtige Handeln. Nach jeder Antwort gibt es eine Begründung, am Ende eine Auswertung mit Wiederholungsempfehlung. Das Quiz eignet sich für die Sicherheitsbelehrung zu Beginn des Schuljahres und kann zur Dokumentation der Unterweisung genutzt werden.",
+  "resourceType": "Quiz",
+  "level": "Sekundarstufe I",
+  "gold": "Messen und Arbeitsweisen"
+ },
+ {
+  "id": "t4-17",
+  "title": "Klimawandel simulieren: Emissionen, Temperatur und Meeresspiegel",
+  "description": "Die interaktive Simulation bildet vereinfacht ab, wie sich unterschiedliche Emissionspfade auf die globale Mitteltemperatur, den Meeresspiegel und das arktische Meereis auswirken. Lernende verändern Parameter wie Treibhausgasausstoß, Aufforstung und Energiemix, lassen den Rechenlauf bis zum Jahr 2100 simulieren und vergleichen die Ergebnisse mit den Szenarien des Weltklimarats. Rückkopplungen wie die Eis-Albedo-Rückkopplung werden schematisch dargestellt. Arbeitsaufträge fordern dazu auf, Prognosen aufzustellen, Kipppunkte zu diskutieren und die Grenzen des Modells zu benennen. Die Simulation läuft im Browser, ist für Geografie und Physik der Oberstufe konzipiert und kommt mit einem Begleitheft für Lehrkräfte.",
+  "resourceType": "Interaktive Simulation",
+  "level": "Sekundarstufe II",
+  "gold": "Wetter und Klima"
+ },
+ {
+  "id": "t4-18",
+  "title": "Messwerte mit dem Smartphone erfassen und auswerten",
+  "description": "Die Anleitung zeigt, wie sich mit der kostenlosen App phyphox und den eingebauten Sensoren eines Smartphones Messreihen aufnehmen lassen. Drei Versuche aus unterschiedlichen Gebieten werden beschrieben: Beschleunigungsmessung an einem Federpendel, Schallpegel in verschiedenen Räumen und Magnetfeld entlang eines Stromleiters. Erläutert werden Abtastrate, Rauschen und die Kalibrierung der Sensoren sowie der Export der Daten als CSV-Datei für die Auswertung in einer Tabellenkalkulation. Aufgaben zur kritischen Bewertung der Messgenauigkeit im Vergleich zu Laborgeräten runden das Material ab. Es richtet sich an Lernende der Sekundarstufe II und kann im Unterricht sowie im Distanzlernen eingesetzt werden.",
+  "resourceType": "Experimentieranleitung",
+  "level": "Sekundarstufe II",
+  "gold": "Messen und Arbeitsweisen"
+ },
+ {
+  "id": "t4-19",
+  "title": "Frost, Niederschlag, Wind: Wetterdaten im Gartenbau nutzen",
+  "description": "Der Erklärtext richtet sich an Auszubildende im Gartenbau und in der Landwirtschaft und zeigt, wie Wetterinformationen für betriebliche Entscheidungen genutzt werden. Erläutert werden die Unterschiede zwischen Wetter, Witterung und Klima, die Bedeutung von Bodenfrost, Spätfrösten und Niederschlagssummen sowie der Einfluss der Windstärke beim Pflanzenschutz. Der Text erklärt, wie Wetterberichte, Agrarwetterkarten und Prognosen des Deutschen Wetterdienstes gelesen werden und wie Bewässerung und Aussaat danach geplant werden. Praxisbeispiele zu Obstblüte und Heuernte, Kontrollfragen und ein Glossar mit den wichtigsten Fachbegriffen helfen beim Lernen. Der Beitrag umfasst etwa vier Seiten.",
+  "resourceType": "Erklärtext",
+  "level": "Berufliche Bildung",
+  "gold": "Wetter und Klima"
+ },
+ {
+  "id": "t4-20",
+  "title": "Luftfeuchte messen mit dem Datenlogger",
+  "description": "Der Lernpfad begleitet Lernende dabei, mit einem kleinen Datenlogger über mehrere Tage die relative Luftfeuchte und die Temperatur im Klassenraum und im Freien aufzuzeichnen. In vier Stationen werden die Funktionsweise eines Hygrometers erklärt, der Logger eingerichtet, die Daten ausgelesen und als Liniendiagramm dargestellt. Im Mittelpunkt steht die Methode: Wie wähle ich Messintervall und Standort, wie erkenne ich Ausreißer, und wie prüfe ich, ob das Gerät verlässliche Werte liefert? Abschließend vergleichen die Gruppen ihre Kurven und formulieren begründete Aussagen. Der Pfad ist für die Klassen 8 und 9 gedacht und benötigt nur wenig Vorwissen.",
+  "resourceType": "Lernpfad",
+  "level": "Sekundarstufe I",
+  "gold": "Messen und Arbeitsweisen"
+ }
+]
