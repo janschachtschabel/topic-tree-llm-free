@@ -178,48 +178,51 @@
  ],
  "uc2": [
   {
-   "label": "Volltext kurz (≈2k Tokens)",
-   "ft": 2000,
-   "tin": 258200,
+   "label": "Volltext 1.000 Zeichen",
+   "chars": 1000,
+   "ft": 225,
+   "tin": 80700,
    "basis": {
     "tout": 102800,
-    "gpt-5.6-luna": 0.175,
-    "gpt-6-luna": 0.0772
+    "gpt-5.6-luna": 0.1395,
+    "gpt-6-luna": 0.0595
    },
    "hoch": {
     "tout": 182800,
-    "gpt-5.6-luna": 0.271,
-    "gpt-6-luna": 0.1172
+    "gpt-5.6-luna": 0.2355,
+    "gpt-6-luna": 0.0995
    }
   },
   {
-   "label": "Volltext mittel (≈5k)",
-   "ft": 5000,
-   "tin": 558200,
+   "label": "Volltext 5.000 Zeichen",
+   "chars": 5000,
+   "ft": 1125,
+   "tin": 170700,
    "basis": {
     "tout": 102800,
-    "gpt-5.6-luna": 0.235,
-    "gpt-6-luna": 0.1072
+    "gpt-5.6-luna": 0.1575,
+    "gpt-6-luna": 0.0685
    },
    "hoch": {
     "tout": 182800,
-    "gpt-5.6-luna": 0.331,
-    "gpt-6-luna": 0.1472
+    "gpt-5.6-luna": 0.2535,
+    "gpt-6-luna": 0.1085
    }
   },
   {
-   "label": "Volltext lang (≈15k, gekappt)",
-   "ft": 15000,
-   "tin": 1558200,
+   "label": "Volltext 20.000 Zeichen",
+   "chars": 20000,
+   "ft": 4500,
+   "tin": 508200,
    "basis": {
     "tout": 102800,
-    "gpt-5.6-luna": 0.435,
-    "gpt-6-luna": 0.2072
+    "gpt-5.6-luna": 0.225,
+    "gpt-6-luna": 0.1022
    },
    "hoch": {
     "tout": 182800,
-    "gpt-5.6-luna": 0.531,
-    "gpt-6-luna": 0.2472
+    "gpt-5.6-luna": 0.321,
+    "gpt-6-luna": 0.1422
    }
   }
  ],
@@ -252,122 +255,122 @@
  "uc3": [
   {
    "struct": "12×5×5",
-   "label": "nur Metadaten (≈250/Inhalt)",
-   "corpus_tok": 25300,
+   "label": "nur Metadaten",
+   "corpus_tok": 103100,
    "calls": 73,
-   "tin_nocache": 1929907,
+   "tin_nocache": 7609307,
    "ohne": {
-    "gpt-5.6-luna": 0.4718,
-    "gpt-6-luna": 0.2288
+    "gpt-5.6-luna": 1.6077,
+    "gpt-6-luna": 0.7967
    },
    "mit": {
-    "gpt-5.6-luna": 0.1452,
-    "gpt-6-luna": 0.0655
+    "gpt-5.6-luna": 0.2767,
+    "gpt-6-luna": 0.1312
    },
    "meta": {
     "tout": 102800,
-    "gpt-5.6-luna": 0.235,
-    "gpt-6-luna": 0.1072
+    "gpt-5.6-luna": 0.1395,
+    "gpt-6-luna": 0.0595
    }
   },
   {
    "struct": "12×5×5",
-   "label": "Metadaten + Volltext kurz (≈2,25k/Inhalt)",
-   "corpus_tok": 225300,
+   "label": "Metadaten + Volltext 1.000 Zeichen",
+   "corpus_tok": 125600,
    "calls": 73,
-   "tin_nocache": 16529907,
+   "tin_nocache": 9251807,
    "ohne": {
-    "gpt-5.6-luna": 3.3918,
-    "gpt-6-luna": 1.6888
+    "gpt-5.6-luna": 1.9362,
+    "gpt-6-luna": 0.961
    },
    "mit": {
-    "gpt-5.6-luna": 0.4832,
-    "gpt-6-luna": 0.2345
+    "gpt-5.6-luna": 0.3147,
+    "gpt-6-luna": 0.1502
    },
    "meta": {
     "tout": 102800,
-    "gpt-5.6-luna": 0.175,
-    "gpt-6-luna": 0.0772
+    "gpt-5.6-luna": 0.1395,
+    "gpt-6-luna": 0.0595
    }
   },
   {
    "struct": "12×5×5",
-   "label": "Metadaten + Volltext mittel (≈5,25k/Inhalt)",
-   "corpus_tok": 525300,
+   "label": "Metadaten + Volltext 5.000 Zeichen",
+   "corpus_tok": 215600,
    "calls": 73,
-   "tin_nocache": 38429907,
+   "tin_nocache": 15821807,
    "ohne": {
-    "gpt-5.6-luna": 7.7718,
-    "gpt-6-luna": 3.8788
+    "gpt-5.6-luna": 3.2502,
+    "gpt-6-luna": 1.618
    },
    "mit": {
-    "gpt-5.6-luna": 0.9902,
-    "gpt-6-luna": 0.488
+    "gpt-5.6-luna": 0.4668,
+    "gpt-6-luna": 0.2263
    },
    "meta": {
     "tout": 102800,
-    "gpt-5.6-luna": 0.235,
-    "gpt-6-luna": 0.1072
+    "gpt-5.6-luna": 0.1395,
+    "gpt-6-luna": 0.0595
    }
   },
   {
    "struct": "12×10×5",
-   "label": "nur Metadaten (≈250/Inhalt)",
-   "corpus_tok": 25300,
+   "label": "nur Metadaten",
+   "corpus_tok": 103100,
    "calls": 133,
-   "tin_nocache": 3523207,
+   "tin_nocache": 13870607,
    "ohne": {
-    "gpt-5.6-luna": 0.8733,
-    "gpt-6-luna": 0.4226
+    "gpt-5.6-luna": 2.9428,
+    "gpt-6-luna": 1.4573
    },
    "mit": {
-    "gpt-5.6-luna": 0.2734,
-    "gpt-6-luna": 0.1227
+    "gpt-5.6-luna": 0.4983,
+    "gpt-6-luna": 0.2351
    },
    "meta": {
     "tout": 102800,
-    "gpt-5.6-luna": 0.235,
-    "gpt-6-luna": 0.1072
+    "gpt-5.6-luna": 0.1395,
+    "gpt-6-luna": 0.0595
    }
   },
   {
    "struct": "12×10×5",
-   "label": "Metadaten + Volltext kurz (≈2,25k/Inhalt)",
-   "corpus_tok": 225300,
+   "label": "Metadaten + Volltext 1.000 Zeichen",
+   "corpus_tok": 125600,
    "calls": 133,
-   "tin_nocache": 30123207,
+   "tin_nocache": 16863107,
    "ohne": {
-    "gpt-5.6-luna": 6.1933,
-    "gpt-6-luna": 3.0826
+    "gpt-5.6-luna": 3.5413,
+    "gpt-6-luna": 1.7566
    },
    "mit": {
-    "gpt-5.6-luna": 0.8514,
-    "gpt-6-luna": 0.4117
+    "gpt-5.6-luna": 0.5633,
+    "gpt-6-luna": 0.2676
    },
    "meta": {
     "tout": 102800,
-    "gpt-5.6-luna": 0.175,
-    "gpt-6-luna": 0.0772
+    "gpt-5.6-luna": 0.1395,
+    "gpt-6-luna": 0.0595
    }
   },
   {
    "struct": "12×10×5",
-   "label": "Metadaten + Volltext mittel (≈5,25k/Inhalt)",
-   "corpus_tok": 525300,
+   "label": "Metadaten + Volltext 5.000 Zeichen",
+   "corpus_tok": 215600,
    "calls": 133,
-   "tin_nocache": 70023207,
+   "tin_nocache": 28833107,
    "ohne": {
-    "gpt-5.6-luna": 14.1733,
-    "gpt-6-luna": 7.0726
+    "gpt-5.6-luna": 5.9353,
+    "gpt-6-luna": 2.9536
    },
    "mit": {
-    "gpt-5.6-luna": 1.7184,
-    "gpt-6-luna": 0.8452
+    "gpt-5.6-luna": 0.8234,
+    "gpt-6-luna": 0.3976
    },
    "meta": {
     "tout": 102800,
-    "gpt-5.6-luna": 0.235,
-    "gpt-6-luna": 0.1072
+    "gpt-5.6-luna": 0.1395,
+    "gpt-6-luna": 0.0595
    }
   }
  ],
@@ -376,15 +379,19 @@
    "struct": "5×3×2 (Default)",
    "nodes": 50,
    "low": {
-    "gpt-5.6-luna": 0.8,
-    "gpt-6-luna": 0.38
+    "gpt-5.6-luna": 0.4976,
+    "gpt-6-luna": 0.2288
    },
    "high": {
-    "gpt-5.6-luna": 1.1,
-    "gpt-6-luna": 0.52
+    "gpt-5.6-luna": 0.822,
+    "gpt-6-luna": 0.381
+   },
+   "mid": {
+    "gpt-5.6-luna": 0.6535,
+    "gpt-6-luna": 0.3018
    },
    "tok_low": 3000000,
-   "tok_high": 4000000,
+   "tok_high": 4500000,
    "h_seq": 0.5,
    "min_par10": 3
   },
@@ -392,15 +399,19 @@
    "struct": "12×5×5",
    "nodes": 372,
    "low": {
-    "gpt-5.6-luna": 5.952,
-    "gpt-6-luna": 2.8272
+    "gpt-5.6-luna": 3.7021,
+    "gpt-6-luna": 1.7023
    },
    "high": {
-    "gpt-5.6-luna": 8.184,
-    "gpt-6-luna": 3.8688
+    "gpt-5.6-luna": 6.1157,
+    "gpt-6-luna": 2.8346
+   },
+   "mid": {
+    "gpt-5.6-luna": 4.862,
+    "gpt-6-luna": 2.245
    },
    "tok_low": 22320000,
-   "tok_high": 29760000,
+   "tok_high": 33480000,
    "h_seq": 3.6,
    "min_par10": 22
   },
@@ -408,15 +419,19 @@
    "struct": "12×10×5",
    "nodes": 732,
    "low": {
-    "gpt-5.6-luna": 11.712,
-    "gpt-6-luna": 5.5632
+    "gpt-5.6-luna": 7.2849,
+    "gpt-6-luna": 3.3496
    },
    "high": {
-    "gpt-5.6-luna": 16.104,
-    "gpt-6-luna": 7.6128
+    "gpt-5.6-luna": 12.0341,
+    "gpt-6-luna": 5.5778
+   },
+   "mid": {
+    "gpt-5.6-luna": 9.5672,
+    "gpt-6-luna": 4.4176
    },
    "tok_low": 43920000,
-   "tok_high": 58560000,
+   "tok_high": 65880000,
    "h_seq": 7.1,
    "min_par10": 43
   }

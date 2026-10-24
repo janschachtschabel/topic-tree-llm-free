@@ -3,53 +3,62 @@
 Diese Analyse schätzt die LLM-Kosten des bestehenden Themenbaum-Generators
 (`topic-tree-generator`, FastAPI, API 1.2.6) für drei Use Cases. Sie war der
 Anlass für diese Demo: Lässt sich die Themenbaum-Erzeugung auch **ohne generatives LLM** umsetzen?
-Die Ergebnisse sind in der App unter **Kosten** kompakt aufbereitet, mit einem Rechner für eigene Annahmen.
+Die Ergebnisse sind in der App unter **Kosten** kompakt aufbereitet, mit einem interaktiven Diagramm und einem
+Rechner für eigene Annahmen.
 
 Alle Beträge in US-Dollar. Gerechnet für **gpt-6-luna** und **gpt-5.6-luna**.
 
 ## Kurzfassung
 
 - **Der Themenbaum selbst ist günstig:** 0,07–0,16 $ für 12×5×5 (372 Knoten), 0,15–0,33 $ für 12×10×5 (732 Knoten).
-- **Ein Kompendium-Text je Sammlung dominiert** mit über 90 % der Kosten: 2,83–8,18 $ für 372 Knoten. Bei mehreren
-  hundert Knoten kommt trotz kleiner Einzelbeträge einiges zusammen.
+- **Ein Kompendium-Text je Sammlung dominiert** mit über 90 % der Kosten: 1,70–6,12 $ für 372 Knoten
+  (60–90 Tsd. Tokens je Knoten, 50–60 % des Inputs aus dem Cache). Bei mehreren hundert Knoten kommt trotz kleiner
+  Einzelbeträge einiges zusammen.
 - **Inhalte skalieren linear mit der Menge:** beschreibende Metadaten (Titel, Beschreibung mit 500 Wörtern, Keywords)
-  kosten etwa 0,11–0,24 Cent je Inhalt; Fach und Bildungsstufe laufen ohne LLM.
+  aus je rund 1.000 Zeichen Webseiten-Volltext kosten etwa 0,06–0,14 Cent je Inhalt. Fach und Bildungsstufe laufen
+  ohne LLM. Caching gibt es hier kaum, weil jeder Inhalt einen eigenen Volltext hat.
 - **Überarbeitungswünsche sind billig**, wenn nur der betroffene Zweig neu erzeugt wird (1–4 Cent).
-- **Teuer wird es nur, wenn Volltexte vieler Inhalte in jeden Aufruf wandern** und kein Prompt-Caching genutzt wird
-  (bis 14 $ je Baum).
+- **Caching beim Themenbaum lohnt nur bei großem, gleichbleibendem Kontext**, etwa wenn die Metadaten aller Inhalte in
+  jede Knotenabfrage gehen: Der Baum kostet dann 0,15–0,32 $ mit Cache statt 0,96–1,94 $ ohne.
 
 ![Kosten je Use Case, Themenbaum 12×5×5](kosten/00_uebersicht_usecases_12x5x5.png)
 
 | Use Case (12×5×5, inkl. Kompendium) | gpt-6-luna | gpt-5.6-luna |
 |---|---:|---:|
-| Themenbaum aus einem Thema | 3,42 $ | 7,22 $ |
-| … + 1 Überarbeitung | 3,43 $ | 7,25 $ |
-| … + 100 eigene Inhalte | 3,54 $ | 7,48 $ |
-| Themenbaum aus 100 Inhalten, nur Metadaten | 3,52 $ | 7,45 $ |
-| Themenbaum aus 100 Inhalten, mit Volltext (mit Cache) | 3,94 $ | 8,29 $ |
-| Themenbaum aus 100 Inhalten, mit Volltext (ohne Cache) | 7,33 $ | 15,07 $ |
+| Themenbaum aus einem Thema | 2,32 $ | 5,02 $ |
+| … + 1 Überarbeitung | 2,33 $ | 5,04 $ |
+| … + 100 eigene Inhalte | 2,39 $ | 5,18 $ |
+| Themenbaum aus 100 Inhalten, nur Metadaten (Cache) | 2,44 $ | 5,28 $ |
+| Themenbaum aus 100 Inhalten, Metadaten + Volltext (Cache) | 2,45 $ | 5,32 $ |
+| Themenbaum aus 100 Inhalten, Metadaten + Volltext (ohne Cache) | 3,27 $ | 6,94 $ |
 
-Dieselbe Übersicht für 12×10×5: [`kosten/00b_uebersicht_usecases_12x10x5.png`](kosten/00b_uebersicht_usecases_12x10x5.png).
+Kompendium je Zeile: 2,25 $ bzw. 4,86 $. Dieselbe Übersicht für 12×10×5:
+[`kosten/00b_uebersicht_usecases_12x10x5.png`](kosten/00b_uebersicht_usecases_12x10x5.png).
 
-## Preise und Methode
+## Preise und Annahmen
 
 | Modell (je 1 Mio. Tokens) | Input | Output | Cache lesen | Cache schreiben (30 min) |
 |---|---:|---:|---:|---:|
 | gpt-6-luna | 0,10 $ | 0,50 $ | 0,01 $ | 0,125 $ |
 | gpt-5.6-luna | 0,20 $ | 1,20 $ | 0,02 $ | 0,25 $ |
 
-- Die Prompts stammen 1:1 aus `src/prompts.py` des Generators, gezählt mit dem o200k-Tokenizer (Abweichung zum echten
-  Tokenizer etwa ±10–15 %).
-- Ablauf des Generators: 1 Aufruf für die Hauptthemen, 1 je Hauptthema für die Unterthemen, 1 je Unterthema für die
-  Lehrplanthemen. 12×5×5 = 73 Aufrufe, 12×10×5 = 133 Aufrufe.
-- System-Prompt 578 Tokens. Ein Knoten im Output (Titel, Kurztitel, Beschreibung, 5 Keywords) hat 182 Tokens bei
-  60 Wörtern Beschreibung, 264 Tokens bei 100 Wörtern.
-- **Inhaltsmetadaten:** Anweisung 582 Tokens + Volltext; Output 65 Tokens (Titel, Keywords) + 1,925 Tokens je Wort
-  Beschreibung. Standard 500 Wörter ≈ 1.030 Tokens. (Eine frühere Fassung rechnete mit 250 Tokens, also nur etwa
-  95 Wörtern, und lag deshalb bei 0,07–0,14 $ je 100 Inhalte.)
-- **Basis:** 60 Wörter je Knotenbeschreibung im Baum, kein Reasoning. **Hoch:** 100 Wörter und 1.000 Reasoning-Tokens je Aufruf.
-- Die Modelle schöpfen die Obergrenzen voll aus (laut Prompt sind es Höchstwerte; real entstehen eher weniger Knoten).
+- **Tokens:** Die Prompts stammen 1:1 aus `src/prompts.py` des Generators, gezählt mit dem o200k-Tokenizer
+  (Abweichung zum echten Tokenizer etwa ±10–15 %). Deutscher Text: 0,225 Tokens je Zeichen, 1,925 Tokens je Wort.
+- **Themenbaum:** 1 Aufruf für die Hauptthemen, 1 je Hauptthema, 1 je Unterthema (12×5×5 = 73 Aufrufe,
+  12×10×5 = 133). System-Prompt 578 Tokens; ein Knoten im Output 190 Tokens bei 60 Wörtern Beschreibung. Die
+  Modelle schöpfen die Obergrenzen voll aus. **Hoch:** 100 Wörter und 1.000 Reasoning-Tokens je Aufruf.
+- **Inhaltsmetadaten:** je Inhalt 1 Aufruf mit dem Volltext der Webseite (Standard 1.000 Zeichen ≈ 225 Tokens) und
+  einer Anweisung von 582 Tokens. Output 65 Tokens (Titel, Keywords) + Beschreibung mit 500 Wörtern ≈ 1.030 Tokens.
+  Kein Caching, weil jeder Aufruf einen anderen Volltext hat.
+- **Kompendium:** 60–90 Tsd. Tokens und 30–40 Sekunden je Knoten, davon 4–6 Tsd. Output; 50–60 % des Inputs kommen
+  aus dem Cache (zum Cache-Lesepreis). Mittelwert für Übersicht und Rechner: 75 Tsd. Tokens, 5 Tsd. Output, 55 %.
+- **Caching beim Themenbaum:** nur sinnvoll, wenn ein großer Kontext für jede Knotenabfrage gleich bleibt. Beim
+  normalen Baum ist der gemeinsame Teil (578 Tokens) zu klein. Beim „Themenbaum aus Inhalten“ wird der Korpus einmal
+  geschrieben (Cache-Schreibpreis) und danach zu 10 % des Input-Preises gelesen.
 - Nicht enthalten: Crawler, Hosting, Wiederholungen nach API-Fehlern.
+
+Frühere Fassungen dieser Analyse rechneten mit 250 Output-Tokens je Inhalt (≈95 Wörter Beschreibung), 5 Tsd. Tokens
+Volltext und einem Kompendium von 60–80 Tsd. Tokens ohne Caching.
 
 ## Use Case 1: Themenbaum aus einem Thema
 
@@ -82,55 +91,58 @@ müsste gestückelt werden. Variante B ist die sinnvolle Umsetzung.
 
 ## Use Case 2: Nutzer bringt 100 Inhalte mit
 
-Volltexte kommen vom Crawler, Fach und Bildungsstufe ohne LLM. Per LLM entstehen nur Titel, Beschreibung und
-Keywords (1 Aufruf je Inhalt). Optional werden die Inhalte einem bestehenden Baum zugeordnet; dort lohnt sich
-Prompt-Caching, weil die Titelliste des Baums in allen Aufrufen gleich bleibt.
+Der Crawler liefert die Volltexte der Webseiten, Fach und Bildungsstufe kommen ohne LLM aus. Per LLM entstehen nur
+Titel, Beschreibung und Keywords (1 Aufruf je Inhalt). Optional werden die Inhalte einem bestehenden Baum zugeordnet;
+dort lohnt sich Prompt-Caching, weil die Titelliste des Baums in allen Aufrufen gleich bleibt.
 
 ![Kosten für 100 Inhalte](kosten/03_100_eigene_inhalte.png)
 
-| Schritt (100 Inhalte) | gpt-6-luna | gpt-5.6-luna |
+| Schritt (100 Inhalte, Beschreibung 500 Wörter) | gpt-6-luna | gpt-5.6-luna |
 |---|---:|---:|
-| Metadaten, Volltext kurz (≈2 Tsd. Tokens) | 0,077 $ | 0,175 $ |
-| Metadaten, Volltext mittel (≈5 Tsd.) | 0,107 $ | 0,235 $ |
-| Metadaten, Volltext lang (≈15 Tsd., gekappt) | 0,207 $ | 0,435 $ |
+| Metadaten aus 1.000 Zeichen Volltext (Standard) | 0,060 $ | 0,140 $ |
+| Metadaten aus 5.000 Zeichen Volltext | 0,069 $ | 0,158 $ |
+| Metadaten aus 20.000 Zeichen Volltext | 0,102 $ | 0,225 $ |
 | Zuordnung zu 12×5×5, ohne / mit Cache | 0,061 / 0,012 $ | 0,122 / 0,025 $ |
+
+Der Output (Beschreibung) bestimmt die Kosten stärker als die Länge des Volltexts.
 
 ## Use Case 3: Struktur aus 100 Inhalten ableiten
 
-Es gibt keine Strukturvorgabe; alle 100 Inhalte gehen mit Metadaten (wahlweise mit Volltext) in **jeden** Aufruf
-des Generators. Caching wirkt stark (Korpus einmal schreiben, danach zu 10 % lesen), setzt aber umgebaute Prompts
-voraus: Korpus vorne, variable Teile hinten.
+Es gibt keine Strukturvorgabe; die erzeugten Metadaten aller 100 Inhalte (≈1.030 Tokens je Inhalt), wahlweise mit
+Volltext, gehen in **jeden** Aufruf des Generators. Caching wirkt stark, weil dieser Kontext für jede Knotenabfrage
+gleich bleibt; dafür müssen die Prompts umgebaut werden (Korpus vorne, variable Teile hinten).
 
 ![Baum aus 100 Inhalten, 12×5×5](kosten/04_baum_aus_100_inhalten_12x5x5.png)
 
-| Korpus im Kontext (12×5×5) | ohne Cache (6 / 5.6) | mit Cache (6 / 5.6) |
-|---|---:|---:|
-| nur Metadaten (≈250 Tokens je Inhalt) | 0,23 / 0,47 $ | 0,07 / 0,15 $ |
-| + Volltext kurz (≈2,25 Tsd.) | 1,69 / 3,39 $ | 0,23 / 0,48 $ |
-| + Volltext mittel (≈5,25 Tsd.) | 3,88 / 7,77 $ | 0,49 / 0,99 $ |
+| Korpus im Kontext (12×5×5) | Tokens je Aufruf | ohne Cache (6 / 5.6) | mit Cache (6 / 5.6) |
+|---|---:|---:|---:|
+| nur Metadaten | 103 Tsd. | 0,80 / 1,61 $ | 0,13 / 0,28 $ |
+| Metadaten + Volltext 1.000 Zeichen | 126 Tsd. | 0,96 / 1,94 $ | 0,15 / 0,32 $ |
+| Metadaten + Volltext 5.000 Zeichen | 216 Tsd. | 1,62 / 3,25 $ | 0,23 / 0,47 $ |
 
-12×10×5: [`kosten/04b_baum_aus_100_inhalten_12x10x5.png`](kosten/04b_baum_aus_100_inhalten_12x10x5.png) (bis 14,17 $ ohne Cache).
-**Kontextfenster:** 100 Volltexte à 5 Tsd. Tokens ergeben rund 525 Tsd. Tokens je Aufruf. Das sprengt viele
-Kontextfenster; dann Volltexte auf etwa 2 Tsd. Tokens kappen oder zweistufig arbeiten.
+12×10×5: [`kosten/04b_baum_aus_100_inhalten_12x10x5.png`](kosten/04b_baum_aus_100_inhalten_12x10x5.png)
+(bis 5,94 $ ohne Cache). Bei längeren Volltexten oder mehr Inhalten wird das Kontextfenster zur Grenze; der Rechner
+warnt ab 400 Tsd. Tokens je Aufruf.
 
 ## Kompendium-Text je Sammlung
 
-Nach Messung 60–80 Tsd. Tokens und 30–40 Sekunden je Knoten, gerechnet mit 4–6 Tsd. Output-Tokens.
+60–90 Tsd. Tokens und 30–40 Sekunden je Knoten, davon 4–6 Tsd. Output, 50–60 % des Inputs aus dem Cache.
 
 ![Kosten der Kompendium-Texte](kosten/05_kompendium.png)
 
 | Baum | Knoten | gpt-6-luna | gpt-5.6-luna | Laufzeit seriell | bei 10 parallel |
 |---|---:|---:|---:|---:|---:|
-| 5×3×2 | 50 | 0,38–0,52 $ | 0,80–1,10 $ | 0,5 h | 3 min |
-| 12×5×5 | 372 | 2,83–3,87 $ | 5,95–8,18 $ | 3,6 h | 22 min |
-| 12×10×5 | 732 | 5,56–7,61 $ | 11,71–16,10 $ | 7,1 h | 43 min |
+| 5×3×2 | 50 | 0,23–0,38 $ | 0,50–0,82 $ | 0,5 h | 3 min |
+| 12×5×5 | 372 | 1,70–2,83 $ | 3,70–6,12 $ | 3,6 h | 22 min |
+| 12×10×5 | 732 | 3,35–5,58 $ | 7,28–12,03 $ | 7,1 h | 43 min |
 
-Nur Ebene 1 und 2 mit Kompendium (132 statt 732 Knoten) senkt Kosten und Zeit um 82 %.
+Untere Grenze: 60 Tsd. Tokens mit 60 % Cache-Treffern; obere Grenze: 90 Tsd. Tokens mit 50 %. Nur Ebene 1 und 2 mit
+Kompendium (132 statt 732 Knoten) senkt Kosten und Zeit um 82 %.
 
 ## Befunde im bestehenden Generator, die Kosten treiben
 
 1. **Ganze Objekte statt Titel im Prompt** (`main.py:230`, `main.py:270`): `f"- {main_topic_title}"` über
-   `main_topics` schreibt das ganze `Collection`-Objekt samt Beschreibung und URIs in den Prompt (≈238 Tokens je
+   `main_topics` schreibt das ganze `Collection`-Objekt samt Beschreibung und URIs in den Prompt (≈245 Tokens je
    Eintrag). Bei 12×10×5 sind das 80 % des Inputs; mit `.title` wird ein Baum 35–43 % günstiger.
 2. **Die Wortgrenze kommt nie an** (`src/prompts.py:47`): `{max_description_length}` in `BASE_INSTRUCTIONS` wird nie
    formatiert; die Templates haben den Platzhalter nicht. Beschreibungen werden eher länger.
@@ -150,10 +162,10 @@ Nur Ebene 1 und 2 mit Kompendium (132 statt 732 Knoten) senkt Kosten und Zeit um
 
 ## Nachrechnen
 
-- **Rechner in der App** (Bereich „Kosten“): Inhaltsmenge, Anpassungsschleifen, Baumgröße, Preise und Kompendium frei
-  einstellbar; das Diagramm aller Use Cases rechnet live mit. Es nutzt dieselben Formeln wie `scripts/kostenmodell.py`
-  (190 Tokens je Knoten bei 60 Wörtern, 245 Tokens je Objekt in den Kontextlisten) und ergibt mit den Standardwerten
-  genau die Werte der Übersichtsgrafik.
+- **Rechner in der App** (Bereich „Kosten“): Inhaltsmenge, Volltextlänge, Beschreibungslänge, Anpassungsschleifen,
+  Baumgröße, Kompendium (Tokens, Cache-Quote) und Preise frei einstellbar; das Diagramm aller Use Cases rechnet live
+  mit. Es nutzt dieselben Formeln wie `scripts/kostenmodell.py` und ergibt mit den Standardwerten genau die Werte der
+  Übersichtsgrafik.
 - **Skripte:** [`scripts/kostenmodell.py`](../scripts/kostenmodell.py) zählt die Tokens aus einem Checkout des
   Generators und schreibt [`data/kosten.json`](../data/kosten.json);
   [`scripts/grafiken_kosten.py`](../scripts/grafiken_kosten.py) erzeugt daraus die Grafiken in `docs/kosten/`.

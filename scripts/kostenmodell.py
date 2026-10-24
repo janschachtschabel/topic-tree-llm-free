@@ -66,27 +66,37 @@ INSTR = t(DESCRIPTION_PROMPT_TEMPLATE)+200
 # Metadaten-Output je Inhalt: Titel, Keywords, JSON (~65 Tokens) + Beschreibung (1,925 Tokens je Wort, Deutsch).
 META_WORDS = 500
 META_OUT = round(65 + 1.925 * META_WORDS)
-for label,ft in {"Volltext kurz (≈2k Tokens)":2000,"Volltext mittel (≈5k)":5000,"Volltext lang (≈15k, gekappt)":15000}.items():
-    tin=100*(INSTR+ft)
-    D["uc2"].append(dict(label=label,ft=ft,tin=tin,basis=dict(tout=100*META_OUT,**C(tin=tin,tout=100*META_OUT)),hoch=dict(tout=100*(META_OUT+800),**C(tin=tin,tout=100*(META_OUT+800)))))
+# Volltext der gecrawlten Webseite: gemessen 0,225 Tokens je Zeichen (deutsche Plattformtexte, o200k).
+TOK_PER_CHAR = 0.225
+FT_DEFAULT_CHARS = 1000
+def ft_tokens(chars): return round(chars * TOK_PER_CHAR)
+# Metadaten werden je Inhalt aus einem eigenen Volltext erzeugt: kein Prompt-Caching angesetzt.
+for label,chars in {"Volltext 1.000 Zeichen":1000,"Volltext 5.000 Zeichen":5000,"Volltext 20.000 Zeichen":20000}.items():
+    ft=ft_tokens(chars); tin=100*(INSTR+ft)
+    D["uc2"].append(dict(label=label,chars=chars,ft=ft,tin=tin,basis=dict(tout=100*META_OUT,**C(tin=tin,tout=100*META_OUT)),hoch=dict(tout=100*(META_OUT+800),**C(tin=tin,tout=100*(META_OUT+800)))))
 for s in ("12×5×5","12×10×5"):
     nodes=tree(*STRUCT[s])["nodes"]; tl=nodes*14+300
     D["assign"].append(dict(struct=s,titlelist=tl,ohne=C(tin=100*(tl+250),tout=100*60),mit=C(tin=100*250,tout=100*60,twrite=tl,tcached=99*tl)))
-# UC3: corpus of 100 contents in context of every generator call (prompt fixed + corpus as static prefix)
-CORPUS = {"nur Metadaten (≈250/Inhalt)":250, "Metadaten + Volltext kurz (≈2,25k/Inhalt)":2250, "Metadaten + Volltext mittel (≈5,25k/Inhalt)":5250}
-META_PRE = {250:5000, 2250:2000, 5250:5000}  # Metadaten-Erzeugung vorab (Volltextlänge)
+# UC3: Korpus aller 100 Inhalte (erzeugte Metadaten, wahlweise + Volltext) in jedem Generator-Aufruf.
+# Caching lohnt hier, weil der große Kontext für jede Knotenabfrage gleich bleibt (umgebaute Prompts: Korpus vorne).
+CORPUS = {"nur Metadaten":META_OUT, "Metadaten + Volltext 1.000 Zeichen":META_OUT+ft_tokens(1000),
+          "Metadaten + Volltext 5.000 Zeichen":META_OUT+ft_tokens(5000)}
+meta_default=[x for x in D["uc2"] if x["chars"]==FT_DEFAULT_CHARS][0]["basis"]
 for s in ("12×5×5","12×10×5"):
     d=tree(*STRUCT[s],fix=True)
     for label,per in CORPUS.items():
         corp=100*per+300
-        meta=[x for x in D["uc2"] if x["ft"]==META_PRE[per]][0]["basis"]
         no = C(tin=d["tin"]+d["calls"]*corp, tout=d["tout"])
         yes= {m: round(cost(m,tin=d["tin"],tout=d["tout"],twrite=corp,tcached=(d["calls"]-1)*corp),4) for m in M}
-        D["uc3"].append(dict(struct=s,label=label,corpus_tok=corp,calls=d["calls"],tin_nocache=d["tin"]+d["calls"]*corp,ohne=no,mit=yes,meta=meta))
+        D["uc3"].append(dict(struct=s,label=label,corpus_tok=corp,calls=d["calls"],tin_nocache=d["tin"]+d["calls"]*corp,ohne=no,mit=yes,meta=meta_default))
+# Kompendium je Knoten: 60–90 Tsd. Tokens, 4–6 Tsd. Output, 50–60 % des Inputs aus dem Cache (Cache-Lesepreis).
+def komp_cost(n, total, out, hit):
+    inp = total - out
+    return {m: round(cost(m, tin=n*inp*(1-hit), tout=n*out, tcached=n*inp*hit), 4) for m in M}
 for s,(a,b,c) in STRUCT.items():
     n=tree(a,b,c)["nodes"]
-    D["komp"].append(dict(struct=s,nodes=n,low=C(tin=n*56000,tout=n*4000),high=C(tin=n*74000,tout=n*6000),
-        tok_low=n*60000,tok_high=n*80000,h_seq=round(n*35/3600,1),min_par10=round(n*35/10/60)))
+    D["komp"].append(dict(struct=s,nodes=n,low=komp_cost(n,60000,4000,0.60),high=komp_cost(n,90000,6000,0.50),
+        mid=komp_cost(n,75000,5000,0.55),tok_low=n*60000,tok_high=n*90000,h_seq=round(n*35/3600,1),min_par10=round(n*35/10/60)))
 D["prices"]=P
 json.dump(D, open(sys.argv[2],"w",encoding="utf-8"), ensure_ascii=False, indent=1)
 for k in ("uc3","komp"):

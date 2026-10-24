@@ -25,13 +25,13 @@ def by(a, k, v): return next(x for x in a if x[k] == v)
 
 
 def komp(st, m):
-    k = by(D["komp"], "struct", st); return (k["low"][m] + k["high"][m]) / 2
+    return by(D["komp"], "struct", st)["mid"][m]
 
 
 def overview(st):
-    u1 = by(D["uc1"], "struct", st); rev = by(D["rev"], "struct", st); asg = by(D["assign"], "struct", st); u2 = D["uc2"][1]
+    u1 = by(D["uc1"], "struct", st); rev = by(D["rev"], "struct", st); asg = by(D["assign"], "struct", st); u2 = next(x for x in D["uc2"] if x["chars"] == 1000)
     u3 = lambda p: next(x for x in D["uc3"] if x["struct"] == st and x["label"].startswith(p))
-    a, b = u3("nur Metadaten"), u3("Metadaten + Volltext mittel")
+    a, b = u3("nur Metadaten"), u3("Metadaten + Volltext 1.000")
     spec = [
         ("Themenbaum aus einem Thema", lambda m: u1["basis_ist"][m], lambda m: 0),
         ("Themenbaum aus einem Thema + 1 Überarbeitung", lambda m: u1["basis_ist"][m] + rev["basis"]["B"][m], lambda m: 0),
@@ -85,7 +85,7 @@ def plot_overview(st, fn):
     fig.legend(hs, ["Themenbaum-Erzeugung", "Inhaltsmetadaten (inkl. Zuordnung)", "Kompendium-Generierung"], loc="lower left",
                bbox_to_anchor=(0.015, 1 - 1.45 / H), ncol=3, frameon=False, fontsize=10)
     fig.text(0.02, 0.12 / H,
-             "Annahmen: 60 Wörter je Knotenbeschreibung, 500 Wörter je Inhaltsbeschreibung, kein Reasoning · 100 Inhalte à ca. 5 Tsd. Tokens Volltext · Kompendium 70 Tsd. Tokens je Knoten (Mittel aus 60–80 Tsd.)\n"
+             "Annahmen: 60 Wörter je Knotenbeschreibung, 500 Wörter je Inhaltsbeschreibung, kein Reasoning · 100 Inhalte mit je 1.000 Zeichen Volltext · Kompendium 75 Tsd. Tokens je Knoten, 55 % Input aus dem Cache\n"
              "Überarbeitung = nur betroffener Zweig neu · „Aus 100 Inhalten“ mit umgebauten Prompts und Prompt-Caching (30 min)",
              ha="left", fontsize=8.5, color=MUTED)
     fig.savefig(f"{OUT}/{fn}", dpi=170); plt.close(fig)
@@ -155,6 +155,6 @@ for st, fn in (("12×5×5", "04_baum_aus_100_inhalten_12x5x5.png"), ("12×10×5"
             rows, whisk=False, labelw=0.3)
 
 rows = [{"label": f"{k['struct']} · {k['nodes']} Knoten", "vals": [V(k["low"][m], k["high"][m], m) for m in M]} for k in D["komp"]]
-grouped("05_kompendium.png", "Kompendium-Text je Knoten", "60–80 Tsd. Tokens und 30–40 s pro Knoten · Kosten für den ganzen Baum",
-        rows, note="Spanne 60 → 80 Tsd. Tokens/Knoten")
+grouped("05_kompendium.png", "Kompendium-Text je Knoten", "60–90 Tsd. Tokens und 30–40 s pro Knoten, 50–60 % des Inputs aus dem Cache · Kosten für den ganzen Baum",
+        rows, note="Spanne 60 Tsd. (60 % Cache) → 90 Tsd. Tokens (50 % Cache)")
 print("done")

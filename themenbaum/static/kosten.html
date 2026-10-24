@@ -110,8 +110,8 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
 
   <div class="facts">
     <div class="fact"><span class="k">Themenbaum 12×5×5 (372 Knoten)</span><span class="v">0,07 – 0,16 $</span><span class="s">73 LLM-Aufrufe; 6-luna bis 5.6-luna</span></div>
-    <div class="fact"><span class="k">Kompendium für 372 Knoten</span><span class="v">2,83 – 8,18 $</span><span class="s">60–80 Tsd. Tokens je Knoten, über 90 % der Kosten</span></div>
-    <div class="fact"><span class="k">Metadaten für 100 Inhalte</span><span class="v">0,11 – 0,24 $</span><span class="s">Titel, Beschreibung (500 Wörter), Keywords; Volltext ≈ 5 Tsd. Tokens</span></div>
+    <div class="fact"><span class="k">Kompendium für 372 Knoten</span><span class="v">1,70 – 6,12 $</span><span class="s">60–90 Tsd. Tokens je Knoten, 50–60 % Input aus dem Cache</span></div>
+    <div class="fact"><span class="k">Metadaten für 100 Inhalte</span><span class="v">0,06 – 0,14 $</span><span class="s">Titel, Beschreibung (500 Wörter), Keywords aus je 1.000 Zeichen Volltext</span></div>
     <div class="fact"><span class="k">Überarbeitungswunsch (nur Zweig)</span><span class="v">0,01 – 0,02 $</span><span class="s">ganzer Baum neu: 0,04 – 0,10 $</span></div>
   </div>
 
@@ -164,7 +164,7 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
         <label for="items">Anzahl Inhalte: <b id="itemsOut">100</b><input type="range" id="items" min="0" max="5000" step="10" value="100"></label>
         <div class="row">
           <label for="itemsExact">genau<input type="number" id="itemsExact" min="0" max="1000000" value="100"></label>
-          <label for="fulltext">Volltext-Tokens je Inhalt<input type="number" id="fulltext" value="5000" min="0" step="500"></label>
+          <label for="fulltext">Volltext je Inhalt (Zeichen)<input type="number" id="fulltext" value="1000" min="0" step="500"></label>
           <label for="metaWords">Wörter je Inhaltsbeschreibung<input type="number" id="metaWords" value="500" min="0" max="3000" step="50"></label>
         </div>
         <label class="check" for="assign"><input type="checkbox" id="assign" checked> Inhalte dem Baum zuordnen (Baum im Cache)</label>
@@ -174,8 +174,9 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
         <label class="check" for="komp"><input type="checkbox" id="komp" checked> Kompendium-Text erzeugen</label>
         <div class="row">
           <label for="kompNodes">für<select id="kompNodes"><option value="all">alle Knoten</option><option value="l12">nur Ebene 1 und 2</option></select></label>
-          <label for="kompTok">Tokens je Knoten<input type="number" id="kompTok" value="70000" min="0" step="5000"></label>
+          <label for="kompTok">Tokens je Knoten<input type="number" id="kompTok" value="75000" min="0" step="5000"></label>
           <label for="kompOut">davon Output<input type="number" id="kompOut" value="5000" min="0" step="500"></label>
+          <label for="kompHit">Input aus Cache (%)<input type="number" id="kompHit" value="55" min="0" max="100" step="5"></label>
         </div>
       </fieldset>
       <label for="runs">Läufe pro Monat<input type="number" id="runs" value="1" min="0" max="100000"></label>
@@ -195,11 +196,11 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
           <tr><td>Themenbaum 12×10×5, aktueller Code (133 Aufrufe)</td><td class="n">0,151 $</td><td class="n">0,330 $</td></tr>
           <tr><td>Themenbaum 12×10×5, Fall „hoch“ (100 Wörter + Reasoning)</td><td class="n">0,267 $</td><td class="n">0,600 $</td></tr>
           <tr><td>Überarbeitung 12×10×5: ganzer Baum / nur Zweig / Zweig + Cache</td><td class="n">0,084 / 0,020 / 0,011 $</td><td class="n">0,197 / 0,042 / 0,023 $</td></tr>
-          <tr><td>Metadaten 100 Inhalte: Volltext kurz / mittel / lang</td><td class="n">0,077 / 0,107 / 0,207 $</td><td class="n">0,175 / 0,235 / 0,435 $</td></tr>
+          <tr><td>Metadaten 100 Inhalte: Volltext 1.000 / 5.000 / 20.000 Zeichen</td><td class="n">0,060 / 0,069 / 0,102 $</td><td class="n">0,140 / 0,158 / 0,225 $</td></tr>
           <tr><td>Zuordnung 100 Inhalte zu 12×5×5: ohne / mit Cache</td><td class="n">0,061 / 0,012 $</td><td class="n">0,122 / 0,025 $</td></tr>
-          <tr><td>Baum aus 100 Inhalten 12×5×5, Volltext mittel: ohne / mit Cache</td><td class="n">3,88 / 0,49 $</td><td class="n">7,77 / 0,99 $</td></tr>
-          <tr><td>Kompendium 12×5×5 (372 Knoten)</td><td class="n">2,83 – 3,87 $</td><td class="n">5,95 – 8,18 $</td></tr>
-          <tr><td>Kompendium 12×10×5 (732 Knoten)</td><td class="n">5,56 – 7,61 $</td><td class="n">11,71 – 16,10 $</td></tr>
+          <tr><td>Baum aus 100 Inhalten 12×5×5, Metadaten + Volltext (1.000 Zeichen) im Kontext: ohne / mit Cache</td><td class="n">0,96 / 0,15 $</td><td class="n">1,94 / 0,32 $</td></tr>
+          <tr><td>Kompendium 12×5×5 (372 Knoten)</td><td class="n">1,70 – 2,83 $</td><td class="n">3,70 – 6,12 $</td></tr>
+          <tr><td>Kompendium 12×10×5 (732 Knoten)</td><td class="n">3,35 – 5,58 $</td><td class="n">7,28 – 12,03 $</td></tr>
         </tbody>
       </table></div>
       <div class="gallery">
@@ -224,8 +225,9 @@ code{font-family:var(--mono);font-size:.9em;background:var(--accent-soft);paddin
       <ul>
         <li>System-Prompt 578 Tokens; ein Knoten im Output 182 Tokens bei 60 Wörtern Beschreibung (+2 Tokens je weiterem Wort).</li>
         <li>Aufrufe: 1 für die Hauptthemen, 1 je Hauptthema, 1 je Unterthema. Die Modelle schöpfen die Obergrenzen voll aus.</li>
-        <li>Metadaten: Anweisung 582 Tokens + Volltext je Inhalt; Output 65 Tokens (Titel, Keywords) + 1,925 Tokens je Wort Beschreibung, Standard 500 Wörter ≈ 1.030 Tokens. Zuordnung: Titelliste des Baums (14 Tokens je Knoten) im Cache.</li>
-        <li>Kompendium: gemessene 60–80 Tsd. Tokens und 30–40 s je Knoten; gerechnet mit 4–6 Tsd. Output, Rest Input.</li>
+        <li>Metadaten: je Inhalt aus dem Volltext der Webseite (Standard 1.000 Zeichen ≈ 225 Tokens; 0,225 Tokens je Zeichen gemessen), Anweisung 582 Tokens, kein Caching (jeder Inhalt hat einen eigenen Volltext); Output 65 Tokens (Titel, Keywords) + 1,925 Tokens je Wort Beschreibung, Standard 500 Wörter ≈ 1.030 Tokens. Zuordnung: Titelliste des Baums (14 Tokens je Knoten) im Cache.</li>
+        <li>Kompendium: 60–90 Tsd. Tokens und 30–40 s je Knoten, davon 4–6 Tsd. Output; 50–60 % des Inputs kommen aus dem Cache (Cache-Lesepreis). Standard im Rechner: 75 Tsd., 5 Tsd. Output, 55 %.</li>
+        <li>Caching beim Themenbaum lohnt nur, wenn ein großer Kontext für jede Knotenabfrage gleich bleibt, z. B. der Korpus aller Inhalte („Themenbaum aus Inhalten“); beim normalen Baum ist der gemeinsame Teil zu klein.</li>
         <li>Tokenizer o200k als Näherung (±10–15 %). Nicht enthalten: Crawler, Hosting, Wiederholungen nach Fehlern.</li>
       </ul>
     </div>
@@ -262,8 +264,8 @@ function applyPreset(){const p=PRESETS[$("#preset").value];if(!p)return;$("#pIn"
 function params(){
   return {NM:Math.round(num("n1")),NS:Math.round(num("n2")),NL:Math.round(num("n3")),words:num("words"),R:num("reason"),
     fix:$("#code").value==="fix",loops:Math.round(num("loops")),loopMode:$("#loopMode").value,
-    n:Math.round(num("itemsExact")),ft:num("fulltext"),metaWords:num("metaWords"),assign:$("#assign").checked,
-    komp:$("#komp").checked,kompAll:$("#kompNodes").value==="all",kompTok:num("kompTok"),kompOut:num("kompOut")};
+    n:Math.round(num("itemsExact")),ft:Math.round(num("fulltext")*0.225),metaWords:num("metaWords"),assign:$("#assign").checked,
+    kompHit:Math.min(100,num("kompHit"))/100,komp:$("#komp").checked,kompAll:$("#kompNodes").value==="all",kompTok:num("kompTok"),kompOut:num("kompOut")};
 }
 function tree(p,fix){
   const extra=1.925*(p.words-60), node=190+extra, rep=245+extra;
@@ -298,8 +300,8 @@ function partTreeFromCorpus(p,pr,perItem,cached){  // Korpus aller Inhalte in je
 }
 function partKomp(p,pr){
   if(!p.komp)return {i:0,o:0,c:0,k:0};
-  const t=tree(p,p.fix),k=p.kompAll?t.nodes:p.NM+p.NM*p.NS,o=Math.min(p.kompOut,p.kompTok);
-  return {i:k*(p.kompTok-o),o:k*o,c:cost(pr,k*(p.kompTok-o),k*o),k};
+  const t=tree(p,p.fix),k=p.kompAll?t.nodes:p.NM+p.NM*p.NS,o=Math.min(p.kompOut,p.kompTok),inp=k*(p.kompTok-o);
+  return {i:inp,o:k*o,c:cost(pr,inp*(1-p.kompHit),k*o,inp*p.kompHit),k};  // Cache-Treffer zum Cache-Lesepreis
 }
 const Z={i:0,o:0,c:0};
 function useCases(p,pr){
@@ -309,7 +311,8 @@ function useCases(p,pr){
   if(p.n>0){
     cases.push({key:"own",name:`… + ${n} eigene Inhalte`,parts:{tree:tr,rev:Z,meta:partMeta(p,pr,p.assign),komp:kp}});
     const meta=partMeta(p,pr,false);
-    const a=partTreeFromCorpus(p,pr,250,true),b=partTreeFromCorpus(p,pr,250+p.ft,true),c=partTreeFromCorpus(p,pr,250+p.ft,false);
+    const metaTok=Math.round(65+1.925*p.metaWords);  // Korpus = erzeugte Metadaten je Inhalt (+ Volltext)
+    const a=partTreeFromCorpus(p,pr,metaTok,true),b=partTreeFromCorpus(p,pr,metaTok+p.ft,true),c=partTreeFromCorpus(p,pr,metaTok+p.ft,false);
     cases.push({key:"cmeta",name:`Themenbaum aus ${n} Inhalten – nur Metadaten (Cache)`,parts:{tree:a,rev:Z,meta,komp:kp},corp:a.corp});
     cases.push({key:"cft",name:`Themenbaum aus ${n} Inhalten – mit Volltext (Cache)`,parts:{tree:b,rev:Z,meta,komp:kp},corp:b.corp});
     cases.push({key:"cftnc",name:`Themenbaum aus ${n} Inhalten – mit Volltext (ohne Cache)`,parts:{tree:c,rev:Z,meta,komp:kp},corp:c.corp});
