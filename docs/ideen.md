@@ -68,13 +68,30 @@ Testskripte: [`scripts/test_verbesserungen.py`](../scripts/test_verbesserungen.p
 
 ## Thema → Baum
 
-| Status | Idee | Hinweise |
-|---|---|---|
-| umgesetzt | Wikipedia-Gliederung + Hauptartikel; Wikidata „Teil von/Unterklasse von/hat Teil“; GND-Unterbegriffe und Sachgruppen | Wikipedia insgesamt am brauchbarsten, als Standard gesetzt |
-| offen | **Lehrpläne als Quelle** (PDF → Markdown, z. B. docling; Überschriften als Gliederung) | didaktisch passend, aber Parser je Bundesland; Überschriften in PDFs oft nicht ausgezeichnet |
-| offen | **Allgemeine Wikipedia-Abschnitte filtern** („Geschichte“, „Rezeption“, „Formulierungen“ auf Ebene 3) | bewusst noch nicht gefiltert, um die Rohqualität zu sehen |
-| offen | **Kombination:** Struktur aus Wikipedia/Wikidata, GND-IDs als Schlagwörter | Normdaten-Anbindung für edu-sharing |
-| offen | **Bildungsstufe berücksichtigen** (z. B. Abschnitte nach Fachsprache filtern) | keine Quelle ist didaktisch gegliedert |
+Umgesetzt: Wikipedia-Gliederung + Hauptartikel (Standard, insgesamt am brauchbarsten); Wikidata „Teil von /
+Unterklasse von / hat Teil“; GND-Unterbegriffe und Sachgruppen. Beobachtete Schwächen: allgemeine
+Wikipedia-Abschnitte („Geschichte“, „Methodik“, „Formulierungen“), schiefe Wikidata-Knoten („Klimawandel in
+Südkorea“), dünne GND-Hierarchie, keine didaktische Gliederung, Zielgröße 12×5×5 wird selten erreicht.
+
+### Offen (Kandidaten für weitere Tests)
+
+| Priorität | Idee | Erwarteter Nutzen | Aufwand | Hinweise |
+|---|---|---|---|---|
+| 1 | **Aufräumregeln:** allgemeine Abschnitte („Geschichte“, „Rezeption“, „Überblick“, „Weitere Aspekte“) ausblenden oder ans Ende; Wikidata-Knoten wie „X in Land“, Personen, Ereignisse, Listen ausschließen; fast doppelte Knoten per Embedding zusammenführen | sauberere Bäume | klein | bisher bewusst ungefiltert, um die Rohqualität zu sehen |
+| 1 | **Besserer Einstieg:** Thema zerlegen (Fach und Stufe über OEH-Vokabulare erkennen, Kernbegriff suchen), Begriffsklärungsseiten auflösen | weniger falsche Einstiege bei langen Themen | klein | z. B. „Physik in Anlehnung an die Lehrpläne der Sek II“ |
+| 2 | **Wikipedia + Wikidata kombinieren:** Wikipedia gibt die Struktur, Wikidata-Unterbegriffe des jeweiligen Artikels füllen Ebene 3; GND-IDs als normierte Schlagwörter | vollere Bäume, Normdaten für edu-sharing | mittel | Artikel → Wikidata über `pageprops.wikibase_item` |
+| 2 | **Mehrheitsentscheid der Quellen:** Kandidaten aus Wikipedia, Wikidata und GND per Embedding zusammenführen; von mehreren Quellen genannte Knoten bevorzugen | robustere Auswahl | mittel | |
+| 2 | **Relevanz für den Unterricht:** Knoten nach Zahl passender WLO-Inhalte gewichten (WLO-Suche) | Baum passt zum vorhandenen Material | mittel | |
+| 2 | **Didaktische Quellen:** Fach-Taxonomien von Serlo, ZUM-Unterrichten, Klexikon (Primarstufe), vorhandene WLO-Themenbäume und Fachportale | didaktische statt enzyklopädische Gliederung | mittel | Verfügbarkeit und Lizenz der Schnittstellen prüfen |
+| 3 | **Zielgröße erreichen:** verlinkte Begriffe (Hauptartikel, Wikilinks, Wikidata-Unterbegriffe) sammeln und mit dem Clustering aus „Inhalte → Baum“ zu 12 × n × m Gruppen bündeln | gewünschte Größe statt Zufallsgröße | mittel | verbindet beide Bereiche der Demo |
+| 3 | **Bildungsstufe berücksichtigen:** Klexikon-Texte für die Primarstufe, fachsprachliche Knoten über Lesbarkeitswerte für die Sek I filtern | stufengerechte Bäume | mittel | |
+| 3 | **Beschreibungen glätten:** Lautschrift und Herkunftsangaben entfernen, auf etwa 60 Wörter kürzen, Wikidata-Kurzbeschreibung als Kurztext | lesbarere Texte | klein | |
+| 4 | **Kleines lokales Sprachmodell zum Nachbearbeiten** der Abschnittstitel zu didaktischen Titeln | bessere Namen | mittel | |
+| 4 | **Lehrpläne als Quelle** (PDF → Markdown, z. B. docling; Überschriften als Gliederung) | lehrplantreu | groß | Parser je Bundesland; Überschriften in PDFs oft nicht ausgezeichnet |
+
+**Messbarkeit:** Für belastbare Vergleiche eine Soll-Struktur festlegen (vorhandener WLO-Themenbaum oder Lehrplan)
+und messen, wie viele Soll-Knoten ein erzeugter Baum per Embedding-Abgleich trifft. Bisher nur nach Augenschein und
+Knotenzahl beurteilt.
 
 ## Kosten und LLM-Generator
 
