@@ -23,6 +23,7 @@ Hintergrund laufen. Die App ist **passwortgeschützt** (Login beim Aufruf).
 
 - [docs/verfahren.md](docs/verfahren.md) – alle Verfahren kurz erklärt, mit Grafiken, Messergebnissen und Empfehlung
 - [docs/kosten.md](docs/kosten.md) – Kostenanalyse mit allen Ergebnissen und Grafiken
+- [docs/ideen.md](docs/ideen.md) – alle Ideen und Testkandidaten: umgesetzt, getestet ohne Gewinn, offen
 
 ![Ablauf Inhaltsmenge → Themenbaum](docs/img/verfahren-inhalte.svg)
 
